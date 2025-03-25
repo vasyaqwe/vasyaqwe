@@ -1,0 +1,524 @@
+---
+import Layout from "@/layout/base.astro"
+import { Image } from "astro:assets"
+import avatar from "@/assets/avatar.jpg"
+import tanstack from "@/assets/tanstack.png"
+import tracker from "@/assets/tracker.png"
+import winsoft from "@/assets/winsoft.svg"
+import recovery from "@/assets/recovery.svg"
+import vfu from "@/assets/vfu.svg"
+import spartagrounds from "@/assets/sparta.png"
+import Vite from "@/assets/tools/vite.svg"
+import Cloudflare from "@/assets/tools/cloudflare.svg"
+import React from "@/assets/tools/react.svg"
+import Tailwind from "@/assets/tools/tailwind.svg"
+import Typescript from "@/assets/tools/typescript.svg"
+import Hono from "@/assets/tools/hono.svg"
+import Turborepo from "@/assets/tools/turborepo.svg"
+import Bun from "@/assets/tools/bun.svg"
+import TRPC from "@/assets/tools/trpc.svg"
+import Drizzle from "@/assets/tools/drizzle.svg"
+import Button from "@/ui/components/button.astro"
+import AstroIcon from "@/assets/tools/astro.svg"
+import Upwork from "@/assets/upwork.svg"
+import LinkIcon from "@/assets/icons/link.svg"
+import ArrowRightCircleIcon from "@/assets/icons/arrow-right-circle.svg"
+
+const tools = [
+  {
+    name: "vite",
+    href: "https://vite.dev",
+    Logo: Vite,
+  },
+  {
+    name: "react",
+    href: "https://react.dev",
+    Logo: React,
+  },
+  {
+    name: "hono",
+    href: "https://hono.dev",
+    Logo: Hono,
+  },
+  {
+    name: "tanstack",
+    href: "https://tanstack.com",
+    logo: tanstack,
+  },
+  {
+    name: "trpc",
+    href: "https://trpc.io",
+    Logo: TRPC,
+  },
+  {
+    name: "turborepo",
+    href: "https://turbo.build/repo",
+    Logo: Turborepo,
+  },
+  {
+    name: "cloudflare",
+    href: "https://cloudflare.com",
+    Logo: Cloudflare,
+  },
+  {
+    name: "typescript",
+    href: "https://www.typescriptlang.org",
+    Logo: Typescript,
+  },
+  {
+    name: "bun",
+    href: "https://bun.sh",
+    Logo: Bun,
+  },
+  {
+    name: "tailwindcss",
+    href: "https://tailwindcss.com",
+    Logo: Tailwind,
+  },
+  {
+    name: "drizzle-orm",
+    href: "https://orm.drizzle.team",
+    Logo: Drizzle,
+  },
+  {
+    name: "astro",
+    href: "https://astro.build/",
+    Logo: AstroIcon,
+  },
+]
+---
+
+<Layout>
+  <section class="mt-12 md:mt-16">
+    <h1 class="text-3xl">
+      <Image
+        src={avatar}
+        alt="Vasyl's avatar"
+        loading={"eager"}
+        width={60}
+        quality={95}
+        height={60}
+        class="-mt-1 squircle mr-1 inline-block aspect-square size-10 object-cover object-top"
+      />
+      Hello — I'm Vasyl,
+    </h1>
+    <p class="my-5 max-w-[50ch]">
+      A full-stack developer based in Ukraine. I enjoy coding all sorts of
+      websites & apps, with the <a
+        href="https://react.dev"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <span class="underline">React</span>
+      </a> & <a
+        href="https://www.typescriptlang.org"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <span class="underline">TypeScript</span>
+      </a> ecosystem, and the tools from <a
+        target="_blank"
+        href="https://tanstack.com"
+        rel="noreferrer"
+        class="underline"
+      >
+        <span class="underline">Tanstack</span>.
+      </a>
+    </p>
+    <Button
+      href="https://417recovery.com"
+      target="_blank"
+      rel="noreferrer"
+      size={"lg"}
+    >
+      <span class="-mt-px">View latest project</span>
+      <ArrowRightCircleIcon class="size-5" />
+    </Button>
+  </section>
+  <section class="mt-12 md:mt-16">
+    <h2 class="text-2xl mb-5">Tools & tech I use</h2>
+    <div
+      class="border bg-primary-1 border-neutral text-foreground/75 p-3 rounded-2xl flex flex-wrap justify-center gap-1 py-4 font-medium text-[1rem]"
+    >
+      {
+        tools.map((t) => (
+          <Button
+            variant={"secondary"}
+            href={t.href}
+            target="_blank"
+            style={{
+              transform: `rotate(${Math.random() > 0.5 ? 4 : -4}deg)`,
+            }}
+            class={"max-sm:grow"}
+            rel="noreferrer"
+          >
+            {t.logo ? (
+              <Image
+                width={25}
+                loading={"eager"}
+                height={25}
+                src={t.logo}
+                alt={"icon"}
+              />
+            ) : (
+              <t.Logo />
+            )}
+            {t.name}
+          </Button>
+        ))
+      }
+    </div>
+  </section>
+  <section class="mt-12 md:mt-16">
+    <h2 class="text-2xl mb-7">Experience</h2>
+
+    <h3 class="flex items-center gap-1.5 !font-primary">
+      2023{" "}
+      <span class="h-px w-full bg-neutral">
+        {" "}
+        <span class="sr-only">til</span>
+      </span>{" "}
+      now
+    </h3>
+    <p class="md:mt-5">
+      <Image
+        loading={"eager"}
+        src={spartagrounds}
+        width={80}
+        height={40}
+        alt="Sparta Grounds logo"
+        class="md:-mt-2 mr-2 max-w-12 max-md:mt-4 max-md:mb-3 md:inline-block md:max-w-10"
+      />
+      <strong class="font-medium">
+        {" "}
+        Full-stack engineer at{" "}
+        <a href="https://spartagrounds.com/" class="underline">
+          Sparta Grounds
+        </a>
+        .
+      </strong>{" "}
+      Building the web for land buyers.
+    </p>
+    <h3 class="mt-6 flex items-center gap-1.5 !font-primary">
+      2022{" "}
+      <span class="h-px w-full bg-neutral">
+        {" "}
+        <span class="sr-only">til</span>
+      </span>{" "}
+      now
+    </h3>
+    <p class="md:mt-5">
+      <Upwork
+        class="mr-2.5 h-8 w-14 max-md:mt-4 max-md:mb-2 md:inline-block md:w-10"
+      />
+      <strong class="font-medium">Upwork freelancing.</strong> Over 40 different
+      projects with 100% Job Success.
+    </p>
+  </section>
+  <section class="mt-12 md:mt-16">
+    <h2 class="mb-7 text-2xl">Recent projects</h2>
+    <div
+      class="flex gap-2 border-b border-neutral pb-7 max-md:flex-col md:gap-4"
+    >
+      <div class="flex items-center justify-between max-md:mb-1">
+        <Image
+          src={recovery}
+          class={"max-w-20 md:max-w-12"}
+          alt="417 Recovery logo"
+          width={100}
+          height={100}
+        />
+        <Button
+          size={"sm"}
+          class={"md:hidden"}
+          href="https://417recovery.com"
+          target="_blank"
+          rel="noreferrer"
+        >
+          view live
+          <LinkIcon class="ml-1 inline-block size-4" />
+        </Button>
+      </div>
+      <div class="w-full max-md:mt-1">
+        <h3
+          class="flex items-center gap-3 font-medium !font-primary text-lg -mt-1"
+        >
+          417 Recovery
+          <a
+            href="https://417recovery.com"
+            target="_blank"
+            class="ml-auto font-normal underline max-md:hidden text-base"
+            rel="noreferrer"
+          >
+            view live
+            <LinkIcon class="ml-1 inline-block size-4" />
+          </a>
+        </h3>
+        <p class="mt-1">
+          Static site for a clinically-based treatment program.
+        </p>
+      </div>
+    </div>
+    <div
+      class="flex gap-2 border-b border-neutral py-7 max-md:flex-col md:gap-4"
+    >
+      <div class="flex items-center justify-between max-md:mb-1">
+        <Image
+          src={tracker}
+          class={"max-w-12 max-md:-ml-px drop-shadow-[0px_1px_8px_rgba(24,24,24,.125)]"}
+          alt="Tracker logo"
+          width={60}
+          height={60}
+        />
+        <Button
+          size="sm"
+          class={"md:hidden"}
+          href="https://tracker-bfs.pages.dev"
+          target="_blank"
+          rel="noreferrer"
+        >
+          view live
+          <LinkIcon class="ml-1 inline-block size-4" />
+        </Button>
+      </div>
+      <div class="w-full max-md:mt-1">
+        <h3
+          class="flex items-center gap-3 font-medium !font-primary text-lg -mt-1"
+        >
+          Tracker
+          <a
+            href="https://tracker-bfs.pages.dev"
+            target="_blank"
+            class="ml-auto font-normal underline max-md:hidden text-base"
+            rel="noreferrer"
+          >
+            view live
+            <LinkIcon class="ml-1 inline-block size-4" />
+          </a>
+        </h3>
+        <p class="mt-1">The app I created to track my work hours & earnings.</p>
+      </div>
+    </div>
+    <div
+      class="flex gap-2 border-b border-neutral py-7 max-md:flex-col md:gap-4"
+    >
+      <div class="flex items-center justify-between max-md:mb-1">
+        <div
+          class="squircle max-md:-ml-px grid size-12 shrink-0 transform-gpu place-content-center bg-background bg-gradient-to-b from-[#1e1448]/70 to-[#1e1448] text-background"
+        >
+          <svg
+            viewBox="0 0 21 13"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{
+              filter: "drop-shadow(1px 5px 6px rgba(24, 24, 24, .4))",
+            }}
+            class="mx-auto w-full max-w-[60%]"
+          >
+            <path
+              d="M1 8.3333C1 8.3333 2.5 9 4.5 12C4.5 12 4.78485 11.5192 5.32133 10.7526M15 1C12.7085 2.14577 10.3119 4.55181 8.3879 6.8223"
+              stroke="currentColor"
+              stroke-opacity="0.7"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+            </path>
+            <path
+              d="M6 8.3333C6 8.3333 7.5 9 9.5 12C9.5 12 15 3.5 20 1"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+            </path>
+          </svg>
+        </div>
+        <Button
+          size={"sm"}
+          class={"md:hidden"}
+          href="https://cuehq.app"
+          target="_blank"
+          rel="noreferrer"
+        >
+          view live
+          <LinkIcon class="ml-1 inline-block size-4" />
+        </Button>
+      </div>
+      <div class="w-full max-md:mt-1">
+        <h3
+          class="flex items-center gap-3 font-medium !font-primary text-lg -mt-1"
+        >
+          Cue
+          <a
+            href="https://cuehq.app"
+            target="_blank"
+            class="ml-auto font-normal underline max-md:hidden text-base"
+            rel="noreferrer"
+          >
+            view live
+            <LinkIcon class="ml-1 inline-block size-4" />
+          </a>
+        </h3>
+        <p class="mt-1">
+          Simple real-time issue tracking app, inspired by Linear.
+        </p>
+      </div>
+    </div>
+    <div
+      class="flex gap-2 border-b border-neutral py-7 max-md:flex-col md:gap-4"
+    >
+      <div class="flex items-center justify-between max-md:mb-1">
+        <Image
+          src={winsoft}
+          class={"max-w-12"}
+          alt="Winsoft logo"
+          width={60}
+          height={60}
+        />
+        <Button
+          size={"sm"}
+          class={"md:hidden"}
+          href="https://www.soft.win"
+          target="_blank"
+          rel="noreferrer"
+        >
+          view live
+          <LinkIcon class="ml-1 inline-block size-4" />
+        </Button>
+      </div>
+      <div class="w-full max-md:mt-1">
+        <h3
+          class="flex items-center gap-3 font-medium !font-primary text-lg -mt-1"
+        >
+          Winsoft
+          <a
+            href="https://www.soft.win"
+            target="_blank"
+            class="ml-auto font-normal underline max-md:hidden text-base"
+            rel="noreferrer"
+          >
+            view live
+            <LinkIcon class="ml-1 inline-block size-4" />
+          </a>
+        </h3>
+        <p class="mt-1">Landing page for a software development company.</p>
+      </div>
+    </div>
+
+    <div class="flex gap-2 pt-6 max-md:flex-col md:gap-4">
+      <div class="flex items-center justify-between max-md:mb-1">
+        <Image
+          src={vfu}
+          alt="Volunteers for Ukraine logo"
+          width={60}
+          height={60}
+          class="max-w-12"
+        />
+        <Button
+          size={"sm"}
+          class={"md:hidden"}
+          href="https://volunteersforukraine.org/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          view live
+          <LinkIcon class="ml-1 inline-block size-4" />
+        </Button>
+      </div>
+      <div class="w-full max-md:mt-1">
+        <h3
+          class="flex items-center gap-3 font-medium !font-primary text-lg -mt-1"
+        >
+          Volunteers for Ukraine
+          <a
+            href="https://volunteersforukraine.org/"
+            target="_blank"
+            class="ml-auto font-normal underline max-md:hidden text-base"
+            rel="noreferrer"
+          >
+            view live
+            <LinkIcon class="ml-1 inline-block size-4" />
+          </a>
+        </h3>
+        <p class="mt-1">
+          Landing page for an organization providing aid in Ukraine.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="mt-12 md:mt-16">
+    <div class="flex items-center mb-6 justify-between">
+      <h2 class="text-2xl">Testimonials</h2>
+      <Button
+        variant={"secondary"}
+        size={"sm"}
+        class={"-mt-1"}
+        target="_blank"
+        href="https://www.upwork.com/freelancers/~015c1b113a62e11b13?viewMode=1"
+        rel="noreferrer"
+      >
+        <span class="-mt-0.5">view all</span>
+        <ArrowRightCircleIcon class="size-4" />
+      </Button>
+    </div>
+    <div
+      class="border bg-primary-1 border-neutral text-foreground/75 p-3 rounded-2xl"
+    >
+      <p>
+        "<b class="font-semibold">Vasyl made a great well-animated website!</b> He
+        is amazing in communication and problem-solving skills. Would like to hire
+        again for sure! Highly recommend Vasyl for the web development."
+      </p>
+      <p class="mt-2">
+        Yurii Klymenko, CEO –{" "}
+        <a
+          target="_blank"
+          href="https://www.soft.win"
+          class="underline hover:text-foreground"
+          rel="noreferrer"
+        >
+          Winsoft
+        </a>
+      </p>
+    </div>
+    <div
+      class="border bg-primary-1 border-neutral text-foreground/75 p-3 rounded-2xl mt-2.5"
+    >
+      <p>
+        "<b class="font-semibold">Vasyl is an amazing REACT developer.</b> Top developer
+        for sure."
+      </p>
+      <p class="mt-2">
+        Charles Polanco, CEO –{" "}
+        <a
+          target="_blank"
+          href="https://wallow.app"
+          class="underline hover:text-foreground"
+          rel="noreferrer"
+        >
+          Wallow
+        </a>
+      </p>
+    </div>
+    <div
+      class="border bg-primary-1 border-neutral text-foreground/75 p-3 rounded-2xl mt-2.5"
+    >
+      <p>
+        "<b class="font-semibold">Skilled developer</b> with great communication
+        skills! Highly recommend!"
+      </p>
+      <p class="mt-2">
+        Ananstasia Usenko –{" "}
+        <a
+          target="_blank"
+          href="https://volunteersforukraine.org/"
+          class="underline hover:text-foreground"
+          rel="noreferrer"
+        >
+          VfU
+        </a>
+      </p>
+    </div>
+  </section>
+</Layout>

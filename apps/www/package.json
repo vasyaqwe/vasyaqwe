@@ -1,0 +1,22 @@
+{
+  "name": "@vasyaqwe/www",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "format-lint": "biome check",
+    "format-lint:fix": "biome check --write"
+  },
+  "dependencies": {
+    "@vasyaqwe/ui": "workspace:*",
+    "@astrojs/sitemap": "^3.1.6",
+    "astro": "^5.1.5"
+  },
+  "devDependencies": {
+    "@vasyaqwe/tsconfig": "workspace:*",
+    "prettier-plugin-astro": "^0.14.1"
+  }
+}

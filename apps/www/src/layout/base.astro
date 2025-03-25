@@ -1,0 +1,129 @@
+---
+import "@vasyaqwe/ui/styles"
+import "@/ui/styles.css"
+import Logo from "@/assets/logo.svg"
+import ArrowRightCircleIcon from "@/assets/icons/arrow-right-circle.svg"
+import Button from "@/ui/components/button.astro"
+
+const title = Astro.props.title ?? "Vasyl Polishchuk"
+const description =
+  Astro.props.description ??
+  "Hi — I'm Vasyl, full-stack developer based in Ukraine."
+
+type Props = {
+  title?: string
+  description?: string
+}
+
+const url = Astro.url.origin
+---
+
+<html lang="en" class="font-primary leading-5 antialiased overflow-y-scroll">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta property="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="twitter:url" content={url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="icon" type="image" href="/favicon.ico" />
+    <style>
+      @font-face {
+        font-family: "outfit";
+        src: url("/font/outfit.woff2") format("woff2-variations");
+        font-display: swap;
+        font-style: normal;
+        font-weight: 400 600;
+      }
+    </style>
+    <link
+      rel="preload"
+      href="/font/outfit.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body
+    class="pt-5 text-base bg-background text-foreground grid min-h-svh grid-rows-[auto_1fr_auto]"
+  >
+    <header class="container flex items-center justify-between pb-4">
+      <a href={"/"} aria-label="Home">
+        <Logo class="size-6 opacity-75" />
+      </a>
+      <nav>
+        <ul class="flex items-center gap-3">
+          <li>
+            <a
+              class="text-foreground/75 underline hover:text-foreground"
+              href="https://www.upwork.com/freelancers/~015c1b113a62e11b13"
+              target="_blank"
+              rel="noreferrer"
+            >
+              upwork
+            </a>
+          </li>
+          <li>
+            <a
+              class="text-foreground/75 underline hover:text-foreground"
+              href="https://github.com/vasyaqwe"
+              target="_blank"
+              rel="noreferrer"
+            >
+              github
+            </a>
+          </li>
+
+          <li>
+            <a
+              class="text-foreground/75 underline hover:text-foreground"
+              href="https://www.linkedin.com/in/vasyl-polishchuk-37329624b"
+              target="_blank"
+              rel="noreferrer"
+            >
+              linkedin
+            </a>
+          </li>
+          <li>
+            <Button
+              variant={"secondary"}
+              size={"sm"}
+              class="text-foreground/75"
+              target="_blank"
+              href="https://cal.com/vasyldev/15min"
+              rel="noreferrer"
+            >
+              <span class="-mt-0.5">contact me</span>
+              <ArrowRightCircleIcon class="mt-0.5 size-5" />
+            </Button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="container">
+      <slot />
+    </main>
+    <footer
+      class="mt-20 border-t border-t-neutral bg-primary-1 py-5 text-foreground/75 text-sm shadow-xs md:mt-28"
+    >
+      <div class="container flex items-center justify-between">
+        <p>© {new Date().getFullYear()} Vasyl Polishchuk</p>
+        <a
+          target="_blank"
+          href="https://github.com/vasyaqwe/vasyaqwe"
+          class="underline hover:text-foreground"
+          rel="noreferrer"
+        >
+          view source code
+        </a>
+      </div>
+    </footer>
+  </body>
+</html>

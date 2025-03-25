@@ -1,0 +1,4 @@
+{
+   "name": "@vasyaqwe/tsconfig",
+   "files": ["*.json"]
+}

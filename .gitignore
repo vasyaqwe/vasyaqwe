@@ -1,0 +1,17 @@
+node_modules
+dist
+build
+
+*.tsbuildinfo
+
+*.pem
+.dev.vars
+.env
+.env.me
+.env.vault
+env.d.ts
+
+.turbo
+.astro
+.wrangler
+.vscode

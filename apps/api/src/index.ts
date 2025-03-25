@@ -1,7 +1,7 @@
 import app from "./app"
 
 const server = Bun.serve({
-   port: 3000,
+   port: 8080,
    hostname: "0.0.0.0",
    fetch: app.fetch,
 })

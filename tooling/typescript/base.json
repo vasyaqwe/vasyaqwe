@@ -17,9 +17,7 @@
       "sourceMap": true,
       "incremental": true,
 
-      "jsx": "preserve",
-      "jsxImportSource": "solid-js",
-      "types": ["solid-js"]
+      "jsx": "preserve"
    },
    "exclude": ["node_modules", "dist"]
 }

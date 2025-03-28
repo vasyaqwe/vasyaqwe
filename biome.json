@@ -21,7 +21,9 @@
          "package.json",
          "zero-schema.json",
          "src-tauri",
-         ".wrangler"
+         ".wrangler",
+         "settings.json",
+         "keybindings.json"
       ]
    },
    "css": {

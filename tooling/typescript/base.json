@@ -18,6 +18,8 @@
       "incremental": true,
 
       "jsx": "preserve",
+      "jsxImportSource": "solid-js",
+      "types": ["solid-js"]
    },
    "exclude": ["node_modules", "dist"]
 }

@@ -1,0 +1,81 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+   {
+      "key": "ctrl+alt+c",
+      "command": "editor.emmet.action.toggleComment"
+   },
+   {
+      "key": "ctrl+o",
+      "command": "workbench.action.files.openFolder",
+      "when": "openFolderWorkspaceSupport"
+   },
+   {
+      "key": "ctrl+k ctrl+o",
+      "command": "-workbench.action.files.openFolder",
+      "when": "openFolderWorkspaceSupport"
+   },
+   {
+      "key": "home backspace",
+      "command": "workbench.action.focusSideBar"
+   },
+   {
+      "key": "ctrl+0",
+      "command": "-workbench.action.focusSideBar"
+   },
+   {
+      "key": "n",
+      "command": "workbench.action.files.newUntitledFile",
+      "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceReadonly && !inputFocus"
+   },
+   {
+      "key": "ctrl+n",
+      "command": "-workbench.action.files.newUntitledFile"
+   },
+   {
+      "key": "ctrl+d",
+      "command": "deleteFile",
+      "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceMoveableToTrash && !explorerResourceReadonly && !inputFocus"
+   },
+   {
+      "key": "delete",
+      "command": "deleteFile",
+      "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceMoveableToTrash && !explorerResourceReadonly && !inputFocus"
+   },
+   {
+      "key": "delete",
+      "command": "-deleteFile",
+      "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceMoveableToTrash && !explorerResourceReadonly && !inputFocus"
+   },
+   {
+      "key": "delete",
+      "command": "deleteFile",
+      "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceReadonly && !inputFocus"
+   },
+   {
+      "key": "shift+delete",
+      "command": "-deleteFile",
+      "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceReadonly && !inputFocus"
+   },
+   {
+      "key": "ctrl+n",
+      "command": "explorer.newFolder"
+   },
+   {
+      "key": "ctrl+1",
+      "command": "workbench.action.focusFirstEditorGroup"
+   },
+   {
+      "key": "ctrl+1",
+      "command": "-workbench.action.focusFirstEditorGroup"
+   },
+   {
+      "key": "d",
+      "command": "moveFileToTrash",
+      "when": "explorerResourceMoveableToTrash && filesExplorerFocus && foldersViewVisible && !explorerResourceReadonly && !inputFocus"
+   },
+   {
+      "key": "delete",
+      "command": "-moveFileToTrash",
+      "when": "explorerResourceMoveableToTrash && filesExplorerFocus && foldersViewVisible && !explorerResourceReadonly && !inputFocus"
+   }
+]

@@ -1,0 +1,284 @@
+{
+   // Font
+   "editor.fontFamily": "BerkeleyMono Nerd Font",
+   "scm.inputFontFamily": "BerkeleyMono Nerd Font",
+   "terminal.integrated.fontFamily": "BerkeleyMono Nerd Font",
+   "chat.editor.fontFamily": "BerkeleyMono Nerd Font",
+   "debug.console.fontFamily": "BerkeleyMono Nerd Font",
+   "editor.codeLensFontFamily": "BerkeleyMono Nerd Font",
+   "notebook.output.fontFamily": "BerkeleyMono Nerd Font",
+   "markdown.preview.fontFamily": "BerkeleyMono Nerd Font",
+   "editor.inlayHints.fontFamily": "BerkeleyMono Nerd Font",
+   "workbench.colorCustomizations": {
+      // "editor.selectionHighlightBackground": "#83868958",
+      // "editor.selectionBackground": "#83868958",
+      "sideBar.foreground": "#a0a0a0", // Sidebar text color
+      "list.errorForeground": "#FF5C5C"
+   },
+   "editor.tokenColorCustomizations": {
+      "textMateRules": [
+         // {
+         //   "scope": "punctuation.definition.comment",
+         //   "settings": {
+         //       "foreground": "#43474e"
+         //   }
+         // },
+         {
+            "scope": [
+               "constant",
+               "constant.character",
+               "constant.character.escape",
+               "constant.numeric",
+               "constant.numeric.integer",
+               "constant.numeric.float",
+               "constant.numeric.hex",
+               "constant.numeric.octal",
+               "constant.other",
+               "constant.regexp",
+               "constant.rgb-value",
+               "emphasis",
+               "entity",
+               "entity.name",
+               "entity.name.class",
+               "entity.name.function",
+               "entity.name.method",
+               "entity.name.section",
+               "entity.name.selector",
+               "entity.name.tag",
+               "entity.name.type",
+               "entity.other",
+               "entity.other.attribute-name",
+               "entity.other.inherited-class",
+               "invalid",
+               "invalid.deprecated",
+               "invalid.illegal",
+               "keyword",
+               "keyword.control",
+               "keyword.operator",
+               "keyword.operator.new",
+               "keyword.operator.assignment",
+               "keyword.operator.arithmetic",
+               "keyword.operator.logical",
+               "keyword.other",
+               "markup",
+               "markup.bold",
+               "markup.changed",
+               "markup.deleted",
+               "markup.heading",
+               "markup.inline.raw",
+               "markup.inserted",
+               "markup.italic",
+               "markup.list",
+               "markup.list.numbered",
+               "markup.list.unnumbered",
+               "markup.other",
+               "markup.quote",
+               "markup.raw",
+               "markup.underline",
+               "markup.underline.link",
+               "meta",
+               "meta.block",
+               "meta.cast",
+               "meta.class",
+               "meta.function",
+               "meta.function-call",
+               "meta.preprocessor",
+               "meta.return-type",
+               "meta.selector",
+               "meta.tag",
+               "meta.type.annotation",
+               "meta.type",
+               "punctuation.definition.string.begin",
+               "punctuation.definition.string.end",
+               "punctuation.separator",
+               "punctuation.separator.continuation",
+               "punctuation.terminator",
+               "storage",
+               "storage.modifier",
+               "storage.type",
+               "string",
+               "string.interpolated",
+               "string.other",
+               "string.quoted",
+               "string.quoted.double",
+               "string.quoted.other",
+               "string.quoted.single",
+               "string.quoted.triple",
+               "string.regexp",
+               "string.unquoted",
+               "strong",
+               "support",
+               "support.class",
+               "support.constant",
+               "support.function",
+               "support.other",
+               "support.type",
+               "support.type.property-name",
+               "support.variable",
+               "variable",
+               "variable.language",
+               "variable.name",
+               "variable.other",
+               "variable.other.readwrite"
+            ],
+            "settings": {
+               "fontStyle": ""
+            }
+         }
+      ]
+   },
+
+   // Font size
+   "editor.fontSize": 13.4,
+   "terminal.integrated.fontSize": 14,
+   "editor.fontWeight": "400",
+
+   "window.titleBarStyle": "native",
+   "apc.menubar.compact": true,
+
+   // ui
+   "scm.showHistoryGraph": false,
+   "editor.scrollbar.vertical": "auto",
+   "editor.scrollbar.horizontal": "auto",
+   "editor.cursorSmoothCaretAnimation": "on",
+   "workbench.list.smoothScrolling": true,
+   "editor.smoothScrolling": true,
+   "editor.cursorBlinking": "solid",
+   "workbench.statusBar.visible": false,
+   "workbench.activityBar.location": "hidden",
+   "workbench.sideBar.location": "left",
+   "workbench.editor.labelFormat": "short",
+   "editor.renderLineHighlight": "none",
+   "workbench.editor.showTabs": "single",
+   "editor.renderControlCharacters": false,
+   "editor.scrollbar.verticalScrollbarSize": 6,
+   "editor.scrollbar.horizontalScrollbarSize": 6,
+   "editor.minimap.maxColumn": 86,
+   "editor.minimap.renderCharacters": false,
+   "editor.linkedEditing": true,
+   "workbench.editor.highlightModifiedTabs": true,
+   "breadcrumbs.enabled": false,
+   // APC
+   "apc.font.family": "BerkeleyMono Nerd Font",
+   "apc.monospace.font.family": "BerkeleyMono Nerd Font",
+   "apc.activityBar": {
+      "position": "bottom",
+      "hideSettings": true,
+      "size": 28
+   },
+   "apc.electron": {
+      "titleBarStyle": "hiddenInset",
+      "trafficLightPosition": {
+         "x": 12,
+         "y": 10
+      },
+      "frame": false
+   },
+   "apc.statusBar": {
+      "position": "editor-bottom",
+      "height": 28,
+      "fontSize": 14
+   },
+   "apc.sidebar.titlebar": { "height": 32 },
+   "apc.header": {
+      "height": 32,
+      "fontSize": 14
+   },
+   "apc.listRow": {
+      "height": 23,
+      "fontSize": 14.25
+   },
+
+   // Custom css
+   "apc.stylesheet": {
+      ".monaco-scrollable-element > .scrollbar": "width: 6px !important;",
+      ".title-actions": "display: none !important",
+      ".tabs-and-actions-container > .editor-actions": "display: none !important",
+      ".titlebar-center": "display: none !important",
+      ".inline-tabs-placeholder": "display: none !important"
+   },
+
+   // Misc
+   "tailwindCSS.includeLanguages": {
+      "html": "html",
+      "javascript": "javascript",
+      "css": "css"
+   },
+   "editor.quickSuggestions": {
+      "strings": true
+   },
+   "editor.inlineSuggest.enabled": true,
+   "editor.lightbulb.enabled": "off",
+   "editor.formatOnSave": true,
+   "editor.tabSize": 3,
+   "window.zoomLevel": 1,
+   "workbench.tree.enableStickyScroll": false,
+   "supermaven.otherWarning": false,
+   "svg.preview.mode": "svg",
+   "javascript.updateImportsOnFileMove.enabled": "never",
+   "typescript.preferences.importModuleSpecifier": "non-relative",
+   "explorer.compactFolders": false,
+   "editor.stickyScroll.enabled": false,
+   "files.simpleDialog.enable": true,
+   "editor.defaultFormatter": "biomejs.biome",
+   "workbench.tree.renderIndentGuides": "always",
+   "editor.glyphMargin": false,
+   "telemetry.telemetryLevel": "off",
+   "[json]": {
+      "editor.defaultFormatter": "biomejs.biome"
+   },
+   "editor.codeActionsOnSave": {
+      "source.organizeImports.biome": "explicit",
+      "quickfix.biome": "explicit"
+   },
+   "[html]": {
+      "editor.defaultFormatter": "vscode.html-language-features"
+   },
+   "emeraldwalk.runonsave": {
+      "commands": [
+         {
+            "match": "\\.(ts|tsx|astro)$",
+            "cmd": "bun biome lint \"${file}\" --write --unsafe"
+         }
+      ]
+   },
+   "update.mode": "manual",
+   "window.newWindowDimensions": "maximized",
+   "window.commandCenter": false,
+   "workbench.startupEditor": "none",
+   "files.associations": {
+      "*.tsx": "typescriptreact"
+   },
+   "[astro]": {
+      "editor.defaultFormatter": "astro-build.astro-vscode"
+   },
+   "window.menuBarVisibility": "compact",
+   "workbench.editor.editorActionsLocation": "hidden",
+   "workbench.layoutControl.enabled": false,
+   "terminal.integrated.profiles.windows": {
+      "PowerShell": {
+         "path": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+         "args": [
+            "-NoExit",
+            "-Command",
+            "& {oh-my-posh init pwsh --config 'C:\\Users\\elekt\\AppData\\Local\\Programs\\oh-my-posh\\themes\\oscura.json' | Invoke-Expression}"
+         ]
+      }
+   },
+   "terminal.integrated.defaultProfile.windows": "PowerShell",
+   "terminal.integrated.allowedLinkSchemes": [
+      "file",
+      "http",
+      "https",
+      "mailto",
+      "vscode",
+      "vscode-insiders",
+      "docker-desktop"
+   ],
+   "explorer.confirmDelete": false,
+   "diffEditor.ignoreTrimWhitespace": false,
+   "errorLens.enabledDiagnosticLevels": ["error", "info"],
+   "workbench.colorTheme": "Oscura Dusk",
+   "liveServer.settings.donotVerifyTags": true,
+   "workbench.iconTheme": "moxer-icons"
+}

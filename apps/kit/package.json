@@ -1,0 +1,32 @@
+{
+  "name": "@vasyaqwe/kit",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "dev:desktop": "bun tauri dev",
+    "build:desktop": "bun tauri build",
+    "typecheck": "tsc -p tsconfig.prod.json --noEmit",
+    "preview": "vite preview",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.0.15",
+    "@tanstack/router-plugin": "^1.109.2",
+    "@tanstack/solid-router": "^1.110.0",
+    "@tanstack/solid-router-devtools": "^1.109.2",
+    "solid-js": "^1.9.4",
+    "@tauri-apps/api": "^2.2.0",
+    "@tauri-apps/plugin-deep-link": "^2.2.0",
+    "@tauri-apps/plugin-fs": "^2.2.0",
+    "@tauri-apps/plugin-notification": "^2.2.0",
+    "@tauri-apps/plugin-shell": "^2.2.0"
+  },
+  "devDependencies": {
+    "vite-tsconfig-paths": "^5.1.4",
+    "@vasyaqwe/tsconfig": "workspace:*",
+    "@tauri-apps/cli": "^2.2.2",
+    "vite": "^6.0.11",
+    "vite-plugin-solid": "^2.11.2"
+  }
+}

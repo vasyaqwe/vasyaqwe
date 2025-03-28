@@ -17,7 +17,7 @@
       "sourceMap": true,
       "incremental": true,
 
-      "jsx": "react-jsx"
+      "jsx": "preserve",
    },
    "exclude": ["node_modules", "dist"]
 }

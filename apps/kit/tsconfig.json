@@ -1,0 +1,15 @@
+{
+   "extends": "@vasyaqwe/tsconfig/base.json",
+   "compilerOptions": {
+      "lib": ["ESNext", "DOM", "DOM.iterable"],
+    "jsxImportSource": "solid-js",
+    "types": ["vite/client"],
+    "baseUrl": ".",
+      "paths": {
+         "@/*": ["./src/*"]
+      },
+      "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
+   },
+   //including packages makes autoimports work, but breaks build - so dev only
+   "include": ["src", "../../packages"]
+}

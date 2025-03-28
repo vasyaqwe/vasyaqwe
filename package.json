@@ -12,7 +12,9 @@
     "start": "turbo start",
     "dev:api": "turbo dev --filter=@vasyaqwe/api",
     "dev:www": "turbo dev --filter=@vasyaqwe/www",
-    "build:www": "turbo build --filter=@vasyaqwe/www"
+    "build:www": "turbo build --filter=@vasyaqwe/www",
+    "dev:kit": "turbo dev --filter=@vasyaqwe/kit",
+    "build:kit": "turbo build --filter=@vasyaqwe/kit"
   },
   "workspaces": ["apps/*", "packages/*", "tooling/*"],
   "trustedDependencies": ["@biomejs/biome", "core-js", "esbuild", "workerd"],

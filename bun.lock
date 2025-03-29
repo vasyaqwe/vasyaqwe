@@ -41,6 +41,7 @@
         "@tauri-apps/plugin-shell": "^2.2.0",
         "solid-js": "^1.9.4",
         "solid-monaco": "^0.3.0",
+        "solid-sonner": "^0.2.8",
       },
       "devDependencies": {
         "@tauri-apps/cli": "^2.2.2",
@@ -1065,6 +1066,8 @@
     "solid-monaco": ["solid-monaco@0.3.0", "", { "dependencies": { "@monaco-editor/loader": "^1.4.0" }, "peerDependencies": { "monaco-editor": "^0.48.0", "solid-js": "^1.8.0" } }, "sha512-MsJLrCWysv5ONdOjC4kShNoBXJWuwjP6JplJLQWG7pL00XSfvqBEKUF0wLVdaKfntf50Qz8NAd7Yx7dq67bjPA=="],
 
     "solid-refresh": ["solid-refresh@0.6.3", "", { "dependencies": { "@babel/generator": "^7.23.6", "@babel/helper-module-imports": "^7.22.15", "@babel/types": "^7.23.6" }, "peerDependencies": { "solid-js": "^1.3" } }, "sha512-F3aPsX6hVw9ttm5LYlth8Q15x6MlI/J3Dn+o3EQyRTtTxidepSTwAYdozt01/YA+7ObcciagGEyXIopGZzQtbA=="],
+
+    "solid-sonner": ["solid-sonner@0.2.8", "", { "peerDependencies": { "solid-js": "^1.6.0" } }, "sha512-EQ2EIznvHHpAmkYh2CTu0AdCgmPJRJWLGFRWygE8j+vMEfvIV2wotHU5qgWzqzVTG1SODGsay2Lwq6ENWx/rPA=="],
 
     "source-map-js": ["source-map-js@1.2.1", "", {}, "sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA=="],
 

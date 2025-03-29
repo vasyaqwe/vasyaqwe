@@ -18,10 +18,7 @@ export function MainScrollArea({
 }: ComponentProps<"div">) {
    return (
       <div
-         class={cn(
-            "overflow-y-auto px-4 pt-4 pb-14 md:px-6 md:pt-6",
-            className,
-         )}
+         class={cn("grow overflow-y-auto", className)}
          {...props}
       />
    )

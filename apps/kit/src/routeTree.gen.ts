@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as LayoutIndexImport } from './routes/_layout/index'
+import { Route as LayoutTypescriptImport } from './routes/_layout/typescript'
 
 // Create/Update Routes
 
@@ -27,6 +28,12 @@ const LayoutIndexRoute = LayoutIndexImport.update({
   getParentRoute: () => LayoutRoute,
 } as any)
 
+const LayoutTypescriptRoute = LayoutTypescriptImport.update({
+  id: '/typescript',
+  path: '/typescript',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/solid-router' {
@@ -37,6 +44,13 @@ declare module '@tanstack/solid-router' {
       fullPath: ''
       preLoaderRoute: typeof LayoutImport
       parentRoute: typeof rootRoute
+    }
+    '/_layout/typescript': {
+      id: '/_layout/typescript'
+      path: '/typescript'
+      fullPath: '/typescript'
+      preLoaderRoute: typeof LayoutTypescriptImport
+      parentRoute: typeof LayoutImport
     }
     '/_layout/': {
       id: '/_layout/'
@@ -51,10 +65,12 @@ declare module '@tanstack/solid-router' {
 // Create and export the route tree
 
 interface LayoutRouteChildren {
+  LayoutTypescriptRoute: typeof LayoutTypescriptRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutTypescriptRoute: LayoutTypescriptRoute,
   LayoutIndexRoute: LayoutIndexRoute,
 }
 
@@ -63,25 +79,28 @@ const LayoutRouteWithChildren =
 
 export interface FileRoutesByFullPath {
   '': typeof LayoutRouteWithChildren
+  '/typescript': typeof LayoutTypescriptRoute
   '/': typeof LayoutIndexRoute
 }
 
 export interface FileRoutesByTo {
+  '/typescript': typeof LayoutTypescriptRoute
   '/': typeof LayoutIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_layout': typeof LayoutRouteWithChildren
+  '/_layout/typescript': typeof LayoutTypescriptRoute
   '/_layout/': typeof LayoutIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/'
+  fullPaths: '' | '/typescript' | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/_layout' | '/_layout/'
+  to: '/typescript' | '/'
+  id: '__root__' | '/_layout' | '/_layout/typescript' | '/_layout/'
   fileRoutesById: FileRoutesById
 }
 
@@ -109,8 +128,13 @@ export const routeTree = rootRoute
     "/_layout": {
       "filePath": "_layout.tsx",
       "children": [
+        "/_layout/typescript",
         "/_layout/"
       ]
+    },
+    "/_layout/typescript": {
+      "filePath": "_layout/typescript.tsx",
+      "parent": "/_layout"
     },
     "/_layout/": {
       "filePath": "_layout/index.tsx",

@@ -1,13 +1,13 @@
-import type { ComponentProps } from "solid-js"
+import type { JSX } from "solid-js"
 import { cn } from "../utils"
 
 export function Separator({
    class: className,
    ...props
-}: ComponentProps<"span">) {
+}: JSX.HTMLAttributes<HTMLHRElement>) {
    return (
-      <span
-         class={cn("h-px w-full bg-neutral", className)}
+      <hr
+         class={cn("h-px w-full border-neutral", className)}
          {...props}
       />
    )

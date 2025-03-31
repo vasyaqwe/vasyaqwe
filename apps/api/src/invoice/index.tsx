@@ -37,11 +37,11 @@ Font.register({
    family: "geist_mono",
    fonts: [
       {
-         src: `https://tracker-bfs.pages.dev/font/geist_mono_regular.ttf`,
+         src: `https://tracker.vasyaqwe.com/font/geist_mono_regular.ttf`,
          fontWeight: 400,
       },
       {
-         src: `https://tracker-bfs.pages.dev/font/geist_mono_medium.ttf`,
+         src: `https://tracker.vasyaqwe.com/font/geist_mono_medium.ttf`,
          fontWeight: 500,
       },
    ],

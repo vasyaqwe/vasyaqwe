@@ -45,6 +45,9 @@
    --width-prose: 60ch;
 
    --ease-vaul: cubic-bezier(0.32, 0.72, 0, 1);
+
+   --popup-radius: 0.5rem;
+   --popup-padding: 3px;
 }
 
 @variant dark (&:where(.dark, .dark *));
@@ -201,4 +204,15 @@ p {
 }
 .line-clamp-1:not(.text-center) {
    text-align: left;
+}
+
+@supports (anchor-name: --anchor) {
+  [popover] {
+    inset: unset;
+    /*	  inset-area: bottom right;*/
+    top: anchor(top);
+    left: anchor(right);
+    position-try-options: flip-block, flip-inline;
+    position-try-fallbacks: flip-block, flip-inline;
+  }
 }

@@ -33,7 +33,6 @@ const jsonToTypeScriptType = (
    if (typeof json === "boolean") return "boolean"
    if (typeof json !== "object") return "unknown"
 
-   // Handle arrays
    if (Array.isArray(json)) {
       if (json.length === 0) return "any[]"
       const itemType = jsonToTypeScriptType(json[0], {

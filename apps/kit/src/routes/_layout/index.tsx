@@ -11,7 +11,7 @@ export const Route = createFileRoute("/_layout/")({
 })
 
 function RouteComponent() {
-   const [input, setInput] = createSignal(`{"hello":"hello"}`)
+   const [input, setInput] = createSignal("")
    const [output, setOutput] = createSignal("")
 
    const format = () => {

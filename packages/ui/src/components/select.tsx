@@ -25,7 +25,7 @@ export function Select(props: Props) {
                   size: local.size,
                   className: local.class,
                }),
-               "w-full appearance-none pr-8 transition-all hover:bg-background",
+               "w-full appearance-none pr-8 transition-all hover:bg-background active:bg-background",
                FOCUS_STYLES,
             )}
             {...rest}

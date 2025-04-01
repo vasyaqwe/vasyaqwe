@@ -6,14 +6,15 @@ import { cn } from "../utils"
 export const buttonVariants = cva(
    [
       "inline-flex items-center justify-center whitespace-nowrap border text-[0.95rem] leading-none shadow-xs",
-      "cursor-pointer transition-all disabled:opacity-80",
+      "cursor-pointer disabled:opacity-80",
    ],
    {
       variants: {
          variant: {
             primary:
-               "border-primary-12 bg-gradient-to-tr from-primary-11 to-primary-10 text-white hover:opacity-90",
-            secondary: "border-neutral bg-background hover:bg-primary-1",
+               "border-transparent bg-gradient-to-t from-primary-11 to-primary-9 text-white hover:from-primary-12 hover:to-primary-10 active:to-primary-11",
+            secondary:
+               "border-neutral bg-background hover:bg-primary-1 active:bg-primary-2/40",
             ghost: "!shadow-none border-transparent bg-transparent hover:border-primary-2 hover:bg-primary-1 aria-[current=page]:border-primary-2 aria-[current=page]:bg-primary-1",
          },
          size: {
@@ -59,7 +60,6 @@ export function Button(props: ButtonProps) {
                className: local.class,
             }),
             FOCUS_STYLES,
-            "active:scale-[98%]",
          )}
          {...rest}
       >

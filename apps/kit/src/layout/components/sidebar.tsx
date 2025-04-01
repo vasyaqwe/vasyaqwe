@@ -13,7 +13,7 @@ export function Sidebar() {
                         to={"/"}
                         class={cx(
                            buttonVariants({ variant: "ghost" }),
-                           "flex w-full justify-start gap-2 px-2 font-medium text-foreground/70 leading-none hover:text-foreground aria-[current=page]:text-foreground",
+                           "flex w-full justify-start gap-2 px-2 font-medium text-foreground/70 leading-none transition-none hover:text-foreground aria-[current=page]:text-foreground",
                         )}
                      >
                         <strong class="-mt-0.5 text-lg">{"{ }"}</strong> JSON
@@ -25,7 +25,7 @@ export function Sidebar() {
                         to={"/typescript"}
                         class={cx(
                            buttonVariants({ variant: "ghost" }),
-                           "flex w-full justify-start gap-2 px-2 font-medium text-foreground/70 leading-none hover:text-foreground aria-[current=page]:text-foreground",
+                           "flex w-full justify-start gap-2 px-2 font-medium text-foreground/70 leading-none transition-none hover:text-foreground aria-[current=page]:text-foreground",
                         )}
                      >
                         <strong class="-mt-0.5 text-sm">{"TS"}</strong> JSON to

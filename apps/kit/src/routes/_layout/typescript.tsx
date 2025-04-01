@@ -87,7 +87,7 @@ const getAllInterfaces = (interfaces: Record<string, string>) => {
 }
 
 function RouteComponent() {
-   const [input, setInput] = createSignal(`{"hello":{"yo":"yo"}}`)
+   const [input, setInput] = createSignal("")
    const [output, setOutput] = createSignal("")
    const [outputKind, setOutputKind] = createSignal<OutputKind>("type")
 

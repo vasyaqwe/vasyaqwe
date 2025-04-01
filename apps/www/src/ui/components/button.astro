@@ -18,13 +18,13 @@ const {
 const button = cva(
    [
       "inline-flex items-center justify-center whitespace-nowrap text-[0.95rem] leading-none border shadow-xs",
-      "gap-1.5 transition-all disabled:opacity-80 hover:opacity-90 active:scale-[99%] hover:scale-[104%]",
+      "gap-1.5 transition-all disabled:opacity-80 active:scale-[99%] hover:scale-[104%]",
    ],
    {
       variants: {
          variant: {
             primary:
-               "bg-gradient-to-tr from-primary-11 to-primary-10 text-white border-primary-12",
+               "bg-gradient-to-tr from-primary-11 to-primary-10 text-white border-transparent text-shadow-2 hover:opacity-90",
             secondary: "bg-background border-neutral hover:bg-primary-1",
          },
          size: {

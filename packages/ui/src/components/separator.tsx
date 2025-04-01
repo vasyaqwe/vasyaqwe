@@ -7,7 +7,7 @@ export function Separator({
 }: JSX.HTMLAttributes<HTMLHRElement>) {
    return (
       <hr
-         class={cn("h-px w-full border-neutral", className)}
+         class={cn("h-px w-full bg-neutral", className)}
          {...props}
       />
    )

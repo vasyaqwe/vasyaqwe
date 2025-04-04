@@ -1,25 +1,30 @@
 import { db } from "@/database"
-import { useQuery } from "@/database/hooks"
+import { createQuery } from "@/database/store"
 import { Command, CommandItem, CommandList } from "@/ui/components/command"
 import { ErrorComponent } from "@/ui/components/error"
 import { createFileRoute } from "@tanstack/solid-router"
 import { cx } from "@vasyaqwe/ui/utils"
-import { For, createDeferred, createSignal } from "solid-js"
+import { For, Match, Switch, createDeferred, createSignal } from "solid-js"
 
-export const Route = createFileRoute("/_layout/")({
+export const Route = createFileRoute("/_authed/")({
    component: RouteComponent,
 })
 
 function RouteComponent() {
-   const query = useQuery(db, { todo: { $: { order: { createdAt: "desc" } } } })
+   const query = createQuery({ todo: { $: { order: { createdAt: "desc" } } } })
    const [selectedId, setSelectedId] = createSignal("")
    const deferredSelectedId = createDeferred(selectedId, { timeoutMs: 50 })
 
    return (
-      <>
-         {query().error ? (
+      <Switch>
+         <Match when={query().error}>
             <ErrorComponent error={new Error(query().error?.message)} />
-         ) : query().data?.todo.length === 0 ? null : (
+         </Match>
+         <Match when={query().isLoading}>{null}</Match>
+         <Match when={query().data?.todo.length === 0}>
+            <p class="mt-8 text-center font-secondary text-xl">Empty</p>
+         </Match>
+         <Match when={(query().data?.todo.length ?? 0) > 0}>
             <Command
                value={deferredSelectedId()}
                onValueChange={setSelectedId}
@@ -60,7 +65,7 @@ function RouteComponent() {
                   </For>
                </CommandList>
             </Command>
-         )}
-      </>
+         </Match>
+      </Switch>
    )
 }

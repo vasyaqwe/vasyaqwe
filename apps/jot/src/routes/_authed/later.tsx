@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/solid-router"
 
-export const Route = createFileRoute("/_layout/later")({
+export const Route = createFileRoute("/_authed/later")({
    component: RouteComponent,
 })
 

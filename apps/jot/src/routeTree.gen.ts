@@ -11,129 +11,149 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as LayoutImport } from './routes/_layout'
-import { Route as LayoutIndexImport } from './routes/_layout/index'
-import { Route as LayoutSettingsImport } from './routes/_layout/settings'
-import { Route as LayoutLaterImport } from './routes/_layout/later'
+import { Route as LoginImport } from './routes/login'
+import { Route as AuthedImport } from './routes/_authed'
+import { Route as AuthedIndexImport } from './routes/_authed/index'
+import { Route as AuthedSettingsImport } from './routes/_authed/settings'
+import { Route as AuthedLaterImport } from './routes/_authed/later'
 
 // Create/Update Routes
 
-const LayoutRoute = LayoutImport.update({
-  id: '/_layout',
+const LoginRoute = LoginImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRoute,
 } as any)
 
-const LayoutIndexRoute = LayoutIndexImport.update({
+const AuthedRoute = AuthedImport.update({
+  id: '/_authed',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthedIndexRoute = AuthedIndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => LayoutRoute,
+  getParentRoute: () => AuthedRoute,
 } as any)
 
-const LayoutSettingsRoute = LayoutSettingsImport.update({
+const AuthedSettingsRoute = AuthedSettingsImport.update({
   id: '/settings',
   path: '/settings',
-  getParentRoute: () => LayoutRoute,
+  getParentRoute: () => AuthedRoute,
 } as any)
 
-const LayoutLaterRoute = LayoutLaterImport.update({
+const AuthedLaterRoute = AuthedLaterImport.update({
   id: '/later',
   path: '/later',
-  getParentRoute: () => LayoutRoute,
+  getParentRoute: () => AuthedRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/solid-router' {
   interface FileRoutesByPath {
-    '/_layout': {
-      id: '/_layout'
+    '/_authed': {
+      id: '/_authed'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof LayoutImport
+      preLoaderRoute: typeof AuthedImport
       parentRoute: typeof rootRoute
     }
-    '/_layout/later': {
-      id: '/_layout/later'
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginImport
+      parentRoute: typeof rootRoute
+    }
+    '/_authed/later': {
+      id: '/_authed/later'
       path: '/later'
       fullPath: '/later'
-      preLoaderRoute: typeof LayoutLaterImport
-      parentRoute: typeof LayoutImport
+      preLoaderRoute: typeof AuthedLaterImport
+      parentRoute: typeof AuthedImport
     }
-    '/_layout/settings': {
-      id: '/_layout/settings'
+    '/_authed/settings': {
+      id: '/_authed/settings'
       path: '/settings'
       fullPath: '/settings'
-      preLoaderRoute: typeof LayoutSettingsImport
-      parentRoute: typeof LayoutImport
+      preLoaderRoute: typeof AuthedSettingsImport
+      parentRoute: typeof AuthedImport
     }
-    '/_layout/': {
-      id: '/_layout/'
+    '/_authed/': {
+      id: '/_authed/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof LayoutIndexImport
-      parentRoute: typeof LayoutImport
+      preLoaderRoute: typeof AuthedIndexImport
+      parentRoute: typeof AuthedImport
     }
   }
 }
 
 // Create and export the route tree
 
-interface LayoutRouteChildren {
-  LayoutLaterRoute: typeof LayoutLaterRoute
-  LayoutSettingsRoute: typeof LayoutSettingsRoute
-  LayoutIndexRoute: typeof LayoutIndexRoute
+interface AuthedRouteChildren {
+  AuthedLaterRoute: typeof AuthedLaterRoute
+  AuthedSettingsRoute: typeof AuthedSettingsRoute
+  AuthedIndexRoute: typeof AuthedIndexRoute
 }
 
-const LayoutRouteChildren: LayoutRouteChildren = {
-  LayoutLaterRoute: LayoutLaterRoute,
-  LayoutSettingsRoute: LayoutSettingsRoute,
-  LayoutIndexRoute: LayoutIndexRoute,
+const AuthedRouteChildren: AuthedRouteChildren = {
+  AuthedLaterRoute: AuthedLaterRoute,
+  AuthedSettingsRoute: AuthedSettingsRoute,
+  AuthedIndexRoute: AuthedIndexRoute,
 }
 
-const LayoutRouteWithChildren =
-  LayoutRoute._addFileChildren(LayoutRouteChildren)
+const AuthedRouteWithChildren =
+  AuthedRoute._addFileChildren(AuthedRouteChildren)
 
 export interface FileRoutesByFullPath {
-  '': typeof LayoutRouteWithChildren
-  '/later': typeof LayoutLaterRoute
-  '/settings': typeof LayoutSettingsRoute
-  '/': typeof LayoutIndexRoute
+  '': typeof AuthedRouteWithChildren
+  '/login': typeof LoginRoute
+  '/later': typeof AuthedLaterRoute
+  '/settings': typeof AuthedSettingsRoute
+  '/': typeof AuthedIndexRoute
 }
 
 export interface FileRoutesByTo {
-  '/later': typeof LayoutLaterRoute
-  '/settings': typeof LayoutSettingsRoute
-  '/': typeof LayoutIndexRoute
+  '/login': typeof LoginRoute
+  '/later': typeof AuthedLaterRoute
+  '/settings': typeof AuthedSettingsRoute
+  '/': typeof AuthedIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/_layout': typeof LayoutRouteWithChildren
-  '/_layout/later': typeof LayoutLaterRoute
-  '/_layout/settings': typeof LayoutSettingsRoute
-  '/_layout/': typeof LayoutIndexRoute
+  '/_authed': typeof AuthedRouteWithChildren
+  '/login': typeof LoginRoute
+  '/_authed/later': typeof AuthedLaterRoute
+  '/_authed/settings': typeof AuthedSettingsRoute
+  '/_authed/': typeof AuthedIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/later' | '/settings' | '/'
+  fullPaths: '' | '/login' | '/later' | '/settings' | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/later' | '/settings' | '/'
+  to: '/login' | '/later' | '/settings' | '/'
   id:
     | '__root__'
-    | '/_layout'
-    | '/_layout/later'
-    | '/_layout/settings'
-    | '/_layout/'
+    | '/_authed'
+    | '/login'
+    | '/_authed/later'
+    | '/_authed/settings'
+    | '/_authed/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  LayoutRoute: typeof LayoutRouteWithChildren
+  AuthedRoute: typeof AuthedRouteWithChildren
+  LoginRoute: typeof LoginRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  LayoutRoute: LayoutRouteWithChildren,
+  AuthedRoute: AuthedRouteWithChildren,
+  LoginRoute: LoginRoute,
 }
 
 export const routeTree = rootRoute
@@ -146,28 +166,32 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/_layout"
+        "/_authed",
+        "/login"
       ]
     },
-    "/_layout": {
-      "filePath": "_layout.tsx",
+    "/_authed": {
+      "filePath": "_authed.tsx",
       "children": [
-        "/_layout/later",
-        "/_layout/settings",
-        "/_layout/"
+        "/_authed/later",
+        "/_authed/settings",
+        "/_authed/"
       ]
     },
-    "/_layout/later": {
-      "filePath": "_layout/later.tsx",
-      "parent": "/_layout"
+    "/login": {
+      "filePath": "login.tsx"
     },
-    "/_layout/settings": {
-      "filePath": "_layout/settings.tsx",
-      "parent": "/_layout"
+    "/_authed/later": {
+      "filePath": "_authed/later.tsx",
+      "parent": "/_authed"
     },
-    "/_layout/": {
-      "filePath": "_layout/index.tsx",
-      "parent": "/_layout"
+    "/_authed/settings": {
+      "filePath": "_authed/settings.tsx",
+      "parent": "/_authed"
+    },
+    "/_authed/": {
+      "filePath": "_authed/index.tsx",
+      "parent": "/_authed"
     }
   }
 }

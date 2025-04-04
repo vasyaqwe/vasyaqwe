@@ -1,3 +1,4 @@
+import { db } from "@/database"
 import {
    type InstaQLLifecycleState,
    type InstaQLOptions,
@@ -5,12 +6,11 @@ import {
    type InstantCoreDatabase,
    type InstantSchemaDef,
    coerceQuery,
-   weakHash,
 } from "@instantdb/core"
 import { createEffect, createSignal, onCleanup } from "solid-js"
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-function stateForResult(result: any) {
+const stateForResult = (result: any) => {
    return {
       isLoading: !result,
       data: undefined,
@@ -20,7 +20,7 @@ function stateForResult(result: any) {
    }
 }
 
-export function useQuery<
+function createQueryInternal<
    Q extends InstaQLParams<Schema>,
    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
    Schema extends InstantSchemaDef<any, any, any>,
@@ -36,15 +36,12 @@ export function useQuery<
    }
 
    const query = queryToUse ? coerceQuery(queryToUse) : null
-   const queryHash = weakHash(query)
 
    const [state, setState] = createSignal<InstaQLLifecycleState<Schema, Q>>(
       stateForResult(core._reactor?.getPreviousResult(query)),
    )
 
    createEffect(() => {
-      const _currentQueryHash = queryHash
-
       if (!query) return
 
       const unsubscribe = core.subscribeQuery<Q>(query, (result) => {
@@ -58,11 +55,18 @@ export function useQuery<
          })
       })
 
-      // Clean up subscription when effect re-runs or component unmounts
       onCleanup(() => {
          unsubscribe()
       })
    })
 
    return state
+}
+
+export function createQuery<
+   Q extends InstaQLParams<Schema>,
+   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+   Schema extends InstantSchemaDef<any, any, any>,
+>(query: null | Q, opts?: InstaQLOptions) {
+   return createQueryInternal(db, query, opts)
 }

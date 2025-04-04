@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/solid-router"
 
-export const Route = createFileRoute("/_layout/settings")({
+export const Route = createFileRoute("/login")({
    component: RouteComponent,
 })
 
 function RouteComponent() {
-   return <div>Hello "/_layout/settings"!</div>
+   return <div>Hello "/login"!</div>
 }

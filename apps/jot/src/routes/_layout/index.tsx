@@ -1,15 +1,66 @@
+import { db } from "@/database"
+import { useQuery } from "@/database/hooks"
+import { Command, CommandItem, CommandList } from "@/ui/components/command"
+import { ErrorComponent } from "@/ui/components/error"
 import { createFileRoute } from "@tanstack/solid-router"
-import { Textarea } from "@vasyaqwe/ui/components/textarea"
+import { cx } from "@vasyaqwe/ui/utils"
+import { For, createDeferred, createSignal } from "solid-js"
 
 export const Route = createFileRoute("/_layout/")({
    component: RouteComponent,
 })
 
 function RouteComponent() {
+   const query = useQuery(db, { todo: { $: { order: { createdAt: "desc" } } } })
+   const [selectedId, setSelectedId] = createSignal("")
+   const deferredSelectedId = createDeferred(selectedId, { timeoutMs: 50 })
+
    return (
-      <div class="container pt-4 pb-12 md:pt-5">
-         <h1 class="font-secondary text-2xl">jot</h1>
-         <Textarea />
-      </div>
+      <>
+         {query().error ? (
+            <ErrorComponent error={new Error(query().error?.message)} />
+         ) : query().data?.todo.length === 0 ? null : (
+            <Command
+               value={deferredSelectedId()}
+               onValueChange={setSelectedId}
+            >
+               <CommandList class="mt-8">
+                  <For each={query().data?.todo}>
+                     {(todo) => (
+                        <CommandItem
+                           class={cx(
+                              "relative mt-5 block cursor-pointer font-medium text-lg before:absolute before:inset-[-10px_-10px_-10px_-10px] before:rounded-xl before:transition-colors before:duration-50",
+                           )}
+                           value={todo.id}
+                           onSelect={() => {
+                              const toUpdate = db.tx.todo[todo.id]
+                              if (!toUpdate) return
+                              db.transact(toUpdate.update({ done: !todo.done }))
+                              setTimeout(() => {
+                                 setSelectedId(todo.id)
+                              }, 0)
+                           }}
+                        >
+                           <div class="relative z-10 flex items-center rounded-xl">
+                              <input
+                                 type="checkbox"
+                                 class="appearance-none"
+                                 checked={todo.done}
+                              />
+                              {todo.done ? <s>{todo.content}</s> : todo.content}
+                              {/* <Badge
+                                 variant={"gradient"}
+                                 class={cx("ml-auto")}
+                              >
+                                 to watch
+                              </Badge> */}
+                           </div>
+                        </CommandItem>
+                     )}
+                  </For>
+               </CommandList>
+            </Command>
+         )}
+      </>
    )
 }

@@ -1,15 +1,15 @@
 :root {
-   --color-primary-1: hsl(70, 25%, 98%);
-   --color-primary-2: hsl(70, 20%, 93%);
-   --color-primary-3: hsl(70, 20%, 88%);
-   --color-primary-4: hsl(70, 20%, 84%);
-   --color-primary-5: hsl(70, 20%, 78%);
-   --color-primary-6: hsl(70, 15%, 72%);
-   --color-primary-7: hsl(70, 15%, 68%);
-   --color-primary-8: hsl(70, 15%, 56%);
-   --color-primary-9: hsl(70, 15%, 47%);
-   --color-primary-10: hsl(70, 15%, 35%);
-   --color-primary-11: hsl(70, 15%, 24%);
+   --color-primary-1: hsl(70, 20%, 98%);
+   --color-primary-2: hsl(70, 15%, 94%);
+   --color-primary-3: hsl(70, 15%, 90%);
+   --color-primary-4: hsl(70, 15%, 84%);
+   --color-primary-5: hsl(70, 15%, 78%);
+   --color-primary-6: hsl(70, 10%, 72%);
+   --color-primary-7: hsl(70, 10%, 68%);
+   --color-primary-8: hsl(70, 10%, 56%);
+   --color-primary-9: hsl(70, 10%, 47%);
+   --color-primary-10: hsl(70, 10%, 35%);
+   --color-primary-11: hsl(70, 10%, 24%);
    --color-primary-12: hsl(70, 10%, 10%);
 
    --color-accent-1: hsl(217, 91%, 90%);
@@ -30,12 +30,15 @@
    --color-neutral: var(--color-primary-3);
 
    --text-sm: 0.8925rem;
-   --text-base: 0.965rem;
+   --text-base: 0.945rem;
+   --text-lg: 1.025rem;
 
    --font-primary: "switzer", sans-serif;
    --font-secondary: "gambarino", sans-serif;
 
    --container-max-width: 40rem;
+
+   --cursor: default;
 }
 
 * {
@@ -46,4 +49,9 @@
 .font-secondary {
    color: hsl(70, 10%, 0%);
    font-family: var(--font-secondary);
+}
+
+[cmdk-root].interacted [cmdk-item][data-selected=true]:before,
+[cmdk-item][data-selected=true]:hover:before {
+  background-color: var(--color-primary-2);
 }

@@ -13,6 +13,8 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as LayoutIndexImport } from './routes/_layout/index'
+import { Route as LayoutSettingsImport } from './routes/_layout/settings'
+import { Route as LayoutLaterImport } from './routes/_layout/later'
 
 // Create/Update Routes
 
@@ -27,6 +29,18 @@ const LayoutIndexRoute = LayoutIndexImport.update({
   getParentRoute: () => LayoutRoute,
 } as any)
 
+const LayoutSettingsRoute = LayoutSettingsImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutLaterRoute = LayoutLaterImport.update({
+  id: '/later',
+  path: '/later',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/solid-router' {
@@ -37,6 +51,20 @@ declare module '@tanstack/solid-router' {
       fullPath: ''
       preLoaderRoute: typeof LayoutImport
       parentRoute: typeof rootRoute
+    }
+    '/_layout/later': {
+      id: '/_layout/later'
+      path: '/later'
+      fullPath: '/later'
+      preLoaderRoute: typeof LayoutLaterImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/settings': {
+      id: '/_layout/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof LayoutSettingsImport
+      parentRoute: typeof LayoutImport
     }
     '/_layout/': {
       id: '/_layout/'
@@ -51,10 +79,14 @@ declare module '@tanstack/solid-router' {
 // Create and export the route tree
 
 interface LayoutRouteChildren {
+  LayoutLaterRoute: typeof LayoutLaterRoute
+  LayoutSettingsRoute: typeof LayoutSettingsRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutLaterRoute: LayoutLaterRoute,
+  LayoutSettingsRoute: LayoutSettingsRoute,
   LayoutIndexRoute: LayoutIndexRoute,
 }
 
@@ -63,25 +95,36 @@ const LayoutRouteWithChildren =
 
 export interface FileRoutesByFullPath {
   '': typeof LayoutRouteWithChildren
+  '/later': typeof LayoutLaterRoute
+  '/settings': typeof LayoutSettingsRoute
   '/': typeof LayoutIndexRoute
 }
 
 export interface FileRoutesByTo {
+  '/later': typeof LayoutLaterRoute
+  '/settings': typeof LayoutSettingsRoute
   '/': typeof LayoutIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_layout': typeof LayoutRouteWithChildren
+  '/_layout/later': typeof LayoutLaterRoute
+  '/_layout/settings': typeof LayoutSettingsRoute
   '/_layout/': typeof LayoutIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/'
+  fullPaths: '' | '/later' | '/settings' | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/_layout' | '/_layout/'
+  to: '/later' | '/settings' | '/'
+  id:
+    | '__root__'
+    | '/_layout'
+    | '/_layout/later'
+    | '/_layout/settings'
+    | '/_layout/'
   fileRoutesById: FileRoutesById
 }
 
@@ -109,8 +152,18 @@ export const routeTree = rootRoute
     "/_layout": {
       "filePath": "_layout.tsx",
       "children": [
+        "/_layout/later",
+        "/_layout/settings",
         "/_layout/"
       ]
+    },
+    "/_layout/later": {
+      "filePath": "_layout/later.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/settings": {
+      "filePath": "_layout/settings.tsx",
+      "parent": "/_layout"
     },
     "/_layout/": {
       "filePath": "_layout/index.tsx",

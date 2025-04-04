@@ -1,6 +1,9 @@
 {
    "extends": "@vasyaqwe/tsconfig/internal-package.json",
    "compilerOptions": {
+      "paths": {
+         "@vasyaqwe/ui/*": ["./src/*"]
+      },
       "lib": ["ESNext", "DOM", "DOM.iterable"],
       "jsxImportSource": "solid-js",
       "types": ["solid-js"],

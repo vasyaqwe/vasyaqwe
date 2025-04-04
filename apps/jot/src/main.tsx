@@ -9,7 +9,6 @@ import {
    createRouter,
    useRouter,
 } from "@tanstack/solid-router"
-import type * as TauriAPI from "@tauri-apps/api"
 import { render } from "solid-js/web"
 import { routeTree } from "./routeTree.gen"
 
@@ -65,10 +64,6 @@ declare module "@tanstack/solid-router" {
    interface Register {
       router: typeof router
    }
-}
-
-declare global {
-   var __TAURI_INTERNALS__: typeof TauriAPI
 }
 
 const rootElement = document.getElementById("app")

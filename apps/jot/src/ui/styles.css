@@ -1,0 +1,49 @@
+:root {
+   --color-primary-1: hsl(70, 25%, 98%);
+   --color-primary-2: hsl(70, 20%, 93%);
+   --color-primary-3: hsl(70, 20%, 88%);
+   --color-primary-4: hsl(70, 20%, 84%);
+   --color-primary-5: hsl(70, 20%, 78%);
+   --color-primary-6: hsl(70, 15%, 72%);
+   --color-primary-7: hsl(70, 15%, 68%);
+   --color-primary-8: hsl(70, 15%, 56%);
+   --color-primary-9: hsl(70, 15%, 47%);
+   --color-primary-10: hsl(70, 15%, 35%);
+   --color-primary-11: hsl(70, 15%, 24%);
+   --color-primary-12: hsl(70, 10%, 10%);
+
+   --color-accent-1: hsl(217, 91%, 90%);
+   --color-accent-2: hsl(217, 91%, 80%);
+   --color-accent-3: hsl(217, 91%, 75%);
+   --color-accent-4: hsl(217, 91%, 70%);
+   --color-accent-5: hsl(217, 91%, 65%);
+   --color-accent-6: hsl(217, 91%, 60%);
+   --color-accent-7: hsl(217, 91%, 55%);
+   --color-accent-8: hsl(217, 91%, 50%);
+   --color-accent-9: hsl(217, 91%, 45%);
+   --color-accent-10: hsl(217, 91%, 40%);
+   --color-accent-11: hsl(217, 91%, 30%);
+   --color-accent-12: hsl(217, 91%, 20%);
+
+   --color-background: var(--color-primary-1);
+   --color-foreground: var(--color-primary-12);
+   --color-neutral: var(--color-primary-3);
+
+   --text-sm: 0.8925rem;
+   --text-base: 0.965rem;
+
+   --font-primary: "switzer", sans-serif;
+   --font-secondary: "gambarino", sans-serif;
+
+   --container-max-width: 40rem;
+}
+
+* {
+   scrollbar-width: thin;
+   scrollbar-color: var(--color-primary-6) transparent;
+}
+
+.font-secondary {
+   color: hsl(70, 10%, 0%);
+   font-family: var(--font-secondary);
+}

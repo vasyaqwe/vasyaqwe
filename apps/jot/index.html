@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" class="font-primary antialiased overflow-hidden">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.svg">
+  <meta name="theme-color" content="#fbfbf9" />
+  <meta name="viewport"
+    content="viewport-fit=cover, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>vasyaqwe/jot</title>
+  <style>
+    @font-face {
+      font-family: "switzer";
+      src: url("/font/switzer.woff2") format("woff2");
+      font-display: swap;
+      font-style: normal;
+      font-weight: 400 600;
+    }
+
+    @font-face {
+      font-family: "gambarino";
+      src: url("/font/gambarino.woff2") format("woff2");
+      font-display: swap;
+      font-style: normal;
+      font-weight: 400;
+    }
+  </style>
+  <link rel="preload" href="/font/switzer.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="/font/gambarino.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+</head>
+
+<body class="min-h-svh bg-background text-base text-foreground selection:bg-accent-7 selection:text-white">
+  <div id="app" class="md:flex"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>

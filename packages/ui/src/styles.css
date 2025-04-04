@@ -1,9 +1,6 @@
 @import "tailwindcss";
 
 @theme default {
-   --sab: max(env(safe-area-inset-bottom), 0px);
-   --container-max-width: 48rem;
-
    --color-primary-1: #fafafa;
    --color-primary-2: #e4e5e7;
    --color-primary-3: #d7d8da;
@@ -34,23 +31,22 @@
    --color-foreground: var(--color-primary-12);
    --color-neutral: var(--color-primary-2);
 
+   --font-primary: "outfit", sans-serif;
+
    --text-sm: 0.845rem;
    --text-sm--line-height: 1rem;
    --text-base: 0.94rem;
    --text-base--line-height: 1.4rem;
    --text-lg: 1.0625rem;
 
-   --font-primary: "outfit", sans-serif;
+   --popup-radius: 0.5rem;
+   --popup-padding: 3px;
 
+   --container-max-width: 48rem;
    --width-prose: 60ch;
 
    --ease-vaul: cubic-bezier(0.32, 0.72, 0, 1);
-
-   --popup-radius: 0.5rem;
-   --popup-padding: 3px;
 }
-
-@variant dark (&:where(.dark, .dark *));
 
 @utility container {
    margin-inline: auto;
@@ -163,15 +159,6 @@
          99.94% 40.66%,
          100.00% 50.00%
       );
-   }
-}
-
-@layer utilities {
-   .text-shadow-1 {
-      text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.08);
-   }
-   .text-shadow-2 {
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
    }
 }
 

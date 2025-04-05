@@ -236,12 +236,10 @@ const Command: Component<CommandRootProps> = (props) => {
       if (e.key === "ArrowUp" || e.key === "ArrowDown") {
          e.preventDefault()
          inputInnerRef()?.focus()
-         console.log("Focusing input", inputInnerRef())
          return setState((prev) => ({ ...prev, interacted: true }))
       }
-      if (e.key === "Escape") {
+      if (e.key === "Escape")
          setState((prev) => ({ ...prev, interacted: false }))
-      }
    })
 
    createEffect(() => {
@@ -615,10 +613,10 @@ const Command: Component<CommandRootProps> = (props) => {
                         // Trigger item onSelect
                         e.preventDefault()
                         const item = getSelectedItem()
-                        if (item) {
-                           const event = new Event(SELECT_EVENT)
-                           item.dispatchEvent(event)
-                        }
+                        if (!item) return
+
+                        const event = new Event(SELECT_EVENT)
+                        item.dispatchEvent(event)
                      }
                   }
                }
@@ -888,7 +886,7 @@ const Input: Component<CommandInputProps> = (props) => {
    createEventListener(
       () => context?.inputInnerRef(),
       "blur",
-      (_e) => {
+      () => {
          const cmdkItemParent = clickedElement
             ? // @ts-expect-error ...
               clickedElement.closest("[cmdk-item]")

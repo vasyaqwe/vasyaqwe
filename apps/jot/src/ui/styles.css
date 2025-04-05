@@ -50,8 +50,3 @@
    color: hsl(70, 10%, 0%);
    font-family: var(--font-secondary);
 }
-
-[cmdk-root].interacted [cmdk-item][data-selected=true]:before,
-[cmdk-item][data-selected=true]:hover:before {
-  background-color: var(--color-primary-2);
-}

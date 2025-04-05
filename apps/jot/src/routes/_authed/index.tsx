@@ -1,29 +1,29 @@
 import { db } from "@/database"
 import { createQuery } from "@/database/store"
-import { Command, CommandItem, CommandList } from "@/ui/components/command"
+import {
+   Command,
+   CommandInput,
+   CommandItem,
+   CommandList,
+} from "@/ui/components/command"
 import { ErrorComponent } from "@/ui/components/error"
-import { interactedWithCommand } from "@/ui/store"
 import { createShortcut } from "@solid-primitives/keyboard"
 import { createFileRoute } from "@tanstack/solid-router"
 import { cx } from "@vasyaqwe/ui/utils"
-import { For, Match, Switch, createDeferred, createSignal } from "solid-js"
+import { For, Match, Switch, createSignal } from "solid-js"
 
 export const Route = createFileRoute("/_authed/")({
    component: RouteComponent,
 })
 
 const [selectedId, setSelectedId] = createSignal("")
-const [interactedViaShortcut, setInteractedViaShortcut] = createSignal(false)
 
 function RouteComponent() {
    const query = createQuery({ todo: { $: { order: { createdAt: "desc" } } } })
 
-   const deferredSelectedId = createDeferred(selectedId, { timeoutMs: 50 })
-
    createShortcut(
       ["Delete"],
       () => {
-         if (!interactedWithCommand()) return
          const data = query().data?.todo
          if (!data) return
 
@@ -46,14 +46,7 @@ function RouteComponent() {
             setSelectedId("")
          }
 
-         const deleteTodo = async () => {
-            setInteractedViaShortcut(true)
-            await db.transact(toDelete.delete())
-            setTimeout(() => {
-               setInteractedViaShortcut(false)
-            }, 100)
-         }
-         deleteTodo()
+         db.transact(toDelete.delete())
       },
       { preventDefault: true, requireReset: true },
    )
@@ -69,13 +62,11 @@ function RouteComponent() {
          </Match>
          <Match when={(query().data?.todo ?? []).length > 0}>
             <Command
-               value={deferredSelectedId()}
-               onValueChange={(v) => {
-                  if (interactedViaShortcut()) return
-                  setSelectedId(v)
-               }}
+               value={selectedId()}
+               onValueChange={setSelectedId}
                onBlur={() => setSelectedId("")}
             >
+               <CommandInput class="sr-only" />
                <CommandList class="mt-8">
                   <For each={query().data?.todo}>
                      {(todo) => <TodoItem todo={todo} />}
@@ -93,7 +84,7 @@ function TodoItem({
    return (
       <CommandItem
          class={cx(
-            "relative mt-5 block cursor-(--cursor) font-medium text-lg before:absolute before:inset-[-10px_-10px_-10px_-10px] before:rounded-xl before:transition-colors before:duration-50",
+            "relative mt-5 block cursor-(--cursor) font-medium text-lg before:absolute before:inset-[-10px_-10px_-10px_-10px] before:rounded-xl before:transition-colors before:duration-50 data-[selected]:before:bg-primary-2",
          )}
          value={todo.id}
          onSelect={() => {

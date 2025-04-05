@@ -1,7 +1,7 @@
 import { db } from "@/database"
 import { buttonVariants } from "@/ui/components/button"
 import { id } from "@instantdb/core"
-import { Link, Outlet, createFileRoute, redirect } from "@tanstack/solid-router"
+import { Link, Outlet, createFileRoute } from "@tanstack/solid-router"
 import { Textarea } from "@vasyaqwe/ui/components/textarea"
 import { cn, formDataFromTarget } from "@vasyaqwe/ui/utils"
 import { onMount } from "solid-js"
@@ -9,8 +9,8 @@ import { onMount } from "solid-js"
 export const Route = createFileRoute("/_authed")({
    component: RouteComponent,
    beforeLoad: async () => {
-      const auth = await db.getAuth()
-      if (!auth) throw redirect({ to: "/login" })
+      // const auth = await db.getAuth()
+      // if (!auth) throw redirect({ to: "/login" })
    },
 })
 

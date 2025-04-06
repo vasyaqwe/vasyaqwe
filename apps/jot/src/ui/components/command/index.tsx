@@ -725,6 +725,7 @@ const Item: ParentComponent<CommandItemProps> = (props) => {
    function select() {
       store?.setState("interacted", true)
       store?.setState("value", value(), true)
+      context?.inputInnerRef()?.focus()
    }
 
    const [localProps, etc] = splitProps(props, [
@@ -883,6 +884,7 @@ const Input: Component<CommandInputProps> = (props) => {
    document.addEventListener("mousedown", (e) => {
       clickedElement = e.target
    })
+
    createEventListener(
       () => context?.inputInnerRef(),
       "blur",

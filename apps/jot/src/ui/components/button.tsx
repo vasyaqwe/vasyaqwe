@@ -14,8 +14,8 @@ export const buttonVariants = cva(
             primary:
                "bg-accent-6 font-[400] text-shadow-md text-white shadow-[inset_0_-2.5px_1px_0_var(--tw-shadow-color,rgb(0_0_0_/_0.2)),0_1px_3px_0_var(--tw-shadow-color,_rgb(0_0_0_/_0.1)),_0_1px_2px_-1px_var(--tw-shadow-color,_rgb(0_0_0_/_0.1))] hover:bg-accent-5 active:bg-accent-6",
             secondary:
-               "border border-primary-5 bg-primary-3 font-[425] text-shadow-xs shadow-[inset_0_-1.5px_1px_0_var(--tw-shadow-color,rgb(0_0_0_/_0.1)),0_1px_2px_0_var(--tw-shadow-color,_rgb(0_0_0_/_0.04)),_0_1px_2px_-1px_var(--tw-shadow-color,_rgb(0_0_0_/_0.04))] hover:border-primary-4 hover:bg-primary-2 active:bg-primary-3",
-            ghost: "bg-transparent font-[425] hover:bg-primary-2 aria-[current=page]:bg-primary-2",
+               "border border-primary-5 bg-primary-3 text-shadow-xs shadow-[inset_0_-1.5px_1px_0_var(--tw-shadow-color,rgb(0_0_0_/_0.1)),0_1px_2px_0_var(--tw-shadow-color,_rgb(0_0_0_/_0.04)),_0_1px_2px_-1px_var(--tw-shadow-color,_rgb(0_0_0_/_0.04))] hover:border-primary-4 hover:bg-primary-2 active:bg-primary-3",
+            ghost: "bg-transparent hover:bg-primary-2 aria-[current=page]:bg-primary-2",
             destructive: "bg-red-100 text-red-900 hover:bg-red-200/80",
          },
          size: {

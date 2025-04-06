@@ -1,3 +1,4 @@
+import { TodoList } from "@/todo/components/todo-list"
 import { createFileRoute } from "@tanstack/solid-router"
 
 export const Route = createFileRoute("/_authed/later")({
@@ -5,5 +6,5 @@ export const Route = createFileRoute("/_authed/later")({
 })
 
 function RouteComponent() {
-   return <div>Hello "/_layout/later"!</div>
+   return <TodoList />
 }

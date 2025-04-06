@@ -1,6 +1,7 @@
 import { db } from "@/database"
 import { Button } from "@/ui/components/button"
 import type { SendMagicCodeResponse, VerifyResponse } from "@instantdb/core"
+import { createEventListener } from "@solid-primitives/event-listener"
 import { createFileRoute, useNavigate } from "@tanstack/solid-router"
 import { formDataFromTarget, tryCatch } from "@vasyaqwe/ui/utils"
 import { Show, createSignal } from "solid-js"
@@ -15,6 +16,13 @@ function RouteComponent() {
    const [email, setEmail] = createSignal("")
    const [loading, setLoading] = createSignal(false)
    const [step, setStep] = createSignal<"initial" | "code">("initial")
+
+   let codeRef: HTMLInputElement | undefined
+
+   createEventListener(document, "visibilitychange", () => {
+      if (document.visibilityState === "visible") codeRef?.focus()
+   })
+   createEventListener(window, "focus", () => codeRef?.focus())
 
    return (
       <div class="grid h-svh w-full place-items-center">
@@ -68,12 +76,12 @@ function RouteComponent() {
                   >
                      <Show when={step() === "initial"}>
                         <div class="absolute w-full duration-500">
-                           <h1 class="font-secondary text-foreground/75 text-lg">
+                           <h1 class="font-secondary text-foreground/80 text-lg">
                               Access Jot
                            </h1>
                            <label
                               for="email"
-                              class="mt-1 inline-block w-fit font-semibold"
+                              class="mt-1 inline-block w-fit font-medium"
                            >
                               What is your email?
                            </label>
@@ -89,10 +97,10 @@ function RouteComponent() {
                      >
                         <Show when={step() === "code"}>
                            <div class="absolute w-full duration-500">
-                              <h1 class="font-secondary text-foreground/75 text-lg">
+                              <h1 class="font-secondary text-foreground/80 text-lg">
                                  Code sent
                               </h1>
-                              <p class="mt-1 line-clamp-1 w-full font-semibold">
+                              <p class="mt-1 line-clamp-1 w-full font-medium">
                                  {email()}
                               </p>
                            </div>
@@ -110,11 +118,12 @@ function RouteComponent() {
                         type="email"
                         required
                         placeholder="example@mail.com"
-                        class="h-12 w-full border-primary-5 border-b py-2 pr-22 transition-colors duration-100 placeholder:text-foreground/40 focus:border-primary-6 focus:outline-hidden md:h-10"
+                        class="h-12 w-full border-primary-5 border-b py-2 pr-22 transition-colors duration-100 placeholder:text-foreground/40 focus:border-primary-7 focus:outline-hidden md:h-10"
                      />
                   </Show>
                   <Show when={step() === "code"}>
                      <input
+                        ref={codeRef}
                         name="code"
                         id="code"
                         inputmode="numeric"
@@ -122,7 +131,7 @@ function RouteComponent() {
                         required
                         placeholder="000000"
                         autofocus
-                        class="h-12 w-full border-primary-5 border-b py-2 pr-22 text-lg transition-colors duration-100 placeholder:text-foreground/40 focus:border-primary-6 focus:outline-hidden md:h-10"
+                        class="h-12 w-full border-primary-5 border-b py-2 pr-22 text-lg transition-colors duration-100 placeholder:text-foreground/40 focus:border-primary-7 focus:outline-hidden md:h-10"
                      />
                   </Show>
                   <Button
@@ -146,7 +155,7 @@ function RouteComponent() {
                         <button
                            type="button"
                            onClick={() => setStep("initial")}
-                           class="mt-3 cursor-pointer font-medium text-foreground/60 text-sm transition-colors duration-100 hover:text-foreground"
+                           class="mt-3 cursor-pointer font-medium text-foreground/75 text-sm transition-colors duration-100 hover:text-foreground"
                         >
                            Go back
                         </button>

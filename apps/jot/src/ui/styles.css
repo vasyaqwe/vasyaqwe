@@ -30,8 +30,11 @@
    --color-neutral: var(--color-primary-3);
 
    --text-sm: 0.8925rem;
+   --text-sm--line-height: 1.2rem;
    --text-base: 0.945rem;
    --text-lg: 1.025rem;
+
+   --font-weight-normal: 425;
 
    --font-primary: "switzer", sans-serif;
    --font-secondary: "gambarino", sans-serif;
@@ -41,12 +44,14 @@
    --cursor: default;
 }
 
+@layer base {
+   .font-secondary {
+      color: hsl(70, 10%, 0%);
+      font-family: var(--font-secondary);
+   }
+}
+
 * {
    scrollbar-width: thin;
    scrollbar-color: var(--color-primary-6) transparent;
-}
-
-.font-secondary {
-   color: hsl(70, 10%, 0%);
-   font-family: var(--font-secondary);
 }

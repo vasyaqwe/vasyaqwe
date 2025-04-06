@@ -2,7 +2,14 @@ import { db } from "@/database"
 import { buttonVariants } from "@/ui/components/button"
 import { id } from "@instantdb/core"
 import { createEventListener } from "@solid-primitives/event-listener"
-import { Link, Outlet, createFileRoute, redirect } from "@tanstack/solid-router"
+import { createShortcut } from "@solid-primitives/keyboard"
+import {
+   Link,
+   Outlet,
+   createFileRoute,
+   redirect,
+   useNavigate,
+} from "@tanstack/solid-router"
 import { Textarea } from "@vasyaqwe/ui/components/textarea"
 import { cn, formDataFromTarget } from "@vasyaqwe/ui/utils"
 
@@ -18,6 +25,7 @@ export const Route = createFileRoute("/_authed")({
 
 function RouteComponent() {
    const context = Route.useRouteContext()
+   const navigate = useNavigate()
    let contentRef: HTMLTextAreaElement | undefined
    let formRef: HTMLFormElement | undefined
 
@@ -25,6 +33,13 @@ function RouteComponent() {
       if (document.visibilityState === "visible") contentRef?.focus()
    })
    createEventListener(window, "focus", () => contentRef?.focus())
+
+   createShortcut(["t"], () => navigate({ to: "/" }))
+   createShortcut(["1"], () => navigate({ to: "/" }))
+   createShortcut(["l"], () => navigate({ to: "/later" }))
+   createShortcut(["2"], () => navigate({ to: "/later" }))
+   createShortcut(["s"], () => navigate({ to: "/settings" }))
+   createShortcut(["3"], () => navigate({ to: "/settings" }))
 
    return (
       <div class="container pt-4 pb-12 md:pt-5">
@@ -35,7 +50,7 @@ function RouteComponent() {
                   to="/"
                   class={cn(
                      buttonVariants({ variant: "ghost" }),
-                     "font-medium text-foreground/80 aria-[current=page]:text-foreground",
+                     "text-foreground/80 aria-[current=page]:text-foreground",
                   )}
                >
                   Today
@@ -44,7 +59,7 @@ function RouteComponent() {
                   to="/later"
                   class={cn(
                      buttonVariants({ variant: "ghost" }),
-                     "font-medium text-foreground/80 aria-[current=page]:text-foreground",
+                     "text-foreground/80 aria-[current=page]:text-foreground",
                   )}
                >
                   Later
@@ -53,7 +68,7 @@ function RouteComponent() {
                   to="/settings"
                   class={cn(
                      buttonVariants({ variant: "ghost" }),
-                     "font-medium text-foreground/80 aria-[current=page]:text-foreground",
+                     "text-foreground/80 aria-[current=page]:text-foreground",
                   )}
                >
                   Settings

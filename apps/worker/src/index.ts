@@ -22,7 +22,7 @@ const app = createRouter()
 
 const base = createRouter().get("/health", (c) =>
    c.json({
-      message: "Healthy",
+      message: "OK",
    }),
 )
 

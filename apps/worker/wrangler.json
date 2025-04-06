@@ -12,9 +12,15 @@
    "vars": {
       "ENVIRONMENT": "development"
    },
+   "ai": {
+      "binding": "AI"
+   },
    "env": {
       "production": {
          "name": "vasyaqwe-worker",
+         "ai": {
+            "binding": "AI"
+         },
          "vars": {
             "ENVIRONMENT": "production"
          }

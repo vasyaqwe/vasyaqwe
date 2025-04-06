@@ -1,5 +1,6 @@
 import { db } from "@/database"
 import { createQuery } from "@/database/store"
+import { Badge } from "@/ui/components/badge"
 import {
    Command,
    CommandInput,
@@ -116,12 +117,12 @@ function TodoItem({
                checked={todo.done}
             />
             {todo.done ? <s>{todo.content}</s> : todo.content}
-            {/* <Badge
-         variant={"gradient"}
-         class={cx("ml-auto")}
-      >
-         to watch
-      </Badge> */}
+            <Badge
+               variant={"gradient"}
+               class={cx("ml-auto")}
+            >
+               to watch
+            </Badge>
          </div>
       </CommandItem>
    )

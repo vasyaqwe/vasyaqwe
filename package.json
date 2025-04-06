@@ -15,7 +15,7 @@
     "build:www": "turbo build --filter=@vasyaqwe/www",
     "dev:kit": "turbo dev --filter=@vasyaqwe/kit",
     "build:kit": "turbo build --filter=@vasyaqwe/kit",
-    "dev:jot": "turbo dev --filter=@vasyaqwe/jot",
+    "dev:jot": "turbo dev --filter=@vasyaqwe/jot --filter=@vasyaqwe/worker",
     "build:jot": "turbo build --filter=@vasyaqwe/jot"
   },
   "workspaces": ["apps/*", "packages/*", "tooling/*"],

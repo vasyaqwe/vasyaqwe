@@ -8,6 +8,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vasyaqwe/ui": "workspace:*",
+    "@vasyaqwe/infra": "workspace:*",
     "@instantdb/core": "^0.18.3",
     "@kobalte/core": "^0.13.9",
     "@kobalte/utils": "^0.9.1",
@@ -17,7 +19,6 @@
     "@solid-primitives/mutation-observer": "^1.2.0",
     "@tanstack/router-plugin": "^1.109.2",
     "@tanstack/solid-router": "^1.110.0",
-    "@vasyaqwe/ui": "workspace:*",
     "solid-js": "^1.9.4",
     "solid-transition-group": "^0.3.0"
   },

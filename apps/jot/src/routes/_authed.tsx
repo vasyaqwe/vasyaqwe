@@ -34,12 +34,30 @@ function RouteComponent() {
    })
    createEventListener(window, "focus", () => contentRef?.focus())
 
-   createShortcut(["t"], () => navigate({ to: "/" }))
-   createShortcut(["1"], () => navigate({ to: "/" }))
-   createShortcut(["l"], () => navigate({ to: "/later" }))
-   createShortcut(["2"], () => navigate({ to: "/later" }))
-   createShortcut(["s"], () => navigate({ to: "/settings" }))
-   createShortcut(["3"], () => navigate({ to: "/settings" }))
+   const goToIndex = (e: KeyboardEvent | null) => {
+      if (document.activeElement?.nodeName === "TEXTAREA") return
+      e?.preventDefault()
+      navigate({ to: "/" })
+   }
+
+   const goToLater = (e: KeyboardEvent | null) => {
+      if (document.activeElement?.nodeName === "TEXTAREA") return
+      e?.preventDefault()
+      navigate({ to: "/later" })
+   }
+
+   const goToSettings = (e: KeyboardEvent | null) => {
+      if (document.activeElement?.nodeName === "TEXTAREA") return
+      e?.preventDefault()
+      navigate({ to: "/settings" })
+   }
+
+   createShortcut(["t"], goToIndex, { preventDefault: false })
+   createShortcut(["1"], goToIndex, { preventDefault: false })
+   createShortcut(["l"], goToLater, { preventDefault: false })
+   createShortcut(["2"], goToLater, { preventDefault: false })
+   createShortcut(["s"], goToSettings, { preventDefault: false })
+   createShortcut(["3"], goToSettings, { preventDefault: false })
 
    return (
       <div class="container pt-4 pb-12 md:pt-5">

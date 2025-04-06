@@ -19,7 +19,15 @@ export const Route = createFileRoute("/_authed/")({
 const [selectedId, setSelectedId] = createSignal("")
 
 function RouteComponent() {
-   const query = createQuery({ todo: { $: { order: { createdAt: "desc" } } } })
+   const context = Route.useRouteContext()
+   const query = createQuery({
+      todo: {
+         $: {
+            order: { createdAt: "desc" },
+            where: { creatorId: context().user.id },
+         },
+      },
+   })
 
    createShortcut(
       ["Delete"],
@@ -57,7 +65,7 @@ function RouteComponent() {
             <ErrorComponent error={new Error(query().error?.message)} />
          </Match>
          <Match when={query().isLoading}>{null}</Match>
-         <Match when={(query().data?.todo ?? 0) === 0}>
+         <Match when={(query().data?.todo ?? []).length === 0}>
             <p class="mt-8 text-center font-secondary text-xl">Empty</p>
          </Match>
          <Match when={(query().data?.todo ?? []).length > 0}>

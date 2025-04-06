@@ -1,6 +1,6 @@
 import { db } from "@/database"
 import type { AuthState } from "@instantdb/core"
-import { createEffect, createSignal, onCleanup } from "solid-js"
+import { createEffect, createMemo, createSignal, onCleanup } from "solid-js"
 
 export function createAuth() {
    const [state, setState] = createSignal<AuthState>(
@@ -21,5 +21,5 @@ export function createAuth() {
       })
    })
 
-   return state
+   return createMemo(() => state())
 }

@@ -1,38 +1,30 @@
 import { db } from "@/database"
 import { buttonVariants } from "@/ui/components/button"
 import { id } from "@instantdb/core"
+import { createEventListener } from "@solid-primitives/event-listener"
 import { Link, Outlet, createFileRoute, redirect } from "@tanstack/solid-router"
 import { Textarea } from "@vasyaqwe/ui/components/textarea"
 import { cn, formDataFromTarget } from "@vasyaqwe/ui/utils"
-import { onMount } from "solid-js"
 
 export const Route = createFileRoute("/_authed")({
    component: RouteComponent,
    beforeLoad: async () => {
-      const auth = await db.getAuth()
-      if (!auth) throw redirect({ to: "/login" })
+      const user = await db.getAuth()
+      if (!user) throw redirect({ to: "/login" })
+
+      return { user }
    },
 })
 
 function RouteComponent() {
+   const context = Route.useRouteContext()
    let contentRef: HTMLTextAreaElement | undefined
    let formRef: HTMLFormElement | undefined
 
-   onMount(() => {
-      contentRef?.focus()
-
-      const handle = () => {
-         if (document.visibilityState === "visible") contentRef?.focus()
-      }
-
-      document.addEventListener("visibilitychange", handle)
-      window.addEventListener("focus", () => contentRef?.focus())
-
-      return () => {
-         document.removeEventListener("visibilitychange", handle)
-         window.removeEventListener("focus", () => contentRef?.focus())
-      }
+   createEventListener(document, "visibilitychange", () => {
+      if (document.visibilityState === "visible") contentRef?.focus()
    })
+   createEventListener(window, "focus", () => contentRef?.focus())
 
    return (
       <div class="container pt-4 pb-12 md:pt-5">
@@ -83,12 +75,16 @@ function RouteComponent() {
                const data = formDataFromTarget<{ content: string }>(e.target)
                const toInsert = db.tx.todo[id()]
                if (!toInsert) return
+
                db.transact(
-                  toInsert.update({
-                     content: data.content,
-                     createdAt: Date.now(),
-                     done: false,
-                  }),
+                  toInsert
+                     .update({
+                        content: data.content,
+                        createdAt: Date.now(),
+                        done: false,
+                        creatorId: context().user.id,
+                     })
+                     .link({ creator: context().user.id }),
                )
             }}
             class="scrollbar-hidden container fixed inset-x-0 bottom-4 z-20 mx-auto md:bottom-6"

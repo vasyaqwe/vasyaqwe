@@ -1,0 +1,27 @@
+name: Deploy
+
+on:
+  push:
+     branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy & migrate database
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
+      - run: bun install
+      
+      - name: Deploy worker
+        id: deploy-worker
+        uses: cloudflare/wrangler-action@v3
+        with:
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          workingDirectory: './apps/worker'
+          packageManager: bun
+          command: deploy ./src/index.ts --env production
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

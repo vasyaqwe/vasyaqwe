@@ -20,11 +20,11 @@
     "@tanstack/router-plugin": "^1.109.2",
     "@tanstack/solid-router": "^1.110.0",
     "solid-js": "^1.9.4",
+    "vite-tsconfig-paths": "^5.1.4",
     "solid-transition-group": "^0.3.0"
   },
   "devDependencies": {
     "@vasyaqwe/tsconfig": "workspace:*",
-    "vite-tsconfig-paths": "^5.1.4",
     "vite": "^6.0.11",
     "vite-plugin-solid": "^2.11.2"
   }

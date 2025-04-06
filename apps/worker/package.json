@@ -1,0 +1,19 @@
+{
+   "name": "@vasyaqwe/worker",
+   "scripts": {
+      "dev": "wrangler dev --local src/index.ts --port 8787",
+      "deploy": "wrangler deploy --minify src/index.ts --env production",
+      "typecheck": "tsc --noEmit"
+   },
+   "dependencies": {
+      "@vasyaqwe/infra": "workspace:*",
+      "hono": "^4.7.5",
+      "valibot": "^1.0.0"
+   },
+   "devDependencies": {
+      "@vasyaqwe/tsconfig": "workspace:*",
+      "@cloudflare/workers-types": "^4.20250406.0",
+      "@types/bun": "latest",
+      "wrangler": "^3.114.1"
+   }
+}

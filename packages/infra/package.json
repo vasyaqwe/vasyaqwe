@@ -1,0 +1,23 @@
+{
+   "name": "@vasyaqwe/infra",
+   "type": "module",
+   "exports": {
+      "./env": {
+         "types": "./dist/env.d.ts",
+         "default": "./src/env.ts"
+      },
+      "./rate-limit": {
+         "types": "./dist/rate-limit.d.ts",
+         "default": "./src/rate-limit.ts"
+      }
+   },
+   "scripts": {
+      "build": "tsc",
+      "clean": "rm -rf .turbo node_modules",
+      "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+   },
+   "devDependencies": {
+      "@cloudflare/workers-types": "^4.20250406.0",
+      "@vasyaqwe/tsconfig": "workspace:*"
+   }
+}

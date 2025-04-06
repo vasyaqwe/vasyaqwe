@@ -69,7 +69,7 @@ export function TodoList({ forToday = false }: { forToday?: boolean }) {
          </Match>
          <Match when={query().isLoading}>{null}</Match>
          <Match when={(query().data?.todo ?? []).length === 0}>
-            <p class="mt-12 text-center font-secondary text-foreground/90 text-xl">
+            <p class="mt-16 text-center font-secondary text-foreground/90 text-xl">
                Empty
             </p>
          </Match>

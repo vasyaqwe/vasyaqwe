@@ -1,0 +1,22 @@
+{
+   "name": "vasyaqwe-worker",
+   "main": "src/index.ts",
+   "observability": {
+      "enabled": true,
+      "head_sampling_rate": 1
+   },
+   "placement": {
+      "mode": "smart"
+   },
+   "vars": {
+      "ENVIRONMENT": "development"
+   },
+   "env": {
+      "production": {
+         "name": "vasyaqwe-worker",
+         "vars": {
+            "ENVIRONMENT": "production"
+         }
+      }
+   }
+}

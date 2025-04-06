@@ -1,7 +1,7 @@
 {
    "name": "vasyaqwe-worker",
    "main": "src/index.ts",
-   "compatibility_date": "2025-04-06",
+   "compatibility_date": "2025-03-10",
    "account_id": "bfef1e994f1aac7e7a42dc4ba75197a0",
    "observability": {
       "enabled": true,
@@ -11,7 +11,8 @@
       "mode": "smart"
    },
    "vars": {
-      "ENVIRONMENT": "development"
+      "ENVIRONMENT": "development",
+      "CLOUDFLARE_ACCOUNT_ID": "bfef1e994f1aac7e7a42dc4ba75197a0"
    },
    "ai": {
       "binding": "AI"
@@ -23,7 +24,8 @@
             "binding": "AI"
          },
          "vars": {
-            "ENVIRONMENT": "production"
+            "ENVIRONMENT": "production",
+            "CLOUDFLARE_ACCOUNT_ID": "bfef1e994f1aac7e7a42dc4ba75197a0"
          }
       }
    }

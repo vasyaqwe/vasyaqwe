@@ -2,6 +2,7 @@
    "name": "vasyaqwe-worker",
    "main": "src/index.ts",
    "compatibility_date": "2025-04-06",
+   "account_id": "bfef1e994f1aac7e7a42dc4ba75197a0",
    "observability": {
       "enabled": true,
       "head_sampling_rate": 1

@@ -98,7 +98,7 @@ function TodoItem({
    return (
       <CommandItem
          class={cx(
-            "relative mt-5 block cursor-(--cursor) font-medium text-lg leading-none before:absolute before:inset-[-9px_-10px_-10px_-10px] before:rounded-[0.6rem] before:transition-colors before:duration-50 data-[selected]:before:bg-primary-2",
+            "relative mt-3 block cursor-(--cursor) font-medium text-lg leading-none before:absolute before:inset-[-6px_-6px_-6px_-10px] before:rounded-[0.6rem] before:transition-colors before:duration-50 data-[selected]:before:bg-primary-2",
          )}
          value={todo.id}
          onSelect={() => {

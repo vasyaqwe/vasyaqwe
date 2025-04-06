@@ -17,6 +17,7 @@ type Environment = "production" | "development"
 
 export type WorkerEnv = {
    ENVIRONMENT: Environment
+   AI: Ai
 }
 
 export type ClientEnv = (typeof clientEnv)[Environment]

@@ -37,7 +37,7 @@ export type Hook<
 
 type HasUndefined<T> = undefined extends T ? true : false
 
-export const apiValidator = <
+export const validator = <
    T extends GenericSchema | GenericSchemaAsync,
    Target extends keyof ValidationTargets,
    E extends Env,

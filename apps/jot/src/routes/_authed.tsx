@@ -1,4 +1,5 @@
 import { db } from "@/database"
+import { env } from "@/env"
 import { buttonVariants } from "@/ui/components/button"
 import { id } from "@instantdb/core"
 import { createEventListener } from "@solid-primitives/event-listener"
@@ -106,7 +107,8 @@ function RouteComponent() {
             onSubmit={(e) => {
                e.preventDefault()
                const data = formDataFromTarget<{ content: string }>(e.target)
-               const toInsert = db.tx.todo[id()]
+               const newId = id()
+               const toInsert = db.tx.todo[newId]
                if (!toInsert) return
 
                db.transact(
@@ -119,6 +121,15 @@ function RouteComponent() {
                      })
                      .link({ creator: context().user.id }),
                )
+
+               const res = fetch(`${env.WORKER_URL}/generate-tag`, {
+                  method: "POST",
+                  headers: {
+                     "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({ input: data.content }),
+               }).then((res) => res.json())
+               console.log(res)
             }}
             class="scrollbar-hidden container fixed inset-x-0 bottom-4 z-20 mx-auto md:bottom-6"
          >

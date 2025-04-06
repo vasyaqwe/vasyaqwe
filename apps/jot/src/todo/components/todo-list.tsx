@@ -1,5 +1,6 @@
 import { db } from "@/database"
 import { createQuery } from "@/database/store"
+import type { Database } from "@/database/types"
 import { Badge } from "@/ui/components/badge"
 import {
    Command,
@@ -80,7 +81,7 @@ export function TodoList({ forToday = false }: { forToday?: boolean }) {
                onValueChange={setSelectedId}
                onBlur={() => setSelectedId("")}
             >
-               <CommandInput class="sr-only" />
+               <CommandInput class="max-md:hidden md:sr-only" />
                <CommandList class="mt-8">
                   <For each={query().data?.todo}>
                      {(todo) => <TodoItem todo={todo} />}
@@ -95,17 +96,12 @@ export function TodoList({ forToday = false }: { forToday?: boolean }) {
 function TodoItem({
    todo,
 }: {
-   todo: {
-      id: string
-      content: string
-      done: boolean
-      tag?: string | undefined
-   }
+   todo: Database["todo"]
 }) {
    return (
       <CommandItem
          class={cx(
-            "relative mt-3 flex min-h-7 cursor-(--cursor) items-center font-medium text-lg leading-none before:absolute before:inset-[-6px_-6px_-6px_-10px] before:rounded-[0.6rem] before:transition-colors before:duration-50 data-[selected]:before:bg-primary-2",
+            "relative mt-3 flex min-h-7 cursor-(--cursor) items-center px-0 font-medium text-lg leading-none before:absolute before:inset-[-6px_-6px_-6px_-10px] before:rounded-[0.6rem] before:transition-colors before:duration-50 data-[selected]:before:bg-primary-2 max-md:transition-transform max-md:duration-500 max-md:active:scale-95",
          )}
          value={todo.id}
          onSelect={() => {
@@ -118,11 +114,6 @@ function TodoItem({
          }}
       >
          <div class="relative z-10 flex w-full items-center rounded-xl">
-            <input
-               type="checkbox"
-               class="appearance-none"
-               checked={todo.done}
-            />
             {todo.done ? <s>{todo.content}</s> : todo.content}
             <Show when={todo.tag}>
                <Badge

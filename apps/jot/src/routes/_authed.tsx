@@ -12,6 +12,7 @@ import {
    useNavigate,
 } from "@tanstack/solid-router"
 import { Textarea } from "@vasyaqwe/ui/components/textarea"
+import { MOBILE_BREAKPOINT } from "@vasyaqwe/ui/constants"
 import { cn, formDataFromTarget } from "@vasyaqwe/ui/utils"
 
 export const Route = createFileRoute("/_authed")({
@@ -31,9 +32,15 @@ function RouteComponent() {
    let formRef: HTMLFormElement | undefined
 
    createEventListener(document, "visibilitychange", () => {
-      if (document.visibilityState === "visible") contentRef?.focus()
+      if (
+         document.visibilityState === "visible" &&
+         window.innerWidth > MOBILE_BREAKPOINT
+      )
+         contentRef?.focus()
    })
-   createEventListener(window, "focus", () => contentRef?.focus())
+   createEventListener(window, "focus", () => {
+      if (window.innerWidth > MOBILE_BREAKPOINT) contentRef?.focus()
+   })
 
    const goToIndex = (e: KeyboardEvent | null) => {
       if (document.activeElement?.nodeName === "TEXTAREA") return

@@ -194,12 +194,12 @@ p {
 }
 
 @supports (anchor-name: --anchor) {
-  [popover] {
-    inset: unset;
-    /*	  inset-area: bottom right;*/
-    top: anchor(top);
-    left: anchor(right);
-    position-try-options: flip-block, flip-inline;
-    position-try-fallbacks: flip-block, flip-inline;
-  }
+   [popover] {
+      inset: unset;
+      /*	  inset-area: bottom right;*/
+      top: anchor(top);
+      left: anchor(right);
+      position-try-options: flip-block, flip-inline;
+      position-try-fallbacks: flip-block, flip-inline;
+   }
 }

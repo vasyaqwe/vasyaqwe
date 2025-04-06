@@ -1,4 +1,4 @@
-import type { schema } from "@/database/schema"
+import type schema from "@/database/instant.schema.ts"
 import type { InstaQLEntity } from "@instantdb/core"
 
 export type DatabaseSchema = typeof schema

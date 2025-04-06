@@ -5,4 +5,5 @@ export const todo = i.entity({
    done: i.boolean(),
    createdAt: i.date().indexed(),
    creatorId: i.string(),
+   tag: i.string().optional(),
 })

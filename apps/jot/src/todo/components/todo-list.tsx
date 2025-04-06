@@ -10,7 +10,7 @@ import {
 import { ErrorComponent } from "@/ui/components/error"
 import { createShortcut } from "@solid-primitives/keyboard"
 import { cx } from "@vasyaqwe/ui/utils"
-import { For, Match, Switch, createSignal } from "solid-js"
+import { For, Match, Show, Switch, createSignal } from "solid-js"
 
 const [selectedId, setSelectedId] = createSignal("")
 const today = new Date()
@@ -94,11 +94,18 @@ export function TodoList({ forToday = false }: { forToday?: boolean }) {
 
 function TodoItem({
    todo,
-}: { todo: { id: string; content: string; done: boolean } }) {
+}: {
+   todo: {
+      id: string
+      content: string
+      done: boolean
+      tag?: string | undefined
+   }
+}) {
    return (
       <CommandItem
          class={cx(
-            "relative mt-3 block cursor-(--cursor) font-medium text-lg leading-none before:absolute before:inset-[-6px_-6px_-6px_-10px] before:rounded-[0.6rem] before:transition-colors before:duration-50 data-[selected]:before:bg-primary-2",
+            "relative mt-3 flex min-h-7 cursor-(--cursor) items-center font-medium text-lg leading-none before:absolute before:inset-[-6px_-6px_-6px_-10px] before:rounded-[0.6rem] before:transition-colors before:duration-50 data-[selected]:before:bg-primary-2",
          )}
          value={todo.id}
          onSelect={() => {
@@ -110,19 +117,21 @@ function TodoItem({
             }, 0)
          }}
       >
-         <div class="relative z-10 flex items-center rounded-xl">
+         <div class="relative z-10 flex w-full items-center rounded-xl">
             <input
                type="checkbox"
                class="appearance-none"
                checked={todo.done}
             />
             {todo.done ? <s>{todo.content}</s> : todo.content}
-            <Badge
-               variant={"gradient"}
-               class={cx("ml-auto")}
-            >
-               to watch
-            </Badge>
+            <Show when={todo.tag}>
+               <Badge
+                  variant={"gradient"}
+                  class={cx("ml-auto")}
+               >
+                  {todo.tag}
+               </Badge>
+            </Show>
          </div>
       </CommandItem>
    )

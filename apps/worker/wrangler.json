@@ -11,8 +11,7 @@
       "mode": "smart"
    },
    "vars": {
-      "ENVIRONMENT": "development",
-      "CLOUDFLARE_ACCOUNT_ID": "bfef1e994f1aac7e7a42dc4ba75197a0"
+      "ENVIRONMENT": "development"
    },
    "ai": {
       "binding": "AI"
@@ -24,8 +23,7 @@
             "binding": "AI"
          },
          "vars": {
-            "ENVIRONMENT": "production",
-            "CLOUDFLARE_ACCOUNT_ID": "bfef1e994f1aac7e7a42dc4ba75197a0"
+            "ENVIRONMENT": "production"
          }
       }
    }

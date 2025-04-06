@@ -104,7 +104,7 @@ function RouteComponent() {
                   formRef?.reset()
                }
             }}
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
                e.preventDefault()
                const data = formDataFromTarget<{ content: string }>(e.target)
                const newId = id()
@@ -122,14 +122,17 @@ function RouteComponent() {
                      .link({ creator: context().user.id }),
                )
 
-               const res = fetch(`${env.WORKER_URL}/generate-tag`, {
+               const res = await fetch(`${env.WORKER_URL}/generate-tag`, {
                   method: "POST",
                   headers: {
                      "Content-Type": "application/json",
                   },
                   body: JSON.stringify({ input: data.content }),
-               }).then((res) => res.json())
-               console.log(res)
+               }).then((res) => res.json() as Promise<{ response: string }>)
+
+               const toUpdate = db.tx.todo[newId]
+               if (!toUpdate) return
+               db.transact(toUpdate.update({ tag: res.response }))
             }}
             class="scrollbar-hidden container fixed inset-x-0 bottom-4 z-20 mx-auto md:bottom-6"
          >

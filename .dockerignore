@@ -1,6 +1,9 @@
 node_modules
 packages/ui
+apps/worker
 apps/www
+apps/jot
+apps/kit
 tooling/github
 
 *.tsbuildinfo

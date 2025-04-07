@@ -71,7 +71,7 @@ function RouteComponent() {
    )
 
    return (
-      <div class="container pt-4 pb-12 md:pt-5">
+      <div class="container pt-4 pb-24 md:pt-5">
          <div class="flex items-center justify-between">
             <h1 class="font-secondary text-2xl">jot</h1>
             <div class="mt-1 flex items-center gap-1">

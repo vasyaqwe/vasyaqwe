@@ -5,6 +5,7 @@ import {
    mergeRefs,
 } from "@kobalte/utils"
 import { trackDeep } from "@solid-primitives/deep"
+import { cn } from "@vasyaqwe/ui/utils"
 import {
    type Accessor,
    type Component,
@@ -901,6 +902,7 @@ const List: ParentComponent<CommandListProps> = (props) => {
       "label",
       "children",
       "ref",
+      "class",
    ])
    let ref: HTMLDivElement
    let height: HTMLDivElement | null
@@ -942,6 +944,7 @@ const List: ParentComponent<CommandListProps> = (props) => {
          role="listbox"
          aria-label={localProps.label}
          id={context?.listId}
+         class={cn("focus:outline-hidden", localProps.class)}
       >
          {SlottableWithNestedChildren(props, (child) => (
             <div

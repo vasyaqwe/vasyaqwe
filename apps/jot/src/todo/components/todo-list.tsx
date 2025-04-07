@@ -160,9 +160,6 @@ export function TodoList({ forToday = false }: { forToday?: boolean }) {
                   <Button
                      data-trigger
                      variant={"secondary"}
-                     data-popup-open={
-                        dialogRef?.hasAttribute("open") ? "" : undefined
-                     }
                      onClick={() =>
                         dialogRef?.hasAttribute("open")
                            ? closeDialog()
@@ -249,7 +246,9 @@ function TodoItem({
          }}
       >
          <div class="relative z-10 flex w-full items-center rounded-xl">
-            {todo.done ? <s>{todo.content}</s> : todo.content}
+            <span class="line-clamp-1 leading-5">
+               {todo.done ? <s>{todo.content}</s> : todo.content}
+            </span>
             <Show when={todo.tag}>
                <Badge
                   variant={"gradient"}

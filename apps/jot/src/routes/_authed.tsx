@@ -2,7 +2,6 @@ import { db } from "@/database"
 import { env } from "@/env"
 import { buttonVariants } from "@/ui/components/button"
 import { id } from "@instantdb/core"
-import { createEventListener } from "@solid-primitives/event-listener"
 import { createShortcut } from "@solid-primitives/keyboard"
 import {
    Link,
@@ -12,7 +11,6 @@ import {
    useNavigate,
 } from "@tanstack/solid-router"
 import { Textarea } from "@vasyaqwe/ui/components/textarea"
-import { MOBILE_BREAKPOINT } from "@vasyaqwe/ui/constants"
 import { cn, formDataFromTarget } from "@vasyaqwe/ui/utils"
 
 export const Route = createFileRoute("/_authed")({
@@ -31,17 +29,16 @@ function RouteComponent() {
    let contentRef: HTMLTextAreaElement | undefined
    let formRef: HTMLFormElement | undefined
 
-   createEventListener(document, "visibilitychange", () => {
-      if (
-         document.visibilityState === "visible" &&
-         window.innerWidth > MOBILE_BREAKPOINT
-      )
+   createShortcut(
+      ["c"],
+      (e) => {
+         if (document.activeElement?.nodeName === "TEXTAREA") return
+         e?.preventDefault()
          contentRef?.focus()
-   })
-   createEventListener(window, "focus", () => {
-      if (window.innerWidth > MOBILE_BREAKPOINT) contentRef?.focus()
-   })
-
+      },
+      { preventDefault: false },
+   )
+   createShortcut(["Escape"], () => contentRef?.blur())
    createShortcut(
       ["1"],
       (e) => {
@@ -71,7 +68,7 @@ function RouteComponent() {
    )
 
    return (
-      <div class="container pt-4 pb-24 md:pt-5">
+      <div class="container pt-4 pb-28 md:pt-5 md:pb-40">
          <div class="flex items-center justify-between">
             <h1 class="font-secondary text-2xl">jot</h1>
             <div class="mt-1 flex items-center gap-1">

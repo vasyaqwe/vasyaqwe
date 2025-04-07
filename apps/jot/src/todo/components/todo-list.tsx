@@ -67,11 +67,11 @@ export function TodoList({ forToday = false }: { forToday?: boolean }) {
 
          db.transact(toDelete.delete())
       },
-      { preventDefault: true, requireReset: true },
+      { requireReset: true },
    )
    createShortcut(
       ["d"],
-      () => {
+      (e) => {
          if (document.activeElement?.nodeName === "TEXTAREA") return
 
          const data = query().data?.todo
@@ -82,12 +82,17 @@ export function TodoList({ forToday = false }: { forToday?: boolean }) {
 
          const toUpdate = db.tx.todo[todo.id]
          if (!toUpdate) return
+
+         e?.preventDefault()
          db.transact(toUpdate.update({ done: !todo.done }))
       },
-      { preventDefault: true, requireReset: true },
+      { preventDefault: false, requireReset: true },
    )
 
    let dialogRef: HTMLDialogElement | undefined
+   const closeDialog = () => {
+      dialogRef?.close()
+   }
 
    createEventListener(document, "click", (e) => {
       if (e.target instanceof HTMLElement && !e.target.closest(ITEM_SELECTOR))
@@ -102,17 +107,25 @@ export function TodoList({ forToday = false }: { forToday?: boolean }) {
          return
 
       if (e.target && dialogRef?.contains && !dialogRef.contains(e.target))
-         dialogRef.close()
+         closeDialog()
    })
    createShortcut(["Escape"], () => {
       setSelectedId("")
-      dialogRef?.close()
+      closeDialog()
    })
 
-   createShortcut(["f"], () => {
-      if (document.activeElement?.nodeName === "TEXTAREA") return
-      dialogRef?.hasAttribute("open") ? dialogRef?.close() : dialogRef?.show()
-   })
+   createShortcut(
+      ["f"],
+      (e) => {
+         if (document.activeElement?.nodeName === "TEXTAREA") return
+         e?.preventDefault()
+
+         if (dialogRef?.hasAttribute("open")) return closeDialog()
+
+         dialogRef?.show()
+      },
+      { preventDefault: false },
+   )
 
    const data = createMemo(() => {
       const data = query().data?.todo ?? []
@@ -122,9 +135,13 @@ export function TodoList({ forToday = false }: { forToday?: boolean }) {
          : data.filter((todo) => selectedTags().some((tag) => todo.tag === tag))
    })
 
-   const tags = data()
-      .map((todo) => todo.tag)
-      .filter((tag) => tag !== undefined)
+   const tags = new Array(
+      ...new Set(
+         data()
+            .map((todo) => todo.tag)
+            .filter((tag) => tag !== undefined),
+      ),
+   )
 
    return (
       <div class="mt-8">
@@ -148,7 +165,7 @@ export function TodoList({ forToday = false }: { forToday?: boolean }) {
                      }
                      onClick={() =>
                         dialogRef?.hasAttribute("open")
-                           ? dialogRef?.close()
+                           ? closeDialog()
                            : dialogRef?.show()
                      }
                   >

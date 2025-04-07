@@ -573,7 +573,13 @@ const Command: Component<CommandRootProps> = (props) => {
    }
 
    createEventListener(document, "keydown", (e) => {
-      if (!etc.main || document.activeElement?.closest("dialog")) return
+      if (
+         !etc.main ||
+         Array.from(document.querySelectorAll("dialog")).some(
+            (dialog) => dialog.open,
+         )
+      )
+         return
       onKeyDown(e)
    })
 

@@ -67,15 +67,13 @@ function RouteComponent() {
             >
                <div class="relative h-15">
                   <Transition
-                     enterActiveClass="transition-all ease-out"
                      enterClass="opacity-0 -translate-y-13 blur-[3px]"
                      enterToClass="opacity-100 translate-y-0 blur-none"
-                     exitActiveClass="transition-all ease-out"
                      exitClass="opacity-100 translate-y-0 blur-none"
                      exitToClass="opacity-0 -translate-y-13 blur-[3px]"
                   >
                      <Show when={step() === "initial"}>
-                        <div class="absolute w-full duration-500">
+                        <div class="absolute w-full transition-all duration-500 ease-out">
                            <h1 class="font-secondary text-foreground/80 text-lg">
                               Access Jot
                            </h1>
@@ -88,15 +86,13 @@ function RouteComponent() {
                         </div>
                      </Show>
                      <Transition
-                        enterActiveClass="transition-all ease-out"
                         enterClass="opacity-0 translate-y-10 blur-[3px]"
                         enterToClass="opacity-100 translate-y-0 blur-none"
-                        exitActiveClass="transition-all ease-out"
                         exitClass="opacity-100 translate-y-0 blur-none"
                         exitToClass="opacity-0 translate-y-10 blur-[3px]"
                      >
                         <Show when={step() === "code"}>
-                           <div class="absolute w-full duration-500">
+                           <div class="absolute w-full transition-all duration-500 ease-out">
                               <h1 class="font-secondary text-foreground/80 text-lg">
                                  Code sent
                               </h1>
@@ -143,15 +139,13 @@ function RouteComponent() {
                   </Button>
                </div>
                <Transition
-                  enterActiveClass="transition-all ease-out"
                   enterClass="opacity-0 -translate-y-2 scale-[97%] blur-[3px]"
                   enterToClass="opacity-100 translate-y-0 blur-none"
-                  exitActiveClass="transition-all ease-out"
                   exitClass="opacity-100 translate-y-0 blur-none"
                   exitToClass="opacity-0 -translate-y-2 scale-[97%] blur-[3px]"
                >
                   <Show when={step() === "code"}>
-                     <div class="absolute w-fit duration-500">
+                     <div class="absolute w-fit transition-all duration-500 ease-out">
                         <button
                            type="button"
                            onClick={() => setStep("initial")}

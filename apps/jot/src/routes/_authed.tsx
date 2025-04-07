@@ -42,30 +42,33 @@ function RouteComponent() {
       if (window.innerWidth > MOBILE_BREAKPOINT) contentRef?.focus()
    })
 
-   const goToIndex = (e: KeyboardEvent | null) => {
-      if (document.activeElement?.nodeName === "TEXTAREA") return
-      e?.preventDefault()
-      navigate({ to: "/" })
-   }
-
-   const goToLater = (e: KeyboardEvent | null) => {
-      if (document.activeElement?.nodeName === "TEXTAREA") return
-      e?.preventDefault()
-      navigate({ to: "/later" })
-   }
-
-   const goToSettings = (e: KeyboardEvent | null) => {
-      if (document.activeElement?.nodeName === "TEXTAREA") return
-      e?.preventDefault()
-      navigate({ to: "/settings" })
-   }
-
-   createShortcut(["t"], goToIndex, { preventDefault: false })
-   createShortcut(["1"], goToIndex, { preventDefault: false })
-   createShortcut(["l"], goToLater, { preventDefault: false })
-   createShortcut(["2"], goToLater, { preventDefault: false })
-   createShortcut(["s"], goToSettings, { preventDefault: false })
-   createShortcut(["3"], goToSettings, { preventDefault: false })
+   createShortcut(
+      ["1"],
+      (e) => {
+         if (document.activeElement?.nodeName === "TEXTAREA") return
+         e?.preventDefault()
+         navigate({ to: "/" })
+      },
+      { preventDefault: false },
+   )
+   createShortcut(
+      ["2"],
+      (e) => {
+         if (document.activeElement?.nodeName === "TEXTAREA") return
+         e?.preventDefault()
+         navigate({ to: "/later" })
+      },
+      { preventDefault: false },
+   )
+   createShortcut(
+      ["3"],
+      (e) => {
+         if (document.activeElement?.nodeName === "TEXTAREA") return
+         e?.preventDefault()
+         navigate({ to: "/settings" })
+      },
+      { preventDefault: false },
+   )
 
    return (
       <div class="container pt-4 pb-12 md:pt-5">

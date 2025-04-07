@@ -40,7 +40,7 @@
    --text-lg: 1.0625rem;
 
    --popup-radius: 0.5rem;
-   --popup-padding: 3px;
+   --popup-padding: 0.25rem;
 
    --container-max-width: 48rem;
    --width-prose: 60ch;

@@ -5,7 +5,6 @@ import {
    mergeRefs,
 } from "@kobalte/utils"
 import { trackDeep } from "@solid-primitives/deep"
-import { useKeyDownEvent } from "@solid-primitives/keyboard"
 import {
    type Accessor,
    type Component,
@@ -140,6 +139,10 @@ export type CommandRootProps = Children &
        * Set to `false` to disable ctrl+n/j/p/k shortcuts. Defaults to `true`.
        */
       vimBindings?: boolean
+      /**
+       * Set to `true` to make keyboard navigation work without focusing the command first. Defaults to `false`.
+       */
+      main?: boolean
    }
 
 type Context = {
@@ -156,12 +159,9 @@ type Context = {
    // Refs
    listInnerRef: Accessor<HTMLDivElement | null>
    setListInnerRef: (el: HTMLDivElement | null) => void
-   inputInnerRef: Accessor<HTMLInputElement | undefined>
-   setInputInnerRef: (el: HTMLInputElement | null) => void
 }
 
 type State = {
-   interacted: boolean
    search: string
    value: string
    filtered: { count: number; items: Record<string, number>; groups: string[] }
@@ -188,7 +188,7 @@ type Group = {
 
 const GROUP_SELECTOR = `[cmdk-group=""]`
 const GROUP_HEADING_SELECTOR = `[cmdk-group-heading=""]`
-const ITEM_SELECTOR = `[cmdk-item=""]`
+export const ITEM_SELECTOR = `[cmdk-item=""]`
 const VALID_ITEM_SELECTOR = `${ITEM_SELECTOR}:not([aria-disabled="true"])`
 const SELECT_EVENT = `cmdk-item-select`
 const VALUE_ATTR = `data-value`
@@ -209,37 +209,12 @@ const GroupContext = createContext<Accessor<Group>>(undefined)
 
 const Command: Component<CommandRootProps> = (props) => {
    const [state, setState] = createStore<State>({
-      interacted: false,
       search: "",
       value: props.value ?? props.defaultValue ?? "",
       filtered: { count: 0, items: {}, groups: [] },
       items: [],
       groups: {},
       ids: {},
-   })
-
-   let rootRef: HTMLDivElement | undefined
-   createEventListener(
-      () => rootRef,
-      "click",
-      (e) => {
-         e.preventDefault()
-         inputInnerRef()?.focus()
-         setState((prev) => ({ ...prev, interacted: true }))
-      },
-   )
-   const event = useKeyDownEvent()
-   createEffect(() => {
-      const e = event()
-      if (!e || !rootRef) return
-
-      if (e.key === "ArrowUp" || e.key === "ArrowDown") {
-         e.preventDefault()
-         inputInnerRef()?.focus()
-         return setState((prev) => ({ ...prev, interacted: true }))
-      }
-      if (e.key === "Escape")
-         setState((prev) => ({ ...prev, interacted: false }))
    })
 
    createEffect(() => {
@@ -265,7 +240,7 @@ const Command: Component<CommandRootProps> = (props) => {
    })
 
    const mergedProps = mergeDefaultProps(
-      { vimBindings: true, disablePointerSelection: false },
+      { vimBindings: true, disablePointerSelection: false, main: false },
       props,
    )
 
@@ -288,7 +263,6 @@ const Command: Component<CommandRootProps> = (props) => {
    const [listInnerRef, setListInnerRef] = createSignal<HTMLDivElement | null>(
       null,
    )
-   const [inputInnerRef, setInputInnerRef] = createSignal<HTMLInputElement>()
 
    const schedule = useScheduleLayoutEffect()
 
@@ -428,8 +402,6 @@ const Command: Component<CommandRootProps> = (props) => {
       labelId,
       listInnerRef,
       setListInnerRef,
-      inputInnerRef,
-      setInputInnerRef,
    }
 
    function score(value: string, keywords?: string[]) {
@@ -556,71 +528,65 @@ const Command: Component<CommandRootProps> = (props) => {
       }
    }
 
+   const onKeyDown = (e: KeyboardEvent) => {
+      // Handle vim keybinds for down
+      if (
+         (e.key === "n" || e.key === "j") &&
+         localProps.vimBindings &&
+         e.ctrlKey
+      )
+         return next(e)
+
+      if (e.key === "ArrowDown") return next(e)
+
+      // Handle vim keybinds for up
+      if (
+         (e.key === "p" || e.key === "k") &&
+         localProps.vimBindings &&
+         e.ctrlKey
+      )
+         return prev(e)
+
+      if (e.key === "ArrowUp") return prev(e)
+
+      if (e.key === "Home") {
+         e.preventDefault()
+         return updateSelectedToIndex(0)
+      }
+
+      if (e.key === "End") {
+         e.preventDefault()
+         return last()
+      }
+
+      if (e.key === "Enter") {
+         // Skip if IME composition is not finished
+         if (e.isComposing || e.keyCode === 229) return
+
+         e.preventDefault()
+         const item = getSelectedItem()
+         if (!item) return
+
+         const event = new Event(SELECT_EVENT)
+         return item.dispatchEvent(event)
+      }
+   }
+
+   createEventListener(document, "keydown", (e) => {
+      if (!etc.main || document.activeElement?.closest("dialog")) return
+      onKeyDown(e)
+   })
+
    return (
       <div
-         ref={rootRef}
          tabIndex={-1}
          {...etc}
          cmdk-root=""
          onKeyDown={(e) => {
             //@ts-ignore
             etc.onKeyDown?.(e)
-
-            if (!e.defaultPrevented) {
-               switch (e.key) {
-                  case "n":
-                  case "j": {
-                     // vim keybind down
-                     if (localProps.vimBindings && e.ctrlKey) {
-                        next(e)
-                     }
-                     break
-                  }
-                  case "ArrowDown": {
-                     next(e)
-                     break
-                  }
-                  case "p":
-                  case "k": {
-                     // vim keybind up
-                     if (localProps.vimBindings && e.ctrlKey) {
-                        prev(e)
-                     }
-                     break
-                  }
-                  case "ArrowUp": {
-                     prev(e)
-                     break
-                  }
-                  case "Home": {
-                     // First item
-                     e.preventDefault()
-                     updateSelectedToIndex(0)
-                     break
-                  }
-                  case "End": {
-                     // Last item
-                     e.preventDefault()
-                     last()
-                     break
-                  }
-                  case "Enter": {
-                     // Check if IME composition is finished before triggering onSelect
-                     // This prevents unwanted triggering while user is still inputting text with IME
-                     // e.keyCode === 229 is for the Japanese IME and Safari.
-                     // isComposing does not work with Japanese IME and Safari combination.
-                     if (!e.isComposing && e.keyCode !== 229) {
-                        // Trigger item onSelect
-                        e.preventDefault()
-                        const item = getSelectedItem()
-                        if (!item) return
-
-                        const event = new Event(SELECT_EVENT)
-                        item.dispatchEvent(event)
-                     }
-                  }
-               }
-            }
+            if (e.defaultPrevented || etc.main) return
+            onKeyDown(e)
          }}
       >
          <label
@@ -655,9 +621,7 @@ const Item: ParentComponent<CommandItemProps> = (props) => {
    const [rendered, setRendered] = createSignal(false)
 
    onMount(() => {
-      if (!forceMount()) {
-         return context?.item(id, groupContext?.().id)
-      }
+      if (!forceMount()) return context?.item(id, groupContext?.().id)
    })
 
    //? Tracks the value of the item and updates it in context and on the [data-value] attribute
@@ -681,9 +645,7 @@ const Item: ParentComponent<CommandItemProps> = (props) => {
    })
 
    const forceMount = () => props.forceMount ?? groupContext?.().forceMount
-   const selected = useCmdk(
-      (state) => value() && value() === state.value && state.interacted,
-   )
+   const selected = useCmdk((state) => value() && value() === state.value)
 
    const render = useCmdk((state) =>
       !rendered()
@@ -723,9 +685,7 @@ const Item: ParentComponent<CommandItemProps> = (props) => {
    }
 
    function select() {
-      store?.setState("interacted", true)
       store?.setState("value", value(), true)
-      context?.inputInnerRef()?.focus()
    }
 
    const [localProps, etc] = splitProps(props, [
@@ -880,27 +840,6 @@ const Input: Component<CommandInputProps> = (props) => {
    const value = useCmdk((state) => state.value)
    const context = useCommand()
 
-   let clickedElement: EventTarget | null = null
-   document.addEventListener("mousedown", (e) => {
-      clickedElement = e.target
-   })
-
-   createEventListener(
-      () => context?.inputInnerRef(),
-      "blur",
-      () => {
-         const cmdkItemParent = clickedElement
-            ? // @ts-expect-error ...
-              clickedElement.closest("[cmdk-item]")
-            : null
-
-         if (cmdkItemParent) return
-
-         store?.setState("interacted", false)
-         clickedElement = null
-      },
-   )
-
    const selectedItemId = createMemo(() => {
       const item = context
          ?.listInnerRef()
@@ -918,7 +857,6 @@ const Input: Component<CommandInputProps> = (props) => {
 
    return (
       <input
-         ref={context?.setInputInnerRef}
          // ref={localProps.ref}
          {...etc}
          cmdk-input=""

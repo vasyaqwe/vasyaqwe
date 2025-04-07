@@ -29,7 +29,10 @@ const base = createRouter()
    )
    .post(
       "/generate-tag",
-      validator("json", v.object({ input: v.string() })),
+      validator(
+         "json",
+         v.object({ input: v.pipe(v.string(), v.minLength(1)) }),
+      ),
       async (c) => {
          const json = c.req.valid("json")
 

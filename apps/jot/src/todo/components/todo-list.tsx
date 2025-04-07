@@ -110,6 +110,7 @@ export function TodoList({ forToday = false }: { forToday?: boolean }) {
    })
 
    createShortcut(["f"], () => {
+      if (document.activeElement?.nodeName === "TEXTAREA") return
       dialogRef?.hasAttribute("open") ? dialogRef?.close() : dialogRef?.show()
    })
 

@@ -117,6 +117,7 @@ function RouteComponent() {
             onSubmit={async (e) => {
                e.preventDefault()
                const data = formDataFromTarget<{ content: string }>(e.target)
+               if (data.content.trim().length === 0) return
                const newId = id()
                const toInsert = db.tx.todo[newId]
                if (!toInsert) return

@@ -31,8 +31,7 @@ function RouteComponent() {
             <h2 class="mt-5 font-secondary text-xl">About</h2>
             <p class="mt-3 mb-6 text-foreground/75 text-sm">
                Hint: use up & down arrows to navigate through the todos. Hit
-               Enter to toggle completion, and Delete to delete the selected
-               todo.
+               Enter/d to toggle done, and Delete to delete the selected todo.
             </p>
             <p class="mt-3 mb-6 text-foreground/75 text-sm">
                Jot is{" "}

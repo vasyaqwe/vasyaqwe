@@ -10,6 +10,7 @@ import {
 } from "@/ui/components/command"
 import { ErrorComponent } from "@/ui/components/error"
 import { createShortcut } from "@solid-primitives/keyboard"
+import {} from "@vasyaqwe/ui/components/menu"
 import { cx } from "@vasyaqwe/ui/utils"
 import { For, Match, Show, Switch, createSignal } from "solid-js"
 
@@ -63,33 +64,58 @@ export function TodoList({ forToday = false }: { forToday?: boolean }) {
       },
       { preventDefault: true, requireReset: true },
    )
+   createShortcut(
+      ["d"],
+      () => {
+         if (document.activeElement?.nodeName === "TEXTAREA") return
+
+         const data = query().data?.todo
+         if (!data) return
+
+         const todo = data.find((todo) => todo.id === selectedId())
+         if (!todo) return
+
+         const toUpdate = db.tx.todo[todo.id]
+         if (!toUpdate) return
+         db.transact(toUpdate.update({ done: !todo.done }))
+      },
+      { preventDefault: true, requireReset: true },
+   )
 
    return (
-      <Switch>
-         <Match when={query().error}>
-            <ErrorComponent error={new Error(query().error?.message)} />
-         </Match>
-         <Match when={query().isLoading}>{null}</Match>
-         <Match when={(query().data?.todo ?? []).length === 0}>
-            <p class="mt-16 text-center font-secondary text-foreground/90 text-xl">
-               Empty
-            </p>
-         </Match>
-         <Match when={(query().data?.todo ?? []).length > 0}>
-            <Command
-               value={selectedId()}
-               onValueChange={setSelectedId}
-               onBlur={() => setSelectedId("")}
-            >
-               <CommandInput class="max-md:hidden md:sr-only" />
-               <CommandList class="mt-8">
-                  <For each={query().data?.todo}>
-                     {(todo) => <TodoItem todo={todo} />}
-                  </For>
-               </CommandList>
-            </Command>
-         </Match>
-      </Switch>
+      <>
+         <Switch>
+            <Match when={query().error}>
+               <ErrorComponent error={new Error(query().error?.message)} />
+            </Match>
+            <Match when={query().isLoading}>{null}</Match>
+            <Match when={(query().data?.todo ?? []).length === 0}>
+               <p class="mt-16 text-center font-secondary text-foreground/90 text-xl">
+                  Empty
+               </p>
+            </Match>
+            <Match when={(query().data?.todo ?? []).length > 0}>
+               <Command
+                  value={selectedId()}
+                  onValueChange={setSelectedId}
+               >
+                  <CommandInput
+                     readOnly
+                     class="max-md:hidden md:sr-only"
+                     onBlur={() => setSelectedId("")}
+                     onFocus={() =>
+                        setSelectedId(query().data?.todo[0]?.id ?? "")
+                     }
+                  />
+                  <CommandList class="mt-8">
+                     <For each={query().data?.todo}>
+                        {(todo) => <TodoItem todo={todo} />}
+                     </For>
+                  </CommandList>
+               </Command>
+            </Match>
+         </Switch>
+      </>
    )
 }
 

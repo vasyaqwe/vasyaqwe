@@ -135,12 +135,15 @@ export function TodoList({ forToday = false }: { forToday?: boolean }) {
          : data.filter((todo) => selectedTags().some((tag) => todo.tag === tag))
    })
 
-   const tags = new Array(
-      ...new Set(
-         data()
-            .map((todo) => todo.tag)
-            .filter((tag) => tag !== undefined),
-      ),
+   const tags = createMemo(
+      () =>
+         new Array(
+            ...new Set(
+               data()
+                  .map((todo) => todo.tag)
+                  .filter((tag) => tag !== undefined),
+            ),
+         ),
    )
 
    return (
@@ -181,7 +184,7 @@ export function TodoList({ forToday = false }: { forToday?: boolean }) {
                            class="sr-only"
                         />
                         <CommandList>
-                           <For each={tags}>
+                           <For each={tags()}>
                               {(tag) => (
                                  <CommandItem
                                     class={cx(MENU_ITEM_STYLES.base)}
@@ -225,36 +228,38 @@ export function TodoList({ forToday = false }: { forToday?: boolean }) {
    )
 }
 
-function TodoItem({
-   todo,
-}: {
+function TodoItem(props: {
    todo: Database["todo"]
 }) {
    return (
       <CommandItem
-         class={cx(
-            "relative mt-3 flex min-h-7 cursor-(--cursor) items-center px-0 font-medium text-lg leading-none before:absolute before:inset-[-6px_-6px_-6px_-10px] before:rounded-[0.6rem] data-[selected]:before:bg-primary-2",
-         )}
-         value={todo.id}
+         class={
+            "relative mt-3 flex min-h-7 cursor-(--cursor) items-center px-0 font-medium text-lg leading-none before:absolute before:inset-[-6px_-6px_-6px_-10px] before:rounded-[0.6rem] data-[selected]:before:bg-primary-2"
+         }
+         value={props.todo.id}
          onSelect={() => {
-            const toUpdate = db.tx.todo[todo.id]
+            const toUpdate = db.tx.todo[props.todo.id]
             if (!toUpdate) return
-            db.transact(toUpdate.update({ done: !todo.done }))
+            db.transact(toUpdate.update({ done: !props.todo.done }))
             setTimeout(() => {
-               setSelectedId(todo.id)
+               setSelectedId(props.todo.id)
             }, 0)
          }}
       >
          <div class="relative z-10 flex w-full items-center rounded-xl">
             <span class="line-clamp-1 leading-5">
-               {todo.done ? <s>{todo.content}</s> : todo.content}
+               {props.todo.done ? (
+                  <s>{props.todo.content}</s>
+               ) : (
+                  props.todo.content
+               )}
             </span>
-            <Show when={todo.tag}>
+            <Show when={props.todo.tag}>
                <Badge
                   variant={"gradient"}
-                  class={cx("ml-auto")}
+                  class={"ml-auto"}
                >
-                  {todo.tag}
+                  {props.todo.tag ?? ""}
                </Badge>
             </Show>
          </div>

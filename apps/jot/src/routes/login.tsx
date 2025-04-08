@@ -73,7 +73,7 @@ function RouteComponent() {
                      exitToClass="opacity-0 -translate-y-13 blur-[3px]"
                   >
                      <Show when={step() === "initial"}>
-                        <div class="absolute w-full transition-all duration-500 ease-out">
+                        <div class="absolute w-full transition-all duration-500 ease-in-out">
                            <h1 class="font-secondary text-foreground/80 text-lg">
                               Access Jot
                            </h1>
@@ -92,7 +92,7 @@ function RouteComponent() {
                         exitToClass="opacity-0 translate-y-10 blur-[3px]"
                      >
                         <Show when={step() === "code"}>
-                           <div class="absolute w-full transition-all duration-500 ease-out">
+                           <div class="absolute w-full transition-all duration-500 ease-in-out">
                               <h1 class="font-secondary text-foreground/80 text-lg">
                                  Code sent
                               </h1>
@@ -145,7 +145,7 @@ function RouteComponent() {
                   exitToClass="opacity-0 -translate-y-2 scale-[97%] blur-[3px]"
                >
                   <Show when={step() === "code"}>
-                     <div class="absolute w-fit transition-all duration-500 ease-out">
+                     <div class="absolute w-fit transition-all duration-500 ease-in-out">
                         <button
                            type="button"
                            onClick={() => setStep("initial")}

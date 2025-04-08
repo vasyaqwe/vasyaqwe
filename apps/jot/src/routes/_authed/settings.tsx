@@ -28,12 +28,15 @@ function RouteComponent() {
             </Button>
          </div>
          <div class="mt-8">
-            <h2 class="mt-5 font-secondary text-xl">About</h2>
+            <h2 class="mt-5 font-secondary text-xl">Shortcuts</h2>
             <p class="mt-3 mb-6 text-foreground/75 text-sm">
-               Shortcuts: use up & down arrows to navigate through the todos.
-               Hit Enter/d to toggle done, and Delete to delete the selected
-               todo. Hit c to start typing a new todo.
+               Use up & down arrows to navigate through the todos. Hit Enter/d
+               to toggle done, and Delete to delete the selected todo. Hit c to
+               start typing a new todo. Toggle filter menu with f.
             </p>
+         </div>
+         <div class="mt-8">
+            <h2 class="mt-5 font-secondary text-xl">About</h2>
             <p class="mt-3 mb-6 text-foreground/75 text-sm">
                Jot is{" "}
                <a

@@ -16,7 +16,8 @@
     "dev:kit": "turbo dev --filter=@vasyaqwe/kit",
     "build:kit": "turbo build --filter=@vasyaqwe/kit",
     "dev:jot": "turbo dev --filter=@vasyaqwe/jot --filter=@vasyaqwe/worker",
-    "build:jot": "turbo build --filter=@vasyaqwe/jot"
+    "build:jot": "turbo build --filter=@vasyaqwe/jot",
+    "dev:slate": "turbo dev --filter=@vasyaqwe/slate"
   },
   "workspaces": ["apps/*", "packages/*", "tooling/*"],
   "trustedDependencies": ["@biomejs/biome", "core-js", "esbuild", "workerd"],

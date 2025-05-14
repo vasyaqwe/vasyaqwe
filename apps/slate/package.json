@@ -1,0 +1,33 @@
+{
+  "name": "@vasyaqwe/slate",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "typecheck": "tsc -p tsconfig.prod.json --noEmit",
+    "preview": "vite preview",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.3.1",
+    "@solid-primitives/deep": "^0.3.1",
+    "@solid-primitives/event-listener": "^2.4.0",
+    "@solid-primitives/keyboard": "^1.3.0",
+    "@solid-primitives/mutation-observer": "^1.2.0",
+    "@tanstack/router-plugin": "^1.109.2",
+    "@tanstack/solid-router": "^1.110.0",
+    "@vasyaqwe/ui": "workspace:*",
+    "base-x": "^5.0.1",
+    "drizzle-orm": "^0.43.1",
+    "solid-js": "^1.9.4",
+    "solid-transition-group": "^0.3.0",
+    "vite-tsconfig-paths": "^5.1.4"
+  },
+  "devDependencies": {
+    "@vasyaqwe/tsconfig": "workspace:*",
+    "drizzle-kit": "^0.31.1",
+    "vite": "^6.0.11",
+    "vite-plugin-solid": "^2.11.2"
+  }
+}

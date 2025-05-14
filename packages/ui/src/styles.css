@@ -27,6 +27,19 @@
    --color-accent-11: #1a1821;
    --color-accent-12: #0b0a0f;
 
+   --color-destructive-1: #ffeded;
+   --color-destructive-2: #f4b3bb;
+   --color-destructive-3: #ea7a8a;
+   --color-destructive-4: #d84f67; 
+   --color-destructive-5: #cf4661;
+   --color-destructive-6: #c63d5b;
+   --color-destructive-7: #bd3454;
+   --color-destructive-8: #b42b4e;
+   --color-destructive-9: #ab2248;
+   --color-destructive-10: #a21941;
+   --color-destructive-11: #99103b;
+   --color-destructive-12: #900834;
+
    --color-background: #ffffff;
    --color-foreground: var(--color-primary-12);
    --color-neutral: var(--color-primary-2);

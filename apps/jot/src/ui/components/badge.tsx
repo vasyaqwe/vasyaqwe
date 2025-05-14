@@ -3,7 +3,7 @@ import { cn } from "@vasyaqwe/ui/utils"
 import { type VariantProps, cva } from "class-variance-authority"
 import { type JSX, splitProps } from "solid-js"
 
-export const badgeVariants = cva(
+export const badge = cva(
    "inline-flex items-center justify-center gap-2 whitespace-nowrap border font-medium text-sm shadow-[inset_0_-1px_1px_0_var(--tw-shadow-color,rgb(0_0_0_/_0.1)),0_1px_0px_0_var(--tw-shadow-color,_rgb(0_0_0_/_0.02)),_0_1px_0px_-1px_var(--tw-shadow-color,_rgb(0_0_0_/_0.02))]",
    {
       variants: {
@@ -27,7 +27,7 @@ export const badgeVariants = cva(
 
 interface Props
    extends JSX.ButtonHTMLAttributes<HTMLSpanElement>,
-      VariantProps<typeof badgeVariants> {}
+      VariantProps<typeof badge> {}
 
 export function Badge(props: Props) {
    const [local, rest] = splitProps(props, ["class", "variant", "size"])
@@ -36,7 +36,7 @@ export function Badge(props: Props) {
    return (
       <span
          class={cn(
-            badgeVariants({
+            badge({
                variant: local.variant,
                size: local.size,
                className: local.class,

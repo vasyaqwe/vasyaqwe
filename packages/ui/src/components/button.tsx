@@ -3,7 +3,7 @@ import { type JSX, splitProps } from "solid-js"
 import { FOCUS_STYLES } from "../constants"
 import { cn } from "../utils"
 
-export const buttonVariants = cva(
+export const button = cva(
    [
       "inline-flex items-center justify-center whitespace-nowrap border text-[0.95rem] leading-none shadow-xs",
       "cursor-pointer disabled:opacity-80",
@@ -37,7 +37,7 @@ export const buttonVariants = cva(
 
 interface ButtonProps
    extends JSX.ButtonHTMLAttributes<HTMLButtonElement>,
-      VariantProps<typeof buttonVariants> {
+      VariantProps<typeof button> {
    class?: string
 }
 
@@ -53,7 +53,7 @@ export function Button(props: ButtonProps) {
    return (
       <button
          class={cn(
-            buttonVariants({
+            button({
                variant: local.variant,
                size: local.size,
                kind: local.kind,

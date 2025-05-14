@@ -2,11 +2,11 @@ import type { VariantProps } from "class-variance-authority"
 import { type JSX, splitProps } from "solid-js"
 import { FOCUS_STYLES } from "../constants"
 import { cn } from "../utils"
-import { buttonVariants } from "./button"
+import { button } from "./button"
 
 interface Props
    extends Omit<JSX.SelectHTMLAttributes<HTMLSelectElement>, "size">,
-      VariantProps<typeof buttonVariants> {}
+      VariantProps<typeof button> {}
 
 export function Select(props: Props) {
    const [local, rest] = splitProps(props, [
@@ -20,7 +20,7 @@ export function Select(props: Props) {
       <div class="relative">
          <select
             class={cn(
-               buttonVariants({
+               button({
                   variant: local.variant ?? "secondary",
                   size: local.size,
                   className: local.class,

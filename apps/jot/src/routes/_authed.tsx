@@ -1,6 +1,6 @@
 import { db } from "@/database"
 import { env } from "@/env"
-import { buttonVariants } from "@/ui/components/button"
+import { button } from "@/ui/components/button"
 import { id } from "@instantdb/core"
 import { createShortcut } from "@solid-primitives/keyboard"
 import {
@@ -75,7 +75,7 @@ function RouteComponent() {
                <Link
                   to="/"
                   class={cn(
-                     buttonVariants({ variant: "ghost" }),
+                     button({ variant: "ghost" }),
                      "text-foreground/80 aria-[current=page]:text-foreground",
                   )}
                >
@@ -84,7 +84,7 @@ function RouteComponent() {
                <Link
                   to="/later"
                   class={cn(
-                     buttonVariants({ variant: "ghost" }),
+                     button({ variant: "ghost" }),
                      "text-foreground/80 aria-[current=page]:text-foreground",
                   )}
                >
@@ -93,7 +93,7 @@ function RouteComponent() {
                <Link
                   to="/settings"
                   class={cn(
-                     buttonVariants({ variant: "ghost" }),
+                     button({ variant: "ghost" }),
                      "text-foreground/80 aria-[current=page]:text-foreground",
                   )}
                >

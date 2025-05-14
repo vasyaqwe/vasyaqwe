@@ -3,7 +3,7 @@ import { cn } from "@vasyaqwe/ui/utils"
 import { type VariantProps, cva } from "class-variance-authority"
 import { type JSX, splitProps } from "solid-js"
 
-export const buttonVariants = cva(
+export const button = cva(
    [
       "inline-flex cursor-(--cursor) items-center justify-center whitespace-nowrap text-base tracking-wide md:text-sm",
       "transition-colors duration-100 disabled:opacity-80",
@@ -43,7 +43,7 @@ export const buttonVariants = cva(
 
 interface Props
    extends JSX.ButtonHTMLAttributes<HTMLButtonElement>,
-      VariantProps<typeof buttonVariants> {}
+      VariantProps<typeof button> {}
 
 export function Button(props: Props) {
    const [local, rest] = splitProps(props, [
@@ -57,7 +57,7 @@ export function Button(props: Props) {
    return (
       <button
          class={cn(
-            buttonVariants({
+            button({
                variant: local.variant,
                size: local.size,
                kind: local.kind,

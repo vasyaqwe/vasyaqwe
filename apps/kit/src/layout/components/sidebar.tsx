@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/solid-router"
-import { buttonVariants } from "@vasyaqwe/ui/components/button"
+import { button } from "@vasyaqwe/ui/components/button"
 import { cx } from "@vasyaqwe/ui/utils"
 
 export function Sidebar() {
@@ -12,7 +12,7 @@ export function Sidebar() {
                      <Link
                         to={"/"}
                         class={cx(
-                           buttonVariants({ variant: "ghost" }),
+                           button({ variant: "ghost" }),
                            "flex w-full justify-start gap-2 px-2 font-medium text-foreground/70 leading-none transition-none hover:text-foreground aria-[current=page]:text-foreground",
                         )}
                      >
@@ -24,7 +24,7 @@ export function Sidebar() {
                      <Link
                         to={"/typescript"}
                         class={cx(
-                           buttonVariants({ variant: "ghost" }),
+                           button({ variant: "ghost" }),
                            "flex w-full justify-start gap-2 px-2 font-medium text-foreground/70 leading-none transition-none hover:text-foreground aria-[current=page]:text-foreground",
                         )}
                      >

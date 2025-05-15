@@ -1,6 +1,7 @@
 import "@vasyaqwe/ui/styles.css"
 import "./ui/styles.css"
 import { databaseClient } from "@/database"
+import { button } from "@/ui/components/button"
 import { ErrorComponent } from "@/ui/components/error"
 import { Link, RouterProvider, createRouter } from "@tanstack/solid-router"
 import { render } from "solid-js/web"
@@ -27,7 +28,12 @@ function NotFound() {
          <p class="mb-5 text-lg leading-snug opacity-70">
             This page does not exist — <br /> it may have been moved or deleted.
          </p>
-         <Link to={"/"}>Back home</Link>
+         <Link
+            to={"/"}
+            class={button()}
+         >
+            Back home
+         </Link>
       </div>
    )
 }

@@ -3,8 +3,15 @@ import { debounce } from "@solid-primitives/scheduled"
 import { Link, createFileRoute, useRouter } from "@tanstack/solid-router"
 import { Separator } from "@vasyaqwe/ui/components/separator"
 import { Textarea } from "@vasyaqwe/ui/components/textarea"
+import { cx } from "@vasyaqwe/ui/utils"
 import { and, desc, gte, lt } from "drizzle-orm"
-import { For, createSignal } from "solid-js"
+import {
+   type Accessor,
+   For,
+   createEffect,
+   createSignal,
+   onCleanup,
+} from "solid-js"
 
 export const Route = createFileRoute("/")({
    component: RouteComponent,
@@ -60,27 +67,56 @@ function RouteComponent() {
 
    const rest = data().entries.slice(1)
 
+   let containerRef!: HTMLDivElement
+
+   const activeLinkObserver = createActiveLinkObserver({
+      firstId: firstEntry?.id ?? "",
+      containerRef: () => containerRef,
+   })
+
    return (
       <div class="flex">
-         <aside class="sticky top-0 flex h-svh w-52 flex-col items-end border-black border-r-[1.5px] bg-primary-11/25 p-4">
-            <p class="mb-7 text-primary-6 text-sm">
-               <b>{data().entries.length}</b> entries
-            </p>
-            <For each={data().entries}>
-               {(entry) => (
-                  <Link
-                     to="."
-                     hash={entry.id}
-                     class="flex cursor-default items-center gap-3 text-primary-6 text-sm"
-                  >
-                     <Separator class="w-8 border-primary-10" />
-                     <span class="whitespace-nowrap">
-                        <b>{formatDate(entry.createdAt)} </b>
-                        {entry.createdAt.getDate()}
-                     </span>
-                  </Link>
-               )}
-            </For>
+         <aside class="sticky top-0 flex h-svh w-52 flex-col border-black border-r-[1.5px] bg-primary-11">
+            <header class="relative flex items-center justify-between border-black border-b-[1.5px] p-4 shadow-md">
+               <span class="h-4 w-1 rounded-[1px] bg-accent-6" />
+               <p class="text-foreground/75 text-sm">
+                  <b>{data().entries.length}</b> entries
+               </p>
+               {/* <div
+class="absolute inset-x-0 top-full h-3/4 bg-gradient-to-b from-primary-11 to-transparent"
+aria-hidden="true"
+      /> */}
+            </header>
+            <div
+               ref={containerRef}
+               class="scrollbar-hidden relative grow overflow-y-auto p-4"
+            >
+               <Separator
+                  class="absolute top-0 left-4 h-px w-[calc(100%-7.75rem)] bg-destructive-6 transition-transform"
+                  style={{
+                     transform: `translateY(${activeLinkObserver.currentLinkY()}px)`,
+                  }}
+               />
+               <For each={data().entries}>
+                  {(entry) => {
+                     return (
+                        <Link
+                           to="."
+                           hash={entry.id}
+                           class={cx(
+                              "grid w-full origin-right cursor-default grid-cols-[1fr_2ch_3ch] items-center justify-items-end whitespace-nowrap py-2 text-right text-foreground/75 text-sm transition-transform hover:scale-x-105",
+                              activeLinkObserver.entryInViewId() === entry.id &&
+                                 "scale-x-105",
+                           )}
+                        >
+                           <Separator class="mr-1 w-8 shrink-0 bg-primary-9" />
+                           <b class="mr-px">{formatDate(entry.createdAt)} </b>
+                           <span> {entry.createdAt.getDate()}</span>
+                        </Link>
+                     )
+                  }}
+               </For>
+            </div>
          </aside>
          <main class="mx-auto max-w-3xl grow divide-y divide-primary-10 px-4 py-[6vh]">
             <div
@@ -104,6 +140,60 @@ function RouteComponent() {
          </main>
       </div>
    )
+}
+
+function createActiveLinkObserver(props: {
+   firstId: string
+   containerRef: Accessor<HTMLDivElement | undefined>
+}) {
+   const [entryInViewId, setEntryInViewId] = createSignal<string | null>(
+      props.firstId,
+   )
+
+   const [currentLinkY, setCurrentLinkY] = createSignal(0)
+   createEffect(() => {
+      const container = props.containerRef()
+      if (!container) return
+
+      const activeLink = container.querySelector(
+         `a[href="/#${entryInViewId()}"]`,
+      )
+      if (!activeLink) return
+
+      const linkRect = activeLink.getBoundingClientRect()
+      const linkMiddle = linkRect.top + linkRect.height / 2
+      const containerRect = container.getBoundingClientRect()
+      setCurrentLinkY(linkMiddle - containerRect.top)
+   })
+
+   createEffect(() => {
+      const observer = new IntersectionObserver(
+         (entries) => {
+            for (const entry of entries) {
+               if (entry.isIntersecting) setEntryInViewId(entry.target.id)
+            }
+         },
+         {
+            root: null,
+            rootMargin: "0px",
+            threshold: 0.5,
+         },
+      )
+
+      const entryElements = document.querySelectorAll("main .py-10")
+      for (const el of entryElements) {
+         observer.observe(el)
+      }
+
+      onCleanup(() => {
+         observer.disconnect()
+      })
+   })
+
+   return {
+      entryInViewId,
+      currentLinkY,
+   }
 }
 
 function EntryContent({ item }: { item: Entry }) {

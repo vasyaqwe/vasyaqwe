@@ -14,12 +14,7 @@ export function ErrorComponent({ error }: Omit<ErrorComponentProps, "reset">) {
          <p class="mb-3 font-secondary text-2xl">An error occurred</p>
          <p class="mb-5 text-lg leading-snug opacity-70">Please, try again.</p>
          <div class="flex items-center justify-center gap-2.5">
-            <Button
-               variant={"secondary"}
-               onClick={() => router.invalidate()}
-            >
-               Try Again
-            </Button>
+            <Button onClick={() => router.invalidate()}>Try Again</Button>
          </div>
          {env.DEV ? (
             <div class="mx-auto mt-12 w-fit">

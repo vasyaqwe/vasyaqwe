@@ -8,7 +8,7 @@ import {
 
 export function ErrorComponent({ error }: Omit<ErrorComponentProps, "reset">) {
    const router = useRouter()
-   console.log(error)
+
    return (
       <div class="flex grow flex-col items-center justify-center pt-20 text-center md:pt-40">
          <p class="mb-3 font-secondary text-2xl">An error occurred</p>

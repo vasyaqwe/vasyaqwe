@@ -1,6 +1,9 @@
+import { formatDate } from "@/date"
 import { type Entry, entry } from "@/entry/schema"
+import { createEventListener } from "@solid-primitives/event-listener"
 import { debounce } from "@solid-primitives/scheduled"
-import { Link, createFileRoute, useRouter } from "@tanstack/solid-router"
+import { makePersisted } from "@solid-primitives/storage"
+import { createFileRoute, useRouter } from "@tanstack/solid-router"
 import { Separator } from "@vasyaqwe/ui/components/separator"
 import { Textarea } from "@vasyaqwe/ui/components/textarea"
 import { cx } from "@vasyaqwe/ui/utils"
@@ -9,6 +12,7 @@ import {
    type Accessor,
    For,
    createEffect,
+   createMemo,
    createSignal,
    onCleanup,
 } from "solid-js"
@@ -44,6 +48,13 @@ function RouteComponent() {
    const firstEntry = data().entries[0]
    const [content, setContent] = createSignal(firstEntry?.content ?? "")
 
+   let contentRef!: HTMLTextAreaElement
+
+   createEventListener(document, "visibilitychange", async () => {
+      if (document.visibilityState === "visible")
+         contentRef.focus({ preventScroll: true })
+   })
+
    const debouncedContent = debounce(async (content: string) => {
       const todaysEntry = data().todaysEntry
       if (todaysEntry) {
@@ -67,8 +78,29 @@ function RouteComponent() {
 
    const rest = data().entries.slice(1)
 
-   let containerRef!: HTMLDivElement
+   const groupedEntries = createMemo(() => {
+      const groups = data().entries.reduce(
+         (acc: Record<string, Entry[]>, entry) => {
+            const monthKey = formatDate(entry.createdAt, {
+               month: "short",
+               year: "numeric",
+            })
 
+            if (!acc[monthKey]) {
+               acc[monthKey] = []
+            }
+
+            acc[monthKey].push(entry)
+
+            return acc
+         },
+         {},
+      )
+
+      return groups
+   })
+
+   let containerRef!: HTMLDivElement
    const activeLinkObserver = createActiveLinkObserver({
       firstId: firstEntry?.id ?? "",
       containerRef: () => containerRef,
@@ -79,7 +111,7 @@ function RouteComponent() {
          <aside class="sticky top-0 flex h-svh w-52 flex-col border-black border-r-[1.5px] bg-primary-11">
             <header class="relative flex items-center justify-between border-black border-b-[1.5px] p-4 shadow-md">
                <span class="h-4 w-1 rounded-[1px] bg-accent-6" />
-               <p class="text-foreground/75 text-sm">
+               <p class="text-foreground/60 text-sm">
                   <b>{data().entries.length}</b> entries
                </p>
                {/* <div
@@ -92,38 +124,59 @@ aria-hidden="true"
                class="scrollbar-hidden relative grow overflow-y-auto p-4"
             >
                <Separator
-                  class="absolute top-0 left-4 h-px w-[calc(100%-7.75rem)] bg-destructive-6 transition-transform"
+                  class={
+                     "absolute top-0 left-4 h-px w-[calc(100%-7.5rem)] bg-destructive-6 transition-transform"
+                  }
                   style={{
                      transform: `translateY(${activeLinkObserver.currentLinkY()}px)`,
                   }}
                />
-               <For each={data().entries}>
-                  {(entry) => {
-                     return (
-                        <Link
-                           to="."
-                           hash={entry.id}
-                           class={cx(
-                              "grid w-full origin-right cursor-default grid-cols-[1fr_2ch_3ch] items-center justify-items-end whitespace-nowrap py-2 text-right text-foreground/75 text-sm transition-transform hover:scale-x-105",
-                              activeLinkObserver.entryInViewId() === entry.id &&
-                                 "scale-x-105",
-                           )}
-                        >
-                           <Separator class="mr-1 w-8 shrink-0 bg-primary-9" />
-                           <b class="mr-px">{formatDate(entry.createdAt)} </b>
-                           <span> {entry.createdAt.getDate()}</span>
-                        </Link>
-                     )
-                  }}
+               <For each={Object.entries(groupedEntries())}>
+                  {([month, entries]) => (
+                     <div>
+                        <p class="mb-3 text-right text-foreground/50 text-sm">
+                           {month}
+                        </p>
+                        <For each={entries}>
+                           {(entry) => {
+                              return (
+                                 <button
+                                    onClick={() =>
+                                       document
+                                          .getElementById(entry.id)
+                                          ?.scrollIntoView({
+                                             behavior: "smooth",
+                                          })
+                                    }
+                                    data-entry-id={entry.id}
+                                    class={cx(
+                                       "grid w-full origin-right grid-cols-[1fr_2ch_3ch] items-center justify-items-end whitespace-nowrap py-2 text-right text-foreground/60 text-sm transition-transform hover:scale-x-[107%]",
+                                       activeLinkObserver.entryInViewId() ===
+                                          entry.id && "scale-x-[107%]",
+                                    )}
+                                 >
+                                    <Separator class="mr-1.5 w-6 shrink-0 bg-primary-9" />
+                                    <b class="mr-px">
+                                       {formatDay(entry.createdAt)}{" "}
+                                    </b>
+                                    <span> {entry.createdAt.getDate()}</span>
+                                 </button>
+                              )
+                           }}
+                        </For>
+                     </div>
+                  )}
                </For>
             </div>
          </aside>
-         <main class="mx-auto max-w-3xl grow divide-y divide-primary-10 px-4 py-[6vh]">
+         <main class="mx-auto max-w-3xl grow px-4">
             <div
-               class="py-10"
+               data-entry
+               class="min-h-svh py-[10svh]"
                id={firstEntry?.id}
             >
                <Textarea
+                  ref={contentRef}
                   spellcheck={false}
                   autofocus
                   class="w-full resize-none placeholder:text-foreground/40 focus:outline-hidden"
@@ -142,45 +195,69 @@ aria-hidden="true"
    )
 }
 
+function EntryContent({ item }: { item: Entry }) {
+   const [content] = createSignal(item.content)
+
+   return (
+      <div
+         data-entry
+         class="min-h-svh scroll-mt-[10svh]"
+         id={item.id}
+      >
+         <p class="text-foreground/50 text-sm">{formatDate(item.createdAt)}</p>
+         <Separator class="mt-4 mb-5 bg-black" />
+         <p>{content()}</p>
+      </div>
+   )
+}
+
+const [entryInViewId, setEntryInViewId] = makePersisted(
+   createSignal<string | null>(),
+   { storage: localStorage, name: "current_entry" },
+)
+
 function createActiveLinkObserver(props: {
    firstId: string
-   containerRef: Accessor<HTMLDivElement | undefined>
+   containerRef: Accessor<HTMLDivElement>
 }) {
-   const [entryInViewId, setEntryInViewId] = createSignal<string | null>(
-      props.firstId,
-   )
-
    const [currentLinkY, setCurrentLinkY] = createSignal(0)
+
    createEffect(() => {
       const container = props.containerRef()
-      if (!container) return
-
       const activeLink = container.querySelector(
-         `a[href="/#${entryInViewId()}"]`,
+         `[data-entry-id="${entryInViewId()}"]`,
       )
       if (!activeLink) return
 
+      activeLink.scrollIntoView({ behavior: "smooth", block: "nearest" })
+
       const linkRect = activeLink.getBoundingClientRect()
-      const linkMiddle = linkRect.top + linkRect.height / 2
       const containerRect = container.getBoundingClientRect()
-      setCurrentLinkY(linkMiddle - containerRect.top)
+      const linkTopInContainerViewport = linkRect.top - containerRect.top
+      const linkMiddleInContainerViewport =
+         linkTopInContainerViewport + linkRect.height / 2
+      const newValue = linkMiddleInContainerViewport + container.scrollTop
+
+      setCurrentLinkY(newValue)
    })
 
    createEffect(() => {
       const observer = new IntersectionObserver(
          (entries) => {
             for (const entry of entries) {
-               if (entry.isIntersecting) setEntryInViewId(entry.target.id)
+               if (entry.isIntersecting) {
+                  setEntryInViewId(entry.target.id)
+               }
             }
          },
          {
             root: null,
             rootMargin: "0px",
-            threshold: 0.5,
+            threshold: 0.8,
          },
       )
 
-      const entryElements = document.querySelectorAll("main .py-10")
+      const entryElements = document.querySelectorAll("[data-entry]")
       for (const el of entryElements) {
          observer.observe(el)
       }
@@ -196,20 +273,7 @@ function createActiveLinkObserver(props: {
    }
 }
 
-function EntryContent({ item }: { item: Entry }) {
-   const [content] = createSignal(item.content)
-
-   return (
-      <div
-         class="py-10"
-         id={item.id}
-      >
-         <p>{content()}</p>
-      </div>
-   )
-}
-
-const formatDate = (date: Date) => {
+const formatDay = (date: Date) => {
    const dayOfWeek = date.getDay()
    const dayNames = [
       "Sunday",

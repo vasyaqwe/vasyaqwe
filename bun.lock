@@ -84,6 +84,7 @@
         "@solid-primitives/keyboard": "^1.3.0",
         "@solid-primitives/mutation-observer": "^1.2.0",
         "@solid-primitives/scheduled": "^1.5.1",
+        "@solid-primitives/storage": "^4.3.2",
         "@tanstack/router-plugin": "^1.109.2",
         "@tanstack/solid-router": "^1.110.0",
         "@vasyaqwe/ui": "workspace:*",
@@ -503,6 +504,8 @@
     "@solid-primitives/scheduled": ["@solid-primitives/scheduled@1.5.1", "", { "peerDependencies": { "solid-js": "^1.6.12" } }, "sha512-WKg/zvAyDIgQ/Xo48YaUY7ISaPyWTZNDzIVWP2R84CuLH+nZN/2O0aFn/gQlWY6y/Bfi/LdDt6Og2/PRzPY7mA=="],
 
     "@solid-primitives/static-store": ["@solid-primitives/static-store@0.1.0", "", { "dependencies": { "@solid-primitives/utils": "^6.3.0" }, "peerDependencies": { "solid-js": "^1.6.12" } }, "sha512-6Coau0Kv/dF83UQpbBzc+gnJafOQAPe2jCbB4jmTK5UocsR5cWmFBVRm3kin+nZFVaO4WkuELw0cKANWgTVh8Q=="],
+
+    "@solid-primitives/storage": ["@solid-primitives/storage@4.3.2", "", { "dependencies": { "@solid-primitives/utils": "^6.3.1" }, "peerDependencies": { "@tauri-apps/plugin-store": "*", "solid-js": "^1.6.12" }, "optionalPeers": ["@tauri-apps/plugin-store"] }, "sha512-Vkuk/AqgUOjz6k7Mo5yDFQBQg8KMQcZfaac/bxLApaza3e5c/iNllNvxZWPM9Vf+Gf4m5SgRbvgsm6dSLJ27Jw=="],
 
     "@solid-primitives/styles": ["@solid-primitives/styles@0.1.0", "", { "dependencies": { "@solid-primitives/rootless": "^1.5.0", "@solid-primitives/utils": "^6.3.0" }, "peerDependencies": { "solid-js": "^1.6.12" } }, "sha512-e+JquRLrplp17yObMBosPEltzexyvY/FDFovbRuWVUX4IYk4DvG4jUmvz6uW8nwwA817DEUYIYruj4ocMFWunQ=="],
 
@@ -1451,6 +1454,8 @@
     "@solid-devtools/shared/@solid-primitives/scheduled": ["@solid-primitives/scheduled@1.5.0", "", { "peerDependencies": { "solid-js": "^1.6.12" } }, "sha512-RVw24IRNh1FQ4DCMb3OahB70tXIwc5vH8nhR4nNPsXwUPQeuOkLsDI5BlxaPk0vyZgqw9lDpufgI3HnPwplgDw=="],
 
     "@solid-primitives/memo/@solid-primitives/scheduled": ["@solid-primitives/scheduled@1.5.0", "", { "peerDependencies": { "solid-js": "^1.6.12" } }, "sha512-RVw24IRNh1FQ4DCMb3OahB70tXIwc5vH8nhR4nNPsXwUPQeuOkLsDI5BlxaPk0vyZgqw9lDpufgI3HnPwplgDw=="],
+
+    "@solid-primitives/storage/@solid-primitives/utils": ["@solid-primitives/utils@6.3.1", "", { "peerDependencies": { "solid-js": "^1.6.12" } }, "sha512-4/Z59nnwu4MPR//zWZmZm2yftx24jMqQ8CSd/JobL26TPfbn4Ph8GKNVJfGJWShg1QB98qObJSskqizbTvcLLA=="],
 
     "@tanstack/router-utils/diff": ["diff@7.0.0", "", {}, "sha512-PJWHUb1RFevKCwaFA9RlG5tCd+FO5iRh9A8HEtkmBH2Li03iJriB6m6JIN4rGz3K3JLawI7/veA1xzRKP6ISBw=="],
 

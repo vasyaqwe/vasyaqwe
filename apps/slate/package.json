@@ -6,6 +6,9 @@
     "build": "vite build",
     "typecheck": "tsc -p tsconfig.prod.json --noEmit",
     "preview": "vite preview",
+    "tauri": "tauri",
+    "dev:desktop": "bun tauri dev",
+    "build:desktop": "bun tauri build",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate"
   },
@@ -19,6 +22,11 @@
     "@solid-primitives/storage": "^4.3.2",
     "@tanstack/router-plugin": "^1.109.2",
     "@tanstack/solid-router": "^1.110.0",
+    "@tauri-apps/api": "^2.2.0",
+    "@tauri-apps/plugin-deep-link": "^2.2.0",
+    "@tauri-apps/plugin-fs": "^2.2.0",
+    "@tauri-apps/plugin-notification": "^2.2.0",
+    "@tauri-apps/plugin-shell": "^2.2.0",
     "@vasyaqwe/ui": "workspace:*",
     "base-x": "^5.0.1",
     "drizzle-orm": "^0.43.1",
@@ -27,6 +35,7 @@
     "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
+    "@tauri-apps/cli": "^2.2.2",
     "@vasyaqwe/tsconfig": "workspace:*",
     "drizzle-kit": "^0.31.1",
     "vite": "^6.0.11",

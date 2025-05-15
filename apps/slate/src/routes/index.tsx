@@ -112,7 +112,8 @@ function RouteComponent() {
             <header class="relative flex items-center justify-between border-black border-b-[1.5px] p-4 shadow-md">
                <span class="h-4 w-1 rounded-[1px] bg-accent-6" />
                <p class="text-foreground/60 text-sm">
-                  <b>{data().entries.length}</b> entries
+                  <b>{data().entries.length}</b>{" "}
+                  {data().entries.length === 1 ? "entry" : "entries"}
                </p>
                {/* <div
 class="absolute inset-x-0 top-full h-3/4 bg-gradient-to-b from-primary-11 to-transparent"
@@ -123,14 +124,16 @@ aria-hidden="true"
                ref={containerRef}
                class="scrollbar-hidden relative grow overflow-y-auto p-4"
             >
-               <Separator
-                  class={
-                     "absolute top-0 left-4 h-px w-[calc(100%-7.5rem)] bg-destructive-6 transition-transform"
-                  }
-                  style={{
-                     transform: `translateY(${activeLinkObserver.currentLinkY()}px)`,
-                  }}
-               />
+               {data().entries.length === 0 ? null : (
+                  <Separator
+                     class={
+                        "absolute top-0 left-4 h-px w-[calc(100%-7.5rem)] bg-destructive-6 transition-transform"
+                     }
+                     style={{
+                        transform: `translateY(${activeLinkObserver.currentLinkY()}px)`,
+                     }}
+                  />
+               )}
                <For each={Object.entries(groupedEntries())}>
                   {([month, entries]) => (
                      <div>

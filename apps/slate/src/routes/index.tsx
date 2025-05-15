@@ -50,7 +50,7 @@ function RouteComponent() {
 
    let contentRef!: HTMLTextAreaElement
 
-   createEventListener(document, "visibilitychange", async () => {
+   createEventListener(window, "focus", async () => {
       if (document.visibilityState === "visible")
          contentRef.focus({ preventScroll: true })
    })

@@ -25,7 +25,7 @@ export const Route = createFileRoute("/")({
       const tomorrow = new Date(today)
       tomorrow.setDate(tomorrow.getDate() + 1)
       const [todaysEntry] = await opts.context.db
-         .select({ id: entry.id })
+         .select({ id: entry.id, content: entry.content })
          .from(entry)
          .where(and(gte(entry.createdAt, today), lt(entry.createdAt, tomorrow)))
 
@@ -45,8 +45,7 @@ function RouteComponent() {
    const router = useRouter()
    const context = Route.useRouteContext()
    const data = Route.useLoaderData()
-   const firstEntry = data().entries[0]
-   const [content, setContent] = createSignal(firstEntry?.content ?? "")
+   const [content, setContent] = createSignal(data().todaysEntry?.content ?? "")
 
    let contentRef!: HTMLTextAreaElement
 
@@ -111,7 +110,6 @@ function RouteComponent() {
 
    let containerRef!: HTMLDivElement
    const activeLinkObserver = createActiveLinkObserver({
-      firstId: firstEntry?.id ?? "",
       containerRef: () => containerRef,
    })
 
@@ -165,7 +163,7 @@ aria-hidden="true"
                                     "new-entry" && "scale-x-[107%]",
                               )}
                            >
-                              <Separator class="mr-1.5 w-6 shrink-0 bg-primary-9" />
+                              <Separator class="mr-1 w-6 shrink-0 bg-primary-9" />
                               <span class="mr-px">NEW</span>
                            </button>
                         )}
@@ -187,10 +185,8 @@ aria-hidden="true"
                                           entry.id && "scale-x-[107%]",
                                     )}
                                  >
-                                    <Separator class="mr-1.5 w-6 shrink-0 bg-primary-9" />
-                                    <b class="mr-px">
-                                       {formatDay(entry.createdAt)}{" "}
-                                    </b>
+                                    <Separator class="mr-1 w-6 shrink-0 bg-primary-9" />
+                                    <b>{formatDay(entry.createdAt)} </b>
                                     <span> {entry.createdAt.getDate()}</span>
                                  </button>
                               )
@@ -249,7 +245,6 @@ const [entryInViewId, setEntryInViewId] = makePersisted(
 )
 
 function createActiveLinkObserver(props: {
-   firstId: string
    containerRef: Accessor<HTMLDivElement>
 }) {
    const [currentLinkY, setCurrentLinkY] = createSignal(0)

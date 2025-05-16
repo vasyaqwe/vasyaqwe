@@ -7,6 +7,33 @@
   ],
   "permissions": [
     "core:window:allow-close", 
-    "core:default"
+    "core:default",
+    "opener:default",
+    "sql:default",
+    "sql:allow-execute",
+    "sql:allow-select",
+    "sql:allow-close",
+    "sql:allow-load",
+    "fs:allow-resource-read-recursive",
+    {
+      "identifier": "fs:allow-exists",
+      "allow": [
+        {
+          "path": "**"
+        }
+      ]
+    },
+    {
+      "identifier": "opener:allow-open-path",
+      "allow": [
+        {
+          "path": "$APPCONFIG"
+        },
+        {
+          "path": "$APPCONFIG/*"
+        }
+      ]
+    },
+    "fs:default"
   ]
 }

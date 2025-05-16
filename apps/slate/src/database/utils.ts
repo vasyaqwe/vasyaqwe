@@ -1,18 +1,18 @@
 import { type ID_PREFIXES, createId } from "@/id"
-import { pgTable, text, timestamp } from "drizzle-orm/pg-core"
+import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
 
 export const tableId = (prefix: keyof typeof ID_PREFIXES) =>
    text("id")
       .primaryKey()
       .$defaultFn(() => createId(prefix))
 
-export const createTable = pgTable
+export const createTable = sqliteTable
 
 export const timestamps = {
-   createdAt: timestamp()
+   createdAt: integer({ mode: "timestamp" })
       .$defaultFn(() => new Date())
       .notNull(),
-   updatedAt: timestamp()
+   updatedAt: integer({ mode: "timestamp" })
       .notNull()
       .$defaultFn(() => new Date())
       .$onUpdateFn(() => new Date()),

@@ -2,10 +2,9 @@ import { defineConfig } from "drizzle-kit"
 import { env } from "./src/env"
 
 export default defineConfig({
-   out: "./src/database/migrations",
+   out: "./src-tauri/migrations",
    schema: "./src/database/schema.ts",
-   dialect: "postgresql",
-   casing: "snake_case",
+   dialect: "sqlite",
    dbCredentials: {
       url: env.DATABASE_URL,
    },

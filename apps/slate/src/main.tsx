@@ -1,6 +1,6 @@
 import "@vasyaqwe/ui/styles.css"
 import "./ui/styles.css"
-import { databaseClient } from "@/database"
+import { db } from "@/database"
 import { button } from "@/ui/components/button"
 import { ErrorComponent } from "@/ui/components/error"
 import { Link, RouterProvider, createRouter } from "@tanstack/solid-router"
@@ -10,7 +10,7 @@ import { routeTree } from "./routeTree.gen"
 const router = createRouter({
    routeTree,
    context: {
-      db: databaseClient,
+      db,
    },
    defaultPreload: "render",
    scrollRestoration: true,

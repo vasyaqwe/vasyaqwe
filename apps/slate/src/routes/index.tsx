@@ -1,5 +1,6 @@
 import { formatDate } from "@/date"
 import { type Entry, entry } from "@/entry/schema"
+import { createId } from "@/id"
 import { createEventListener } from "@solid-primitives/event-listener"
 import { debounce } from "@solid-primitives/scheduled"
 import { makePersisted } from "@solid-primitives/storage"
@@ -74,17 +75,24 @@ function RouteComponent() {
 
       if (content === "") return
 
-      const [created] = await context()
-         .db.insert(entry)
-         .values({
-            content,
-         })
-         .returning()
+      const id = createId("entry")
 
-      router.invalidate().then(() => setEntryInViewId(created?.id))
+      await context().db.insert(entry).values({
+         id,
+         content,
+      })
+
+      router.invalidate().then(() => setEntryInViewId(id))
    }, 500)
 
-   const rest = data().todaysEntry ? data().entries.slice(1) : data().entries
+   const rest = createMemo(() => {
+      const currentData = data()
+      return currentData.todaysEntry
+         ? currentData.entries.filter(
+              (item) => item.id !== currentData.todaysEntry?.id,
+           )
+         : currentData.entries
+   })
 
    const groupedEntries = createMemo(() => {
       const groups = data().entries.reduce(
@@ -217,7 +225,7 @@ aria-hidden="true"
                   }}
                />
             </div>
-            <For each={rest}>{(item) => <EntryContent item={item} />}</For>
+            <For each={rest()}>{(item) => <EntryContent item={item} />}</For>
          </main>
       </div>
    )
@@ -243,12 +251,14 @@ const [entryInViewId, setEntryInViewId] = makePersisted(
    createSignal<string | null>(),
    { storage: localStorage, name: "current_entry" },
 )
+const [currentLinkY, setCurrentLinkY] = makePersisted(createSignal(0), {
+   storage: localStorage,
+   name: "current_link_y",
+})
 
 function createActiveLinkObserver(props: {
    containerRef: Accessor<HTMLDivElement>
 }) {
-   const [currentLinkY, setCurrentLinkY] = createSignal(0)
-
    createEffect(() => {
       const container = props.containerRef()
       const activeLink = container.querySelector(

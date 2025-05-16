@@ -7,7 +7,7 @@ import { createFileRoute, useRouter } from "@tanstack/solid-router"
 import { Separator } from "@vasyaqwe/ui/components/separator"
 import { Textarea } from "@vasyaqwe/ui/components/textarea"
 import { cx } from "@vasyaqwe/ui/utils"
-import { and, desc, gte, lt } from "drizzle-orm"
+import { and, desc, eq, gte, lt } from "drizzle-orm"
 import {
    type Accessor,
    For,
@@ -58,6 +58,10 @@ function RouteComponent() {
    const debouncedContent = debounce(async (content: string) => {
       const todaysEntry = data().todaysEntry
       if (todaysEntry) {
+         if (content === "") {
+            await context().db.delete(entry).where(eq(entry.id, todaysEntry.id))
+            return router.invalidate().then(() => setEntryInViewId("new-entry"))
+         }
          await context()
             .db.insert(entry)
             .values({
@@ -69,14 +73,19 @@ function RouteComponent() {
          return router.invalidate()
       }
 
-      await context().db.insert(entry).values({
-         content,
-      })
+      if (content === "") return
 
-      router.invalidate()
+      const [created] = await context()
+         .db.insert(entry)
+         .values({
+            content,
+         })
+         .returning()
+
+      router.invalidate().then(() => setEntryInViewId(created?.id))
    }, 500)
 
-   const rest = data().entries.slice(1)
+   const rest = data().todaysEntry ? data().entries.slice(1) : data().entries
 
    const groupedEntries = createMemo(() => {
       const groups = data().entries.reduce(
@@ -140,17 +149,37 @@ aria-hidden="true"
                         <p class="mb-3 text-right text-foreground/50 text-sm">
                            {month}
                         </p>
+                        {data().todaysEntry ? null : (
+                           <button
+                              onClick={() => {
+                                 document
+                                    .getElementById("new-entry")
+                                    ?.scrollIntoView({
+                                       behavior: "smooth",
+                                    })
+                              }}
+                              data-entry-id={"new-entry"}
+                              class={cx(
+                                 "grid w-full origin-right grid-cols-[1fr_5ch] items-center justify-items-end whitespace-nowrap py-2 text-right text-foreground/60 text-sm transition-transform hover:scale-x-[107%]",
+                                 activeLinkObserver.entryInViewId() ===
+                                    "new-entry" && "scale-x-[107%]",
+                              )}
+                           >
+                              <Separator class="mr-1.5 w-6 shrink-0 bg-primary-9" />
+                              <span class="mr-px">NEW</span>
+                           </button>
+                        )}
                         <For each={entries}>
                            {(entry) => {
                               return (
                                  <button
-                                    onClick={() =>
+                                    onClick={() => {
                                        document
                                           .getElementById(entry.id)
                                           ?.scrollIntoView({
                                              behavior: "smooth",
                                           })
-                                    }
+                                    }}
                                     data-entry-id={entry.id}
                                     class={cx(
                                        "grid w-full origin-right grid-cols-[1fr_2ch_3ch] items-center justify-items-end whitespace-nowrap py-2 text-right text-foreground/60 text-sm transition-transform hover:scale-x-[107%]",
@@ -174,9 +203,9 @@ aria-hidden="true"
          </aside>
          <main class="mx-auto max-w-3xl grow px-4">
             <div
-               data-entry
                class="min-h-svh py-[10svh]"
-               id={firstEntry?.id}
+               data-entry
+               id={data().todaysEntry?.id ?? "new-entry"}
             >
                <Textarea
                   ref={contentRef}
@@ -209,7 +238,7 @@ function EntryContent({ item }: { item: Entry }) {
       >
          <p class="text-foreground/50 text-sm">{formatDate(item.createdAt)}</p>
          <Separator class="mt-4 mb-5 bg-black" />
-         <p>{content()}</p>
+         <p class="whitespace-pre">{content()}</p>
       </div>
    )
 }

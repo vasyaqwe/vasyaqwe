@@ -1,50 +1,49 @@
 :root {
-   --color-primary-1:  #F9F9F9;
-   --color-primary-2:  #F7F7F7;
-   --color-primary-3:  #F0F0F0;
-   --color-primary-4:  #E8E8E8;
-   --color-primary-5:  #E0E0E0;
-   --color-primary-6:  #C8C8C8; 
-   --color-primary-7:  #A0A0A0;
-   --color-primary-8:  #787878;
-   --color-primary-9:  #505050;
-   --color-primary-10: #2E2E2E;
+   --color-primary-1: #f9f9f9;
+   --color-primary-2: #f7f7f7;
+   --color-primary-3: #f0f0f0;
+   --color-primary-4: #e8e8e8;
+   --color-primary-5: #e0e0e0;
+   --color-primary-6: #c8c8c8;
+   --color-primary-7: #a0a0a0;
+   --color-primary-8: #787878;
+   --color-primary-9: #505050;
+   --color-primary-10: #2e2e2e;
    --color-primary-11: #161616;
-   --color-primary-12: #121212; 
- 
-   --color-accent-1: #FFFCEF;
-   --color-accent-2: #FFF9DF;
-   --color-accent-3: #FFF6CF;
-   --color-accent-4: #FFF3BF;
-   --color-accent-5: #FEEFB0;
-   --color-accent-6: #FEECA0; 
-   --color-accent-7: #E8D88E;
-   --color-accent-8: #D2C47C;
-   --color-accent-9: #BCAF6A;
-   --color-accent-10: #A69958;
-   --color-accent-11: #908446;
-   --color-accent-12: #7A6E34;
- 
-   --color-destructive-1:  #FDECEF;
-   --color-destructive-2:  #F9D1D9;
-   --color-destructive-3:  #F5B6C3;
-   --color-destructive-4:  #F199AD;
-   --color-destructive-5:  #EC7D97;
-   --color-destructive-6:  #D75068; 
-   --color-destructive-7:  #C2485E;
-   --color-destructive-8:  #AC4053;
-   --color-destructive-9:  #963848;
-   --color-destructive-10: #81303E;
-   --color-destructive-11: #6B2833;
-   --color-destructive-12: #561F29;
+   --color-primary-12: #121212;
 
+   --color-accent-1: #fffcef;
+   --color-accent-2: #fff9df;
+   --color-accent-3: #fff6cf;
+   --color-accent-4: #fff3bf;
+   --color-accent-5: #feefb0;
+   --color-accent-6: #feeca0;
+   --color-accent-7: #e8d88e;
+   --color-accent-8: #d2c47c;
+   --color-accent-9: #bcaf6a;
+   --color-accent-10: #a69958;
+   --color-accent-11: #908446;
+   --color-accent-12: #7a6e34;
+
+   --color-destructive-1: #fdecef;
+   --color-destructive-2: #f9d1d9;
+   --color-destructive-3: #f5b6c3;
+   --color-destructive-4: #f199ad;
+   --color-destructive-5: #ec7d97;
+   --color-destructive-6: #d75068;
+   --color-destructive-7: #c2485e;
+   --color-destructive-8: #ac4053;
+   --color-destructive-9: #963848;
+   --color-destructive-10: #81303e;
+   --color-destructive-11: #6b2833;
+   --color-destructive-12: #561f29;
 
    --color-background: var(--color-primary-12);
    --color-foreground: var(--color-primary-1);
    --color-neutral: var(--color-primary-7);
 
    --font-primary: "pt_sans", sans-serif;
-   
+
    --text-sm: 0.9525rem;
    --text-base: 1.0325rem;
 }

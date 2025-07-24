@@ -55,6 +55,20 @@ function RouteComponent() {
          contentRef.focus({ preventScroll: true })
    })
 
+   createEventListener(document, "keydown", (event: KeyboardEvent) => {
+      if (
+         contentRef &&
+         document.activeElement !== contentRef &&
+         !event.metaKey && // Cmd/Win key
+         !event.ctrlKey && // Ctrl key
+         !event.altKey && // Alt key
+         !event.key.startsWith("F") && // Function keys
+         event.key.length === 1 // Single character keys (printable)
+      ) {
+         contentRef.focus()
+      }
+   })
+
    const debouncedContent = debounce(async (content: string) => {
       const todaysEntry = data().todaysEntry
       if (todaysEntry) {
@@ -121,6 +135,11 @@ function RouteComponent() {
       containerRef: () => containerRef,
    })
 
+   const currentMonthKey = createMemo(() => {
+      const today = new Date()
+      return formatDate(today, { month: "short", year: "numeric" })
+   })
+
    return (
       <div class="flex">
          <aside class="sticky top-0 flex h-svh w-52 flex-col border-black border-r-[1.5px] bg-primary-11">
@@ -137,7 +156,7 @@ aria-hidden="true"
             </header>
             <div
                ref={containerRef}
-               class="scrollbar-hidden relative grow overflow-y-auto p-4"
+               class="scrollbar-hidden relative grow space-y-5 overflow-y-auto p-4 pt-5"
             >
                {data().entries.length === 0 ? null : (
                   <Separator
@@ -155,7 +174,8 @@ aria-hidden="true"
                         <p class="mb-3 text-right text-foreground/50 text-sm">
                            {month}
                         </p>
-                        {data().todaysEntry ? null : (
+                        {data().todaysEntry ||
+                        month !== currentMonthKey() ? null : (
                            <button
                               onClick={() => {
                                  document

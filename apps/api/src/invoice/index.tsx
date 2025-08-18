@@ -1,8 +1,3 @@
-import { Document, Font, Image, Page, Text, View } from "@react-pdf/renderer"
-import { EditorContent } from "./components/editor-content"
-import { LineItems } from "./components/line-items"
-import { Meta } from "./components/meta"
-import { Summary } from "./components/summary"
 import type { EditorDoc, LineItem } from "./types"
 
 export type Template = {
@@ -33,19 +28,19 @@ type TemplateProps = {
    size: "letter" | "a4"
 }
 
-Font.register({
-   family: "geist_mono",
-   fonts: [
-      {
-         src: `https://tracker.vasyaqwe.com/font/geist_mono_regular.ttf`,
-         fontWeight: 400,
-      },
-      {
-         src: `https://tracker.vasyaqwe.com/font/geist_mono_medium.ttf`,
-         fontWeight: 500,
-      },
-   ],
-})
+// Font.register({
+//    family: "geist_mono",
+//    fonts: [
+//       {
+//          src: `https://tracker.vasyaqwe.com/font/geist_mono_regular.ttf`,
+//          fontWeight: 400,
+//       },
+//       {
+//          src: `https://tracker.vasyaqwe.com/font/geist_mono_medium.ttf`,
+//          fontWeight: 500,
+//       },
+//    ],
+// })
 
 export async function InvoicePdf({
    invoiceNumber,
@@ -58,6 +53,14 @@ export async function InvoicePdf({
    amount,
    size = "a4",
 }: TemplateProps) {
+   const { Document, Image, Page, Text, View } = await import(
+      "@react-pdf/renderer"
+   )
+
+   const { EditorContent } = await import("./components/editor-content")
+   const { LineItems } = await import("./components/line-items")
+   const { Meta } = await import("./components/meta")
+   const { Summary } = await import("./components/summary")
    return (
       <Document>
          <Page

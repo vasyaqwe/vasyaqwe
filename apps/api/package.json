@@ -1,6 +1,5 @@
 {
    "name": "@vasyaqwe/api",
-   "type": "module",
    "scripts": {
       "typecheck": "tsc --noEmit",
       "format-lint": "biome check",

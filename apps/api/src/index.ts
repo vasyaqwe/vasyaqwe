@@ -11,6 +11,8 @@
 import { Hono } from "hono"
 import { invoiceRouter } from "./invoice/router"
 
+export const runtime = "nodejs"
+
 const app = new Hono()
 
 app.get("/hello", (c) => {

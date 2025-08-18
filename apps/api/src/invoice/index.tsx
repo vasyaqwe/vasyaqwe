@@ -61,6 +61,7 @@ export async function InvoicePdf({
    const { LineItems } = await import("./components/line-items")
    const { Meta } = await import("./components/meta")
    const { Summary } = await import("./components/summary")
+
    return (
       <Document>
          <Page

@@ -1,7 +1,10 @@
 {
    "extends": "@vasyaqwe/tsconfig/base.json",
    "compilerOptions": {
-      "types": ["node", "bun"]
+      "types": ["node", "bun"],
+      "target": "es2022",
+      "module": "es2022",
+      "moduleResolution": "node"
    },
    "include": ["src"]
 }

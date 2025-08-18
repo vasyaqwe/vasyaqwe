@@ -1,8 +1,6 @@
 import { zValidator } from "@hono/zod-validator"
-import { renderToStream } from "@react-pdf/renderer"
 import { Hono } from "hono"
 import { z } from "zod"
-import { InvoicePdf } from "./index"
 import { generateInvoiceNumber } from "./utils"
 
 export const invoiceRouter = new Hono().post(
@@ -26,6 +24,9 @@ export const invoiceRouter = new Hono().post(
    ),
    async (c) => {
       const data = c.req.valid("json")
+
+      const { renderToStream } = await import("@react-pdf/renderer")
+      const { InvoicePdf } = await import("./index")
 
       const invoiceNumber = generateInvoiceNumber()
       const pdfStream = await renderToStream(

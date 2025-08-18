@@ -1,20 +1,7 @@
 {
-   "$schema": "https://json.schemastore.org/tsconfig",
+   "extends": "@vasyaqwe/tsconfig/base.json",
    "compilerOptions": {
-      "esModuleInterop": true,
-      "skipLibCheck": true,
-      "target": "ES2022",
-      "lib": ["ES2022"],
-      "moduleDetection": "force",
-      "isolatedModules": true,
-      "strict": true,
-      "noUncheckedIndexedAccess": true,
-      "noImplicitOverride": true,
-      "moduleResolution": "node",
-      "module": "commonjs",
-      "sourceMap": true,
-      "incremental": true,
-      "jsx": "preserve"
+      "types": ["node", "bun"]
    },
-   "exclude": ["node_modules", "dist"]
+   "include": ["src"]
 }

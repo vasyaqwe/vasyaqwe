@@ -1,6 +1,5 @@
 {
    "name": "@vasyaqwe/api",
-   "type": "module",
    "scripts": {
       "dev": "bun --watch src/index.ts",
       "start": "bun src/index.ts",

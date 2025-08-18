@@ -25,74 +25,53 @@ export const invoiceRouter = new Hono().post(
    async (c) => {
       const data = c.req.valid("json")
 
-      const { renderToStream } = await import("@react-pdf/renderer")
-      const { InvoicePdf } = await import("./index")
-
       const invoiceNumber = generateInvoiceNumber()
-      const pdfStream = await renderToStream(
-         await InvoicePdf({
-            amount: data.amount,
-            dueDate: new Date().getTime(),
-            invoiceNumber,
-            issueDate: new Date().getTime(),
-            lineItems: data.selectedItems.map((item) => ({
-               name: item.description,
-               price: item.price,
-               quantity: 1,
-            })),
-            fromDetails: {
-               content: [
-                  {
-                     type: "paragraph",
-                     content: [
-                        {
-                           type: "text",
-                           text: data.user.name,
-                        },
-                     ],
-                  },
-                  {
-                     type: "paragraph",
-                     content: [
-                        {
-                           type: "text",
-                           text: data.user.email,
-                        },
-                     ],
-                  },
-               ],
-               type: "doc",
-            },
-            customerDetails: {
-               content: [
-                  {
-                     type: "paragraph",
-                     content: [
-                        {
-                           type: "text",
-                           text: data.customer.name,
-                        },
-                     ],
-                  },
-                  {
-                     type: "paragraph",
-                     content: [
-                        {
-                           type: "text",
-                           text: data.customer.email,
-                        },
-                     ],
-                  },
-               ],
-               type: "doc",
-            },
-            size: "a4",
-         }),
+      const { generatePdf } = await import(
+         // @ts-expect-error ...
+         new URL("./pdf.mjs", import.meta.url)
       )
+
+      const pdfStream = await generatePdf({
+         amount: data.amount,
+         dueDate: Date.now(),
+         invoiceNumber,
+         issueDate: Date.now(),
+         lineItems: data.selectedItems.map((item) => ({
+            name: item.description,
+            price: item.price,
+            quantity: 1,
+         })),
+         fromDetails: {
+            content: [
+               {
+                  type: "paragraph",
+                  content: [{ type: "text", text: data.user.name }],
+               },
+               {
+                  type: "paragraph",
+                  content: [{ type: "text", text: data.user.email }],
+               },
+            ],
+            type: "doc",
+         },
+         customerDetails: {
+            content: [
+               {
+                  type: "paragraph",
+                  content: [{ type: "text", text: data.customer.name }],
+               },
+               {
+                  type: "paragraph",
+                  content: [{ type: "text", text: data.customer.email }],
+               },
+            ],
+            type: "doc",
+         },
+         size: "a4",
+      })
 
       const chunks: Buffer[] = []
       for await (const chunk of pdfStream) {
-         // @ts-expect-error ...
          chunks.push(Buffer.from(chunk))
       }
 

@@ -2,8 +2,7 @@
    "extends": "@vasyaqwe/tsconfig/base.json",
    "compilerOptions": {
       "types": ["node", "bun"],
-      "module": "ESNext",
-      "jsx": "react-jsx"
+      "module": "ESNext"
    },
    "include": ["src"]
 }

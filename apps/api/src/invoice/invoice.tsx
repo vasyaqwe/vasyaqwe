@@ -1,8 +1,8 @@
 import { Document, Image, Page, Text, View } from "@react-pdf/renderer"
-import { EditorContent } from "./components/editor-content.js"
-import { LineItems } from "./components/line-items.js"
-import { Meta } from "./components/meta.js"
-import { Summary } from "./components/summary.js"
+import { EditorContent } from "./components/editor-content.jsx"
+import { LineItems } from "./components/line-items.jsx"
+import { Meta } from "./components/meta.jsx"
+import { Summary } from "./components/summary.jsx"
 
 export function InvoicePdf({
    invoiceNumber,

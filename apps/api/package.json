@@ -2,6 +2,7 @@
    "name": "@vasyaqwe/api",
    "type": "module",
    "scripts": {
+      "build": "tsc",
       "typecheck": "tsc --noEmit",
       "format-lint": "biome check",
       "format-lint:fix": "biome check --write"

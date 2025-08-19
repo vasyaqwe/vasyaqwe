@@ -1,5 +1,5 @@
 import { Text, View } from "@react-pdf/renderer"
-import { formatCurrency } from "../../currency.js"
+import { formatCurrency } from "../../currency"
 
 export function Summary({
    amount,

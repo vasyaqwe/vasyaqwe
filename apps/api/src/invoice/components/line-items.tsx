@@ -1,6 +1,6 @@
 import { Text, View } from "@react-pdf/renderer"
-import { formatCurrency } from "../../currency.js"
-import type { LineItem } from "../types.js"
+import { formatCurrency } from "../../currency"
+import type { LineItem } from "../types"
 
 export function LineItems({
    lineItems,

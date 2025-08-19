@@ -9,7 +9,7 @@
 // console.log("server running", server.port)
 
 import { Hono } from "hono"
-import { invoiceRouter } from "./invoice/router.js"
+import { invoiceRouter } from "./invoice/router"
 
 const app = new Hono()
 

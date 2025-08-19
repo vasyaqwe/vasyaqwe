@@ -1,7 +1,24 @@
+import crypto from "node:crypto"
 import { zValidator } from "@hono/zod-validator"
+import baseX from "base-x"
 import { Hono } from "hono"
 import { z } from "zod"
-import { generateInvoiceNumber } from "./utils"
+
+export const b58 = baseX(
+   "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz",
+)
+
+export const generateInvoiceNumber = () => {
+   const date = new Date()
+   const year = date.getFullYear().toString().slice(-2)
+   const month = (date.getMonth() + 1).toString().padStart(2, "0")
+   const day = date.getDate().toString().padStart(2, "0")
+   const random = b58
+      .encode(crypto.getRandomValues(new Uint8Array(3)))
+      .toUpperCase()
+
+   return `${year}${month}${day}-${random}`
+}
 
 export const invoiceRouter = new Hono().post(
    "/generate",

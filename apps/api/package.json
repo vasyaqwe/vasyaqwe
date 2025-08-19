@@ -1,7 +1,8 @@
 {
    "name": "@vasyaqwe/api",
+   "type": "module",
    "scripts": {
-      "build": "tsc",
+      "build": "esbuild src/index.ts --bundle --platform=node --format=esm --outfile=dist/index.js --packages=external",
       "typecheck": "tsc --noEmit",
       "format-lint": "biome check",
       "format-lint:fix": "biome check --write"

@@ -1,6 +1,5 @@
 {
    "name": "@vasyaqwe/api",
-   "type": "module",
    "scripts": {
       "build": "tsc",
       "typecheck": "tsc --noEmit",

@@ -43,10 +43,7 @@ export const invoiceRouter = new Hono().post(
       const data = c.req.valid("json")
 
       const invoiceNumber = generateInvoiceNumber()
-      const { generatePdf } = await import(
-         // @ts-expect-error ...
-         new URL("./pdf.mjs", import.meta.url)
-      )
+      const { generatePdf } = await import("./pdf.js")
 
       const pdfStream = await generatePdf({
          amount: data.amount,
@@ -89,6 +86,7 @@ export const invoiceRouter = new Hono().post(
 
       const chunks = []
       for await (const chunk of pdfStream) {
+         // @ts-expect-error ...
          chunks.push(Buffer.from(chunk))
       }
 

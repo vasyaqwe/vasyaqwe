@@ -1,17 +1,10 @@
-import {
-   Document,
-   Image,
-   Page,
-   Text,
-   View,
-   renderToStream,
-} from "@react-pdf/renderer"
-import { EditorContent } from "./components/editor-content.js"
-import { LineItems } from "./components/line-items.js"
-import { Meta } from "./components/meta.js"
-import { Summary } from "./components/summary.js"
+import { Document, Image, Page, Text, View } from "@react-pdf/renderer"
+import { EditorContent } from "./components/editor-content"
+import { LineItems } from "./components/line-items"
+import { Meta } from "./components/meta"
+import { Summary } from "./components/summary"
 
-export async function generatePdf({
+export function InvoicePdf({
    invoiceNumber,
    issueDate,
    dueDate,
@@ -21,8 +14,9 @@ export async function generatePdf({
    fromDetails,
    amount,
    size = "a4",
-}) {
-   return renderToStream(
+   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+}: any) {
+   return (
       <Document>
          <Page
             size={size.toUpperCase()}
@@ -84,6 +78,6 @@ export async function generatePdf({
                totalLabel={template?.totalLabel}
             />
          </Page>
-      </Document>,
+      </Document>
    )
 }

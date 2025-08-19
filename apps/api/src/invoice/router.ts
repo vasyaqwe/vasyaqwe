@@ -70,7 +70,7 @@ export const invoiceRouter = new Hono().post(
          size: "a4",
       })
 
-      const chunks: Buffer[] = []
+      const chunks = []
       for await (const chunk of pdfStream) {
          chunks.push(Buffer.from(chunk))
       }

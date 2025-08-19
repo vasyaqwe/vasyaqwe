@@ -1,8 +1,7 @@
 {
    "extends": "@vasyaqwe/tsconfig/base.json",
    "compilerOptions": {
-      "types": ["node", "bun"],
-      "module": "ESNext"
+      "types": ["node", "bun"]
    },
    "include": ["src"]
 }

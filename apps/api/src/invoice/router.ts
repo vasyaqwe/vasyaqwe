@@ -3,7 +3,7 @@ import { zValidator } from "@hono/zod-validator"
 import baseX from "base-x"
 import { Hono } from "hono"
 import { z } from "zod"
-import { generatePdf } from "./pdf"
+import { generatePdf } from "./pdf.js"
 
 export const b58 = baseX(
    "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz",

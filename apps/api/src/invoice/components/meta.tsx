@@ -1,5 +1,5 @@
 import { Text, View } from "@react-pdf/renderer"
-import { formatDateIntl } from "../../date"
+import { formatDateIntl } from "../../date.js"
 
 export function Meta({
    invoiceNumber,

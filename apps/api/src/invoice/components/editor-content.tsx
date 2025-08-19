@@ -1,5 +1,5 @@
 import { Link, type Styles, Text, View } from "@react-pdf/renderer"
-import type { EditorDoc } from "../types"
+import type { EditorDoc } from "../types.js"
 
 export function EditorContent({ content }: { content?: EditorDoc }) {
    if (!content) return null

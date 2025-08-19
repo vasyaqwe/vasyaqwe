@@ -1,6 +1,6 @@
 import { Text, View } from "@react-pdf/renderer"
-import type { EditorDoc } from "../types"
-import { EditorContent } from "./editor-content"
+import type { EditorDoc } from "../types.js"
+import { EditorContent } from "./editor-content.js"
 
 export function Note({
    content,

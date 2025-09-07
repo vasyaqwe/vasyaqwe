@@ -1,5 +1,5 @@
 {
-   "$schema": "https://biomejs.dev/schemas/1.8.2/schema.json",
+   "$schema": "https://biomejs.dev/schemas/2.2.3/schema.json",
    "formatter": {
       "enabled": true,
       "formatWithErrors": false,
@@ -10,23 +10,27 @@
       "attributePosition": "multiline"
    },
    "files": {
-      "ignore": [
-         "dist",
-         "out",
-         ".turbo",
-         ".astro",
-         "*.astro",
-         "routeTree.gen.ts",
-         "migrations/meta",
-         "package.json",
-         "zero-schema.json",
-         "src-tauri",
-         ".wrangler",
-         "settings.json",
-         "keybindings.json"
+      "includes": [
+         "**",
+         "!**/dist",
+         "!**/out",
+         "!**/.turbo",
+         "!**/.astro",
+         "!**/*.astro",
+         "!**/routeTree.gen.ts",
+         "!**/migrations/meta",
+         "!**/package.json",
+         "!**/zero-schema.json",
+         "!**/src-tauri",
+         "!**/.wrangler",
+         "!**/settings.json",
+         "!**/keybindings.json"
       ]
    },
    "css": {
+      "linter": {
+         "enabled": false
+      },
       "formatter": {
          "enabled": true
       }
@@ -43,9 +47,7 @@
          "attributePosition": "multiline"
       }
    },
-   "organizeImports": {
-      "enabled": true
-   },
+   "assist": { "actions": { "source": { "organizeImports": "on" } } },
    "linter": {
       "enabled": true,
       "rules": {
@@ -56,19 +58,33 @@
          "style": {
             "useNumberNamespace": "off",
             "noUnusedTemplateLiteral": "off",
-            "useNodejsImportProtocol": "off"
+            "useNodejsImportProtocol": "off",
+            "noParameterAssign": "error",
+            "useAsConstAssertion": "error",
+            "useDefaultParameterLast": "error",
+            "useEnumInitializers": "error",
+            "useSelfClosingElements": "error",
+            "useSingleVarDeclarator": "error",
+            "noInferrableTypes": "error",
+            "noUselessElse": "error",
+            "noNonNullAssertion": "off"
          },
          "correctness": {
             "useExhaustiveDependencies": "off",
             "noUnusedVariables": "error",
-            "noUnusedImports": "error"
+            "noUnusedImports": "error",
+            "useUniqueElementIds": "off"
          },
          "a11y": {
+            "useValidAriaRole": "off",
             "noAutofocus": "off",
             "useMediaCaption": "off",
             "noSvgWithoutTitle": "off",
             "useKeyWithClickEvents": "off",
-            "useButtonType": "off"
+            "useButtonType": "off",
+            "useSemanticElements": "off",
+            "useAriaPropsSupportedByRole": "off",
+            "noLabelWithoutControl": "off"
          },
          "suspicious": {
             "noArrayIndexKey": "off"
@@ -78,8 +94,8 @@
                "level": "info",
                "fix": "safe",
                "options": {
-                  "attributes": ["className", "tw"],
-                  "functions": ["clsx", "cva", "tw", "cn"]
+                  "attributes": ["className"],
+                  "functions": ["tv", "cn"]
                }
             }
          }

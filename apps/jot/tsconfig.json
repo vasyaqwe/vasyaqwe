@@ -3,7 +3,7 @@
    "compilerOptions": {
       "lib": ["ESNext", "DOM", "DOM.iterable"],
       "jsxImportSource": "solid-js",
-      "types": ["vite/client"],
+      "types": ["vite/client","@cloudflare/workers-types"],
       "baseUrl": ".",
       "paths": {
          "@vasyaqwe/ui/*": ["../../packages/ui/src/*"],

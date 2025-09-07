@@ -1,8 +1,5 @@
 import { createFileRoute } from "@tanstack/solid-router"
 import { createSignal, Show } from "solid-js"
-import privat from "@/assets/logo_Privat24.png"
-import monobank from "@/assets/monobank.jpeg"
-
 export const Route = createFileRoute("/pay")({
    component: RouteComponent,
    validateSearch: (search) => {
@@ -34,21 +31,13 @@ function RouteComponent() {
       }
    }
 
-   const generateMonobankLink = () => {
-      return `https://send.monobank.ua/jar/send?amount=${search().amount}&card=${search().card}`
-   }
-
-   const generatePrivat24Link = () => {
-      return `https://next.privat24.ua/mobile/payments/card?amount=${search().amount}&card=${search().card}`
-   }
-
    return (
       <div class="w-full max-w-md text-center">
          <p class="mb-6 font-medium text-3xl">₴{search().amount}</p>
          <p class="mx-auto text-lg text-muted">
             За рахунок ₴{search().total} між {search().people} персонами
          </p>
-         <div class="mt-8 w-full space-y-3 pb-5">
+         {/* <div class="mt-8 w-full space-y-3 pb-5">
             <a
                target="_blank"
                href={generateMonobankLink()}
@@ -76,8 +65,8 @@ function RouteComponent() {
                   class="h-11"
                />
             </a>
-         </div>
-         <div class="border-neutral border-t-2 border-dashed pt-5">
+         </div> */}
+         <div class="pt-6">
             <div class="flex gap-3">
                <button
                   onClick={() => copyToClipboard(search().card)}

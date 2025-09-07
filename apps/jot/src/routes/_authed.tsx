@@ -1,17 +1,17 @@
-import { db } from "@/database"
-import { env } from "@/env"
-import { button } from "@/ui/components/button"
 import { id } from "@instantdb/core"
 import { createShortcut } from "@solid-primitives/keyboard"
 import {
+   createFileRoute,
    Link,
    Outlet,
-   createFileRoute,
    redirect,
    useNavigate,
 } from "@tanstack/solid-router"
 import { Textarea } from "@vasyaqwe/ui/components/textarea"
 import { cn, formDataFromTarget } from "@vasyaqwe/ui/utils"
+import { db } from "@/database"
+import { env } from "@/env"
+import { button } from "@/ui/components/button"
 
 export const Route = createFileRoute("/_authed")({
    component: RouteComponent,

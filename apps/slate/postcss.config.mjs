@@ -1,5 +1,5 @@
-import { join } from "path"
-import path from "path"
+import path, { join } from "path"
+
 const __dirname = path.resolve()
 
 export default {

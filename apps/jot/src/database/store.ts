@@ -1,15 +1,15 @@
-import { db } from "@/database"
 import {
+   coerceQuery,
+   type InstantCoreDatabase,
+   type InstantSchemaDef,
    type InstaQLLifecycleState,
    type InstaQLOptions,
    type InstaQLParams,
-   type InstantCoreDatabase,
-   type InstantSchemaDef,
-   coerceQuery,
 } from "@instantdb/core"
 import { createEffect, createSignal, onCleanup } from "solid-js"
+import { db } from "@/database"
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: <>
 const stateForResult = (result: any) => {
    return {
       isLoading: !result,
@@ -22,7 +22,7 @@ const stateForResult = (result: any) => {
 
 function createQueryInternal<
    Q extends InstaQLParams<Schema>,
-   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+   // biome-ignore lint/suspicious/noExplicitAny: <>
    Schema extends InstantSchemaDef<any, any, any>,
 >(
    core: InstantCoreDatabase<Schema>,
@@ -65,7 +65,7 @@ function createQueryInternal<
 
 export function createQuery<
    Q extends InstaQLParams<Schema>,
-   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+   // biome-ignore lint/suspicious/noExplicitAny: <>
    Schema extends InstantSchemaDef<any, any, any>,
 >(query: null | Q, opts?: InstaQLOptions) {
    return createQueryInternal(db, query, opts)

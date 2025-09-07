@@ -1,8 +1,8 @@
 import "@vasyaqwe/ui/styles.css"
 import "./ui/styles.css"
-import { ErrorComponent } from "@/ui/components/error"
-import { Link, RouterProvider, createRouter } from "@tanstack/solid-router"
+import { createRouter, Link, RouterProvider } from "@tanstack/solid-router"
 import { render } from "solid-js/web"
+import { ErrorComponent } from "@/ui/components/error"
 import { routeTree } from "./routeTree.gen"
 
 const router = createRouter({

@@ -1,6 +1,6 @@
-import { createTable, tableId, timestamps } from "@/database/utils"
 import type { InferSelectModel } from "drizzle-orm"
 import { index, text } from "drizzle-orm/sqlite-core"
+import { createTable, tableId, timestamps } from "@/database/utils"
 
 export const entry = createTable(
    "entry",

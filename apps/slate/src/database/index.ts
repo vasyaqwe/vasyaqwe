@@ -1,13 +1,13 @@
-import { env } from "@/env"
 import Database from "@tauri-apps/plugin-sql"
 import { drizzle } from "drizzle-orm/sqlite-proxy"
+import { env } from "@/env"
 import * as schema from "./schema"
 
 /**
  * Represents the result of a SELECT query.
  */
 export type SelectQueryResult = {
-   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+   // biome-ignore lint/suspicious/noExplicitAny: <>
    [key: string]: any
 }
 
@@ -26,7 +26,7 @@ export async function getDb() {
 export const db = drizzle<typeof schema>(
    async (sql, params, method) => {
       const sqlite = await getDb()
-      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+      // biome-ignore lint/suspicious/noExplicitAny: <>
       let rows: any = []
       let results = []
 
@@ -45,7 +45,7 @@ export const db = drizzle<typeof schema>(
          return { rows: [] }
       }
 
-      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+      // biome-ignore lint/suspicious/noExplicitAny: <>
       rows = rows.map((row: any) => {
          return Object.values(row)
       })

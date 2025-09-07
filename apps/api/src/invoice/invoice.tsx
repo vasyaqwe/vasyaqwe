@@ -14,7 +14,7 @@ export function InvoicePdf({
    fromDetails,
    amount,
    size = "a4",
-   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+   // biome-ignore lint/suspicious/noExplicitAny: <>
 }: any) {
    return (
       <Document>

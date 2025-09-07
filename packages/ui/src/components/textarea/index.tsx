@@ -18,7 +18,7 @@ type Style = NonNullable<TextareaProps["style"]> & {
    "min-height"?: never
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: <>
 const useWindowResizeListener = (listener: (event: UIEvent) => any) => {
    const handler: typeof listener = (event) => listener(event)
 
@@ -60,7 +60,7 @@ export interface TextareaAutosizeProps extends Omit<TextareaProps, "style"> {
 export function Textarea(props: TextareaAutosizeProps & TextareaProps) {
    const [textarea, setTextarea] = createSignal<HTMLTextAreaElement>()
    let heightRef = 0
-   let measurementsCacheRef: SizingData | undefined = undefined
+   let measurementsCacheRef: SizingData | undefined
 
    const resizeTextarea = () => {
       const node = textarea()

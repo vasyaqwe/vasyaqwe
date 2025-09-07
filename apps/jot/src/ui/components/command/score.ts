@@ -46,8 +46,8 @@ const _PENALTY_DISTANCE_FROM_START = 0.9
 // with the number of tokens.
 const PENALTY_NOT_COMPLETE = 0.99
 
-const IS_GAP_REGEXP = /[\\\/_+.#"@\[\(\{&]/
-const COUNT_GAPS_REGEXP = /[\\\/_+.#"@\[\(\{&]/g
+const IS_GAP_REGEXP = /[\\/_+.#"@[({&]/
+const COUNT_GAPS_REGEXP = /[\\/_+.#"@[({&]/g
 const IS_SPACE_REGEXP = /[\s-]/
 const COUNT_SPACE_REGEXP = /[\s-]/g
 
@@ -58,7 +58,7 @@ function commandScoreInner(
    lowerAbbreviation: string,
    stringIndex: number,
    abbreviationIndex: number,
-   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+   // biome-ignore lint/suspicious/noExplicitAny: <>
    memoizedResults: any,
 ) {
    if (abbreviationIndex === abbreviation.length) {
@@ -77,13 +77,13 @@ function commandScoreInner(
    let index = lowerString.indexOf(abbreviationChar, stringIndex)
    let highScore = 0
 
-   // biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
+   // biome-ignore lint/suspicious/noImplicitAnyLet: <>
    let score
-   // biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
+   // biome-ignore lint/suspicious/noImplicitAnyLet: <>
    let transposedScore
-   // biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
+   // biome-ignore lint/suspicious/noImplicitAnyLet: <>
    let wordBreaks
-   // biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
+   // biome-ignore lint/suspicious/noImplicitAnyLet: <>
    let spaceBreaks
 
    while (index >= 0) {

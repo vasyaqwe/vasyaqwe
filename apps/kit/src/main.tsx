@@ -1,16 +1,16 @@
 import "@vasyaqwe/ui/styles.css"
 import "./ui/styles.css"
-import { env } from "@/env"
 import {
+   createRouter,
    ErrorComponent,
    type ErrorComponentProps,
    Link,
    RouterProvider,
-   createRouter,
    useRouter,
 } from "@tanstack/solid-router"
 import type * as TauriAPI from "@tauri-apps/api"
 import { render } from "solid-js/web"
+import { env } from "@/env"
 import { routeTree } from "./routeTree.gen"
 
 const router = createRouter({

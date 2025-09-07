@@ -1,4 +1,5 @@
 export * as v from "valibot"
+
 import type {
    Context,
    Env,
@@ -22,7 +23,7 @@ export type Hook<
    E extends Env,
    P extends string,
    Target extends keyof ValidationTargets = keyof ValidationTargets,
-   // biome-ignore lint/complexity/noBannedTypes: <explanation>
+   // biome-ignore lint/complexity/noBannedTypes: <>
    O = {},
 > = (
    result: SafeParseResult<T> & {

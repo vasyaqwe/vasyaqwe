@@ -1,7 +1,7 @@
 import {
-   type JSX,
    createContext,
    createUniqueId,
+   type JSX,
    splitProps,
    useContext,
 } from "solid-js"

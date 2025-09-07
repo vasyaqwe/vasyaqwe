@@ -1,10 +1,10 @@
 import "@vasyaqwe/ui/styles.css"
 import "./ui/styles.css"
+import { createRouter, Link, RouterProvider } from "@tanstack/solid-router"
+import { render } from "solid-js/web"
 import { db } from "@/database"
 import { button } from "@/ui/components/button"
 import { ErrorComponent } from "@/ui/components/error"
-import { Link, RouterProvider, createRouter } from "@tanstack/solid-router"
-import { render } from "solid-js/web"
 import { routeTree } from "./routeTree.gen"
 
 const router = createRouter({

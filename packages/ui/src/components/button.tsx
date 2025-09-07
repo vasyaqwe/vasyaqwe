@@ -1,4 +1,4 @@
-import { type VariantProps, cva } from "class-variance-authority"
+import { cva, type VariantProps } from "class-variance-authority"
 import { type JSX, splitProps } from "solid-js"
 import { FOCUS_STYLES } from "../constants"
 import { cn } from "../utils"

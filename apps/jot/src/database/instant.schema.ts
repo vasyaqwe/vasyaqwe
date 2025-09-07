@@ -1,5 +1,5 @@
-import { todo } from "@/todo/schema"
 import { i } from "@instantdb/core"
+import { todo } from "@/todo/schema"
 
 const schema = i.schema({
    entities: {

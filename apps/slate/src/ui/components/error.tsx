@@ -1,10 +1,10 @@
-import { env } from "@/env"
-import { Button } from "@/ui/components/button"
 import {
    type ErrorComponentProps,
    ErrorComponent as RouterErrorComponent,
    useRouter,
 } from "@tanstack/solid-router"
+import { env } from "@/env"
+import { Button } from "@/ui/components/button"
 
 export function ErrorComponent({ error }: Omit<ErrorComponentProps, "reset">) {
    const router = useRouter()

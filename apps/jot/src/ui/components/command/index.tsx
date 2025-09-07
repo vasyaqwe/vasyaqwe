@@ -9,17 +9,17 @@ import { cn } from "@vasyaqwe/ui/utils"
 import {
    type Accessor,
    type Component,
-   type JSX,
-   type ParentComponent,
-   Show,
    createContext,
    createEffect,
    createMemo,
    createSignal,
    createUniqueId,
+   type JSX,
    on,
    onCleanup,
    onMount,
+   type ParentComponent,
+   Show,
    splitProps,
    useContext,
 } from "solid-js"
@@ -177,7 +177,7 @@ type Store = {
    setState: <K extends keyof State>(
       key: K,
       value: State[K],
-      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+      // biome-ignore lint/suspicious/noExplicitAny: <>
       opts?: any,
    ) => void
 }
@@ -199,13 +199,12 @@ const defaultFilter: NonNullable<CommandRootProps["filter"]> = (
    keywords,
 ) => commandScore(value, search, keywords)
 
-// @ts-ignore
 const CommandContext = createContext<Context>(undefined)
 const useCommand = () => useContext(CommandContext)
-// @ts-ignore
+
 const StoreContext = createContext<Store>(undefined)
 const useStore = () => useContext(StoreContext)
-// @ts-ignore
+
 const GroupContext = createContext<Accessor<Group>>(undefined)
 
 const Command: Component<CommandRootProps> = (props) => {
@@ -459,7 +458,7 @@ const Command: Component<CommandRootProps> = (props) => {
    function updateSelectedByItem(change: 1 | -1) {
       const selected = getSelectedItem()
       const items = getValidItems()
-      const index = items.findIndex((item) => item === selected)
+      const index = items.indexOf(selected!)
 
       // Get item at this index
       let newSelected = items[index + change]
@@ -585,12 +584,13 @@ const Command: Component<CommandRootProps> = (props) => {
    })
 
    return (
+      // biome-ignore lint/a11y/noStaticElementInteractions: <>
       <div
          tabIndex={-1}
          {...etc}
          cmdk-root=""
          onKeyDown={(e) => {
-            //@ts-ignore
+            //@ts-expect-error
             etc.onKeyDown?.(e)
             if (e.defaultPrevented || etc.main) return
             onKeyDown(e)
@@ -705,13 +705,12 @@ const Item: ParentComponent<CommandItemProps> = (props) => {
 
    return (
       <Show when={render?.()}>
-         {/* biome-ignore lint/a11y/useFocusableInteractive: <explanation> */}
+         {/* biome-ignore lint/a11y/useFocusableInteractive: <> */}
          <div
             {...etc}
             ref={(el) => setRef(el)}
             id={id}
             cmdk-item=""
-            // biome-ignore lint/a11y/useSemanticElements: <explanation>
             role="option"
             aria-disabled={Boolean(localProps.disabled)}
             aria-selected={Boolean(selected?.())}
@@ -802,7 +801,6 @@ const Group: ParentComponent<CommandGroupProps> = (props) => {
 
          <div
             cmdk-group-items=""
-            // biome-ignore lint/a11y/useSemanticElements: <explanation>
             role="group"
             aria-labelledby={props.heading ? headingId : undefined}
          >
@@ -825,10 +823,11 @@ const Separator: Component<CommandSeparatorProps> = (props) => {
 
    return (
       <Show when={localProps.alwaysRender || render?.()}>
-         {/* biome-ignore lint/a11y/useFocusableInteractive: <explanation> */}
+         {/* biome-ignore lint/a11y/useFocusableInteractive: <> */}
          <div
             {...etc}
             cmdk-separator=""
+            // biome-ignore lint/a11y/useAriaPropsForRole: <>
             role="separator"
          />
       </Show>
@@ -881,11 +880,10 @@ const Input: Component<CommandInputProps> = (props) => {
          value={isControlled() ? props.value : search?.()}
          onInput={(e) => {
             if (!isControlled()) {
-               //@ts-ignore
+               //@ts-expect-error
                store.setState("search", e.target.value)
             }
 
-            //@ts-ignore
             localProps.onValueChange?.(e.target.value)
          }}
       />
@@ -934,13 +932,11 @@ const List: ParentComponent<CommandListProps> = (props) => {
    })
 
    return (
-      // biome-ignore lint/a11y/useFocusableInteractive: <explanation>
       <div
-         // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
+         // biome-ignore lint/suspicious/noAssignInExpressions: <>
          ref={mergeRefs((el) => (ref = el), localProps.ref)}
          {...etc}
          cmdk-list=""
-         // biome-ignore lint/a11y/useSemanticElements: <explanation>
          role="listbox"
          aria-label={localProps.label}
          id={context?.listId}
@@ -948,7 +944,7 @@ const List: ParentComponent<CommandListProps> = (props) => {
       >
          {SlottableWithNestedChildren(props, (child) => (
             <div
-               // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
+               // biome-ignore lint/suspicious/noAssignInExpressions: <>
                ref={mergeRefs((el) => (height = el), context?.setListInnerRef)}
                cmdk-list-sizer=""
             >
@@ -1036,7 +1032,6 @@ const Loading: ParentComponent<CommandLoadingProps> = (props) => {
    ])
 
    return (
-      // biome-ignore lint/a11y/useFocusableInteractive: <explanation>
       <div
          {...etc}
          cmdk-loading=""
@@ -1105,7 +1100,7 @@ function findPreviousSibling(el: Element, selector: string) {
 }
 
 /** Run a selector against the store state. */
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: <>
 function useCmdk<T = any>(selector: (state: State) => T) {
    const store = useStore()
    if (!store) return

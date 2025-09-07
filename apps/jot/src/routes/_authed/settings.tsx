@@ -1,7 +1,7 @@
-import { db } from "@/database"
-import { Button } from "@/ui/components/button"
 import { createFileRoute, useNavigate } from "@tanstack/solid-router"
 import { tryCatch } from "@vasyaqwe/ui/utils"
+import { db } from "@/database"
+import { Button } from "@/ui/components/button"
 
 export const Route = createFileRoute("/_authed/settings")({
    component: RouteComponent,

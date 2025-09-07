@@ -1,3 +1,9 @@
+import { createEventListener } from "@solid-primitives/event-listener"
+import { createShortcut } from "@solid-primitives/keyboard"
+import { Checkbox } from "@vasyaqwe/ui/components/checkbox"
+import { MENU_ITEM_STYLES, POPUP_STYLES } from "@vasyaqwe/ui/constants"
+import { cx } from "@vasyaqwe/ui/utils"
+import { createMemo, createSignal, For, Match, Show, Switch } from "solid-js"
 import { db } from "@/database"
 import { createQuery } from "@/database/store"
 import type { Database } from "@/database/types"
@@ -10,13 +16,6 @@ import {
    ITEM_SELECTOR,
 } from "@/ui/components/command"
 import { ErrorComponent } from "@/ui/components/error"
-import { createEventListener } from "@solid-primitives/event-listener"
-import { createShortcut } from "@solid-primitives/keyboard"
-import { Checkbox } from "@vasyaqwe/ui/components/checkbox"
-import {} from "@vasyaqwe/ui/components/menu"
-import { MENU_ITEM_STYLES, POPUP_STYLES } from "@vasyaqwe/ui/constants"
-import { cx } from "@vasyaqwe/ui/utils"
-import { For, Match, Show, Switch, createMemo, createSignal } from "solid-js"
 
 const [selectedId, setSelectedId] = createSignal("")
 const today = new Date()
@@ -135,16 +134,13 @@ export function TodoList({ forToday = false }: { forToday?: boolean }) {
          : data.filter((todo) => selectedTags().some((tag) => todo.tag === tag))
    })
 
-   const tags = createMemo(
-      () =>
-         new Array(
-            ...new Set(
-               data()
-                  .map((todo) => todo.tag)
-                  .filter((tag) => tag !== undefined),
-            ),
-         ),
-   )
+   const tags = createMemo(() => [
+      ...new Set(
+         (query().data?.todo ?? [])
+            .map((todo) => todo.tag)
+            .filter((tag) => tag !== undefined),
+      ),
+   ])
 
    return (
       <div class="mt-8">
@@ -228,9 +224,7 @@ export function TodoList({ forToday = false }: { forToday?: boolean }) {
    )
 }
 
-function TodoItem(props: {
-   todo: Database["todo"]
-}) {
+function TodoItem(props: { todo: Database["todo"] }) {
    return (
       <CommandItem
          class={

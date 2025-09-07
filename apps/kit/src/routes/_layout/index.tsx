@@ -1,10 +1,10 @@
-import { MainScrollArea } from "@/layout/components/main"
-import { Editor } from "@/ui/components/editor"
 import { createFileRoute } from "@tanstack/solid-router"
 import { Button } from "@vasyaqwe/ui/components/button"
 import { Separator } from "@vasyaqwe/ui/components/separator"
 import { createSignal } from "solid-js"
 import { toast } from "solid-sonner"
+import { MainScrollArea } from "@/layout/components/main"
+import { Editor } from "@/ui/components/editor"
 
 export const Route = createFileRoute("/_layout/")({
    component: RouteComponent,

@@ -41,7 +41,7 @@ const base = createRouter()
             {
                role: "user",
                content: `You are an AI that classifies short user input into one of the following tags: 
-                  work, personal, to watch, to read, shopping, chore, idea.
+                  work, personal, to watch, shopping, chore, idea. If input starts with an uppercase letter, then it's probably something to watch.
 
                   Only return one tag.
 

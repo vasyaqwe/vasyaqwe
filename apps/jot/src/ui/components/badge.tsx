@@ -1,7 +1,7 @@
-import { tagGradient } from "@/tag/utils"
 import { cn } from "@vasyaqwe/ui/utils"
-import { type VariantProps, cva } from "class-variance-authority"
+import { cva, type VariantProps } from "class-variance-authority"
 import { type JSX, splitProps } from "solid-js"
+import { tagGradient } from "@/tag/utils"
 
 export const badge = cva(
    "inline-flex items-center justify-center gap-2 whitespace-nowrap border font-medium text-sm shadow-[inset_0_-1px_1px_0_var(--tw-shadow-color,rgb(0_0_0_/_0.1)),0_1px_0px_0_var(--tw-shadow-color,_rgb(0_0_0_/_0.02)),_0_1px_0px_-1px_var(--tw-shadow-color,_rgb(0_0_0_/_0.02))]",

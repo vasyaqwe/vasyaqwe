@@ -1,6 +1,6 @@
 import { FOCUS_STYLES } from "@vasyaqwe/ui/constants"
 import { cn } from "@vasyaqwe/ui/utils"
-import { type VariantProps, cva } from "class-variance-authority"
+import { cva, type VariantProps } from "class-variance-authority"
 import { type JSX, splitProps } from "solid-js"
 
 export const button = cva(

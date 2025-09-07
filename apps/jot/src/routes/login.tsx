@@ -1,11 +1,11 @@
-import { db } from "@/database"
-import { Button } from "@/ui/components/button"
 import type { SendMagicCodeResponse, VerifyResponse } from "@instantdb/core"
 import { createEventListener } from "@solid-primitives/event-listener"
 import { createFileRoute, useNavigate } from "@tanstack/solid-router"
 import { formDataFromTarget, tryCatch } from "@vasyaqwe/ui/utils"
-import { Show, createSignal } from "solid-js"
+import { createSignal, Show } from "solid-js"
 import { Transition } from "solid-transition-group"
+import { db } from "@/database"
+import { Button } from "@/ui/components/button"
 
 export const Route = createFileRoute("/login")({
    component: RouteComponent,

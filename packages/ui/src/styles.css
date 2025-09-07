@@ -43,8 +43,10 @@
    --color-background: #ffffff;
    --color-foreground: var(--color-primary-12);
    --color-neutral: var(--color-primary-2);
+   --color-muted: var(--color-primary-4);
 
    --font-primary: "outfit", sans-serif;
+   --font-mono: monospace;
 
    --text-sm: 0.845rem;
    --text-sm--line-height: 1rem;

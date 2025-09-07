@@ -18,7 +18,8 @@
     "dev:jot": "turbo dev --filter=@vasyaqwe/jot --filter=@vasyaqwe/worker",
     "build:jot": "turbo build --filter=@vasyaqwe/jot",
     "dev:slate": "turbo dev --filter=@vasyaqwe/slate",
-    "dev:slate:desktop": "bun --cwd apps/slate tauri dev"
+    "dev:slate:desktop": "bun --cwd apps/slate tauri dev",
+    "dev:split": "turbo dev --filter=@vasyaqwe/split"
   },
   "workspaces": ["apps/*", "packages/*", "tooling/*"],
   "trustedDependencies": ["@biomejs/biome", "core-js", "esbuild", "workerd"]

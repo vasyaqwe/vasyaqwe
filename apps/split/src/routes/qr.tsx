@@ -34,10 +34,10 @@ function RouteComponent() {
 
    return (
       <>
-         <div class="absolute top-6 mx-auto w-[calc(100%-2.5rem)]">
+         <div class="">
             <Link
                to="/"
-               class="flex aspect-square h-14 items-center justify-center gap-3 rounded-full bg-primary-2 px-6 font-medium text-lg shadow-md"
+               class="flex aspect-square h-14 items-center justify-center gap-3 rounded-full bg-primary-3 px-6 font-medium text-lg shadow-md transition-transform active:scale-[97%]"
             >
                <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +56,7 @@ function RouteComponent() {
                Назад
             </Link>
          </div>
-         <div class="text-center">
+         <div class="my-auto text-center">
             <p class="mb-6 font-medium text-2xl">
                По ₴{search().amount} з людини
             </p>
@@ -72,7 +72,7 @@ function RouteComponent() {
          </div>
          <button
             onClick={() => copyToClipboard(shareableLink())}
-            class="absolute bottom-6 mx-auto flex h-14 w-[calc(100%-2.5rem)] items-center justify-center rounded-full bg-primary-2 font-medium text-lg shadow-md"
+            class="mx-auto flex h-14 w-full items-center justify-center rounded-full bg-primary-3 font-medium text-lg shadow-md transition-transform active:scale-[97%]"
          >
             <Show
                when={copying()}

@@ -7,7 +7,7 @@ export const Route = createRootRouteWithContext<{}>()({
 
 function RootComponent() {
    return (
-      <div class="relative grid min-h-svh place-items-center p-4">
+      <div class="relative flex min-h-svh flex-col p-4">
          <Outlet />
       </div>
    )

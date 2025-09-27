@@ -32,7 +32,7 @@ function RouteComponent() {
    }
 
    return (
-      <div class="w-full max-w-md text-center">
+      <div class="my-auto w-full max-w-md text-center">
          <p class="mb-6 font-medium text-3xl">₴{search().amount}</p>
          <p class="mx-auto text-lg text-muted">
             За рахунок ₴{search().total} між {search().people} персонами
@@ -70,7 +70,7 @@ function RouteComponent() {
             <div class="flex gap-3">
                <button
                   onClick={() => copyToClipboard(search().card)}
-                  class="flex h-14 w-full items-center justify-center rounded-full bg-primary-2 font-medium text-lg shadow-md"
+                  class="flex h-14 w-full items-center justify-center rounded-full bg-primary-3 font-medium text-lg shadow-md transition-transform active:scale-[97%]"
                >
                   <Show
                      when={copying()}

@@ -81,9 +81,15 @@ function RouteComponent() {
 
    const isValid = () => amount() && selectedCard() && parseFloat(amount()) > 0
 
+   const formatCard = (card: string) => {
+      const cleanNumber = card.replace(/\D/g, "")
+      const formattedNumber = cleanNumber.replace(/(\d{4})(?=\d)/g, "$1 ")
+      return formattedNumber
+   }
+
    return (
       <>
-         <div class="absolute top-6 mx-auto w-[calc(100%-2.5rem)]">
+         <div class="mx-auto w-full">
             <Show when={!addingCard()}>
                <div class="flex gap-3">
                   <div class="relative grow">
@@ -104,17 +110,19 @@ function RouteComponent() {
                      <select
                         value={selectedCard()}
                         onChange={(e) => setSelectedCard(e.target.value)}
-                        class="size-full appearance-none rounded-full border border-primary-5 bg-primary-3 px-5"
+                        class="size-full appearance-none rounded-full border border-primary-6 bg-primary-4 px-5"
                      >
                         <option value="">Оберіть картку..</option>
                         <For each={cards()}>
-                           {(card) => <option value={card}>{card}</option>}
+                           {(card) => (
+                              <option value={card}>{formatCard(card)}</option>
+                           )}
                         </For>
                      </select>
                   </div>
                   <button
                      onClick={() => setAddingCard(true)}
-                     class="flex aspect-square h-14 items-center justify-center rounded-full bg-primary-2 font-medium text-lg shadow-md"
+                     class="flex aspect-square h-14 items-center justify-center rounded-full bg-primary-3 font-medium text-lg shadow-md transition-transform active:scale-[97%]"
                   >
                      <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -140,12 +148,12 @@ function RouteComponent() {
                      type="text"
                      value={newCard()}
                      onInput={(e) => setNewCard(e.target.value)}
-                     placeholder="1234 5678 9012 3456"
-                     class="h-14 w-full rounded-full border border-primary-5 bg-primary-3 px-5"
+                     placeholder="Уведіть номер картки"
+                     class="h-14 w-full rounded-full border border-primary-6 bg-primary-4 px-5"
                   />
                   <button
                      onClick={addCard}
-                     class="flex aspect-square h-14 items-center justify-center rounded-full border border-emerald-300 bg-emerald-500 font-medium text-lg shadow-md"
+                     class="flex aspect-square h-14 items-center justify-center rounded-full border border-emerald-500 bg-emerald-600 font-medium text-lg shadow-md transition-transform active:scale-[97%]"
                   >
                      <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -167,7 +175,7 @@ function RouteComponent() {
                         setAddingCard(false)
                         setNewCard("")
                      }}
-                     class="flex aspect-square h-14 items-center justify-center rounded-full border border-primary-5 bg-primary-3 font-medium text-lg shadow-md"
+                     class="flex aspect-square h-14 items-center justify-center rounded-full border border-primary-6 bg-primary-4 font-medium text-lg shadow-md transition-transform active:scale-[97%]"
                   >
                      <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -187,7 +195,7 @@ function RouteComponent() {
                </div>
             </Show>
          </div>
-         <div class="mx-auto flex max-w-md flex-col items-center justify-center text-center">
+         <div class="m-auto flex max-w-md flex-col items-center justify-center text-center">
             <div class="mb-8">
                <input
                   type="number"
@@ -204,7 +212,7 @@ function RouteComponent() {
                      onClick={() =>
                         setPeopleCount(Math.max(2, peopleCount() - 1))
                      }
-                     class="grid size-14 place-content-center rounded-full border border-primary-5 bg-primary-3"
+                     class="grid size-14 place-content-center rounded-full border border-primary-6 bg-primary-4 transition-transform active:scale-[97%]"
                   >
                      <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -226,7 +234,7 @@ function RouteComponent() {
                   </span>
                   <button
                      onClick={() => setPeopleCount(peopleCount() + 1)}
-                     class="grid size-14 place-content-center rounded-full border border-primary-5 bg-primary-3"
+                     class="grid size-14 place-content-center rounded-full border border-primary-6 bg-primary-4 transition-transform active:scale-[97%]"
                   >
                      <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -256,7 +264,7 @@ function RouteComponent() {
             onClick={generatePaymentLink}
             disabled={!isValid()}
             class={
-               "absolute bottom-6 mx-auto flex h-14 w-[calc(100%-2.5rem)] items-center justify-center rounded-full bg-primary-2 font-medium text-lg shadow-md"
+               "bottom-6 mx-auto flex h-14 w-full items-center justify-center rounded-full bg-primary-3 font-medium text-lg shadow-md transition-transform active:scale-[97%]"
             }
          >
             Згенерувати QR

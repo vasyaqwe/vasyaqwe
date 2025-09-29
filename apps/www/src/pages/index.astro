@@ -4,8 +4,8 @@ import { Image } from "astro:assets"
 import avatar from "@/assets/avatar.jpg"
 import tanstack from "@/assets/tanstack.png"
 import tracker from "@/assets/tracker.png"
-import winsoft from "@/assets/winsoft.svg"
 import recovery from "@/assets/recovery.svg"
+import unfiddle from "@/assets/unfiddle.svg"
 import vfu from "@/assets/vfu.svg"
 import spartagrounds from "@/assets/sparta.png"
 import Vite from "@/assets/tools/vite.svg"
@@ -104,19 +104,22 @@ const tools = [
     </h1>
     <p class="my-5 max-w-[50ch]">
       A full-stack developer based in Ukraine. I enjoy coding all sorts of
-      websites & apps, with the <a
-        href="https://react.dev"
+      websites & apps, with <a
+        href="https://astro.build"
         target="_blank"
         rel="noreferrer"
       >
-        <span class="underline">React</span>
+        <u>Astro</u>,
+      </a>
+      <a href="https://react.dev" target="_blank" rel="noreferrer">
+        <u>React</u>
       </a> & <a
         href="https://www.typescriptlang.org"
         target="_blank"
         rel="noreferrer"
       >
-        <span class="underline">TypeScript</span>
-      </a> ecosystem, and the tools from <a
+        <u>TypeScript</u>,
+      </a> and the tools from <a
         target="_blank"
         href="https://tanstack.com"
         rel="noreferrer"
@@ -130,8 +133,19 @@ const tools = [
       target="_blank"
       rel="noreferrer"
       size={"lg"}
+      class={"mr-1"}
     >
       <span class="-mt-px">View latest project</span>
+      <ArrowRightCircleIcon class="size-5" />
+    </Button>
+    <Button
+      href="https://cal.com/vasyldev/15min"
+      target="_blank"
+      rel="noreferrer"
+      size={"lg"}
+      variant={"secondary"}
+    >
+      <span class="-mt-px">Contact me</span>
       <ArrowRightCircleIcon class="size-5" />
     </Button>
   </section>
@@ -226,6 +240,48 @@ const tools = [
     <h2 class="mb-7 text-2xl">Recent projects</h2>
     <div
       class="flex gap-2 border-b border-neutral pb-7 max-md:flex-col md:gap-4"
+    >
+      <div class="flex items-center justify-between max-md:mb-1">
+        <Image
+          src={unfiddle}
+          class={"max-w-20 md:max-w-12"}
+          alt="Unfiddle logo"
+          width={100}
+          height={100}
+        />
+        <Button
+          size={"sm"}
+          class={"md:hidden"}
+          href="https://unfiddle.com"
+          target="_blank"
+          rel="noreferrer"
+        >
+          view live
+          <LinkIcon class="ml-1 inline-block size-4" />
+        </Button>
+      </div>
+      <div class="w-full max-md:mt-1">
+        <h3
+          class="flex items-center gap-3 font-medium !font-primary text-lg -mt-1"
+        >
+          Unfiddle
+          <a
+            href="https://unfiddle.com"
+            target="_blank"
+            class="ml-auto font-normal underline max-md:hidden text-base"
+            rel="noreferrer"
+          >
+            view live
+            <LinkIcon class="ml-1 inline-block size-4" />
+          </a>
+        </h3>
+        <p class="mt-1">
+          Collaborative operations platform for procurement teams.
+        </p>
+      </div>
+    </div>
+    <div
+      class="flex gap-2 border-b border-neutral py-7 max-md:flex-col md:gap-4"
     >
       <div class="flex items-center justify-between max-md:mb-1">
         <Image
@@ -372,47 +428,6 @@ const tools = [
         </p>
       </div>
     </div>
-    <div
-      class="flex gap-2 border-b border-neutral py-7 max-md:flex-col md:gap-4"
-    >
-      <div class="flex items-center justify-between max-md:mb-1">
-        <Image
-          src={winsoft}
-          class={"max-w-12"}
-          alt="Winsoft logo"
-          width={60}
-          height={60}
-        />
-        <Button
-          size={"sm"}
-          class={"md:hidden"}
-          href="https://www.soft.win"
-          target="_blank"
-          rel="noreferrer"
-        >
-          view live
-          <LinkIcon class="ml-1 inline-block size-4" />
-        </Button>
-      </div>
-      <div class="w-full max-md:mt-1">
-        <h3
-          class="flex items-center gap-3 font-medium !font-primary text-lg -mt-1"
-        >
-          Winsoft
-          <a
-            href="https://www.soft.win"
-            target="_blank"
-            class="ml-auto font-normal underline max-md:hidden text-base"
-            rel="noreferrer"
-          >
-            view live
-            <LinkIcon class="ml-1 inline-block size-4" />
-          </a>
-        </h3>
-        <p class="mt-1">Landing page for a software development company.</p>
-      </div>
-    </div>
-
     <div class="flex gap-2 pt-6 max-md:flex-col md:gap-4">
       <div class="flex items-center justify-between max-md:mb-1">
         <Image
@@ -471,6 +486,12 @@ const tools = [
     </div>
     <div
       class="border bg-primary-1 border-neutral text-foreground/75 p-3 rounded-2xl"
+    >
+      <p>"<b class="font-semibold">Vasyl possesses every attribute you want in a developer.</b> Super up-front about his skill sets, always took time to understand requirements and communicated super clearly. And he always figured out the task at hand in less time that I expected."</p>
+      <p class="mt-2">Yash Paliwal</p>
+    </div>
+    <div
+      class="border bg-primary-1 mt-2.5 border-neutral text-foreground/75 p-3 rounded-2xl"
     >
       <p>
         "<b class="font-semibold">Vasyl made a great well-animated website!</b> He

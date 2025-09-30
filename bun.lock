@@ -150,14 +150,14 @@
     "apps/www": {
       "name": "@vasyaqwe/www",
       "dependencies": {
-        "@astrojs/check": "^0.9.4",
-        "@astrojs/sitemap": "^3.1.6",
+        "@astrojs/check": "latest",
+        "@astrojs/sitemap": "latest",
         "@vasyaqwe/ui": "workspace:*",
-        "astro": "^5.1.5",
+        "astro": "latest",
       },
       "devDependencies": {
         "@vasyaqwe/tsconfig": "workspace:*",
-        "prettier-plugin-astro": "^0.14.1",
+        "prettier-plugin-astro": "latest",
       },
     },
     "packages/infra": {

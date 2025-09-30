@@ -5,9 +5,6 @@ import { defineConfig } from "astro/config"
 export default defineConfig({
    site: "https://vasyaqwe.com",
    integrations: [sitemap()],
-   experimental: {
-      svg: true,
-   },
    server: {
       port: 3000,
    },

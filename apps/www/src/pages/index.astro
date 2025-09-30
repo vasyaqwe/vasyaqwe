@@ -4,6 +4,7 @@ import { Image } from "astro:assets"
 import avatar from "@/assets/avatar.jpg"
 import tanstack from "@/assets/tanstack.png"
 import tracker from "@/assets/tracker.png"
+import sanao from "@/assets/sanao.svg"
 import recovery from "@/assets/recovery.svg"
 import unfiddle from "@/assets/unfiddle.svg"
 import vfu from "@/assets/vfu.svg"
@@ -129,17 +130,17 @@ const tools = [
       </a>
     </p>
     <Button
-      href="https://417recovery.com"
+      href="/resume.pdf"
       target="_blank"
       rel="noreferrer"
       size={"lg"}
       class={"mr-1"}
     >
-      <span class="-mt-px">View latest project</span>
+      <span class="-mt-px">View resume</span>
       <ArrowRightCircleIcon class="size-5" />
     </Button>
     <Button
-      href="https://cal.com/vasyldev/15min"
+      href="https://cal.com/vasyaqwe/15min"
       target="_blank"
       rel="noreferrer"
       size={"lg"}
@@ -285,6 +286,46 @@ const tools = [
     >
       <div class="flex items-center justify-between max-md:mb-1">
         <Image
+          src={sanao}
+          class={"max-w-12 max-md:-ml-px drop-shadow-[0px_1px_8px_rgba(24,24,24,.125)]"}
+          alt="Sanao logo"
+          width={60}
+          height={60}
+        />
+        <Button
+          size="sm"
+          class={"md:hidden"}
+          href="https://sanao.health"
+          target="_blank"
+          rel="noreferrer"
+        >
+          view live
+          <LinkIcon class="ml-1 inline-block size-4" />
+        </Button>
+      </div>
+      <div class="w-full max-md:mt-1">
+        <h3
+          class="flex items-center gap-3 font-medium !font-primary text-lg -mt-1"
+        >
+          Sanao
+          <a
+            href="https://tracker.vasyaqwe.com"
+            target="_blank"
+            class="ml-auto font-normal underline max-md:hidden text-base"
+            rel="noreferrer"
+          >
+            view live
+            <LinkIcon class="ml-1 inline-block size-4" />
+          </a>
+        </h3>
+        <p class="mt-1">Natural remedies search for any health concern.</p>
+      </div>
+    </div>
+    <div
+      class="flex gap-2 border-b border-neutral py-7 max-md:flex-col md:gap-4"
+    >
+      <div class="flex items-center justify-between max-md:mb-1">
+        <Image
           src={recovery}
           class={"max-w-20 md:max-w-12"}
           alt="417 Recovery logo"
@@ -362,72 +403,6 @@ const tools = [
         <p class="mt-1">The app I created to track my work hours & earnings.</p>
       </div>
     </div>
-    <div
-      class="flex gap-2 border-b border-neutral py-7 max-md:flex-col md:gap-4"
-    >
-      <div class="flex items-center justify-between max-md:mb-1">
-        <div
-          class="squircle max-md:-ml-px grid size-12 shrink-0 transform-gpu place-content-center bg-background bg-gradient-to-b from-[#1e1448]/70 to-[#1e1448] text-background"
-        >
-          <svg
-            viewBox="0 0 21 13"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            style={{
-              filter: "drop-shadow(1px 5px 6px rgba(24, 24, 24, .4))",
-            }}
-            class="mx-auto w-full max-w-[60%]"
-          >
-            <path
-              d="M1 8.3333C1 8.3333 2.5 9 4.5 12C4.5 12 4.78485 11.5192 5.32133 10.7526M15 1C12.7085 2.14577 10.3119 4.55181 8.3879 6.8223"
-              stroke="currentColor"
-              stroke-opacity="0.7"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-            </path>
-            <path
-              d="M6 8.3333C6 8.3333 7.5 9 9.5 12C9.5 12 15 3.5 20 1"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-            </path>
-          </svg>
-        </div>
-        <Button
-          size={"sm"}
-          class={"md:hidden"}
-          href="https://cue.vasyaqwe.com"
-          target="_blank"
-          rel="noreferrer"
-        >
-          view live
-          <LinkIcon class="ml-1 inline-block size-4" />
-        </Button>
-      </div>
-      <div class="w-full max-md:mt-1">
-        <h3
-          class="flex items-center gap-3 font-medium !font-primary text-lg -mt-1"
-        >
-          Cue
-          <a
-            href="https://cue.vasyaqwe.com"
-            target="_blank"
-            class="ml-auto font-normal underline max-md:hidden text-base"
-            rel="noreferrer"
-          >
-            view live
-            <LinkIcon class="ml-1 inline-block size-4" />
-          </a>
-        </h3>
-        <p class="mt-1">
-          Simple real-time issue tracking app, inspired by Linear.
-        </p>
-      </div>
-    </div>
     <div class="flex gap-2 pt-6 max-md:flex-col md:gap-4">
       <div class="flex items-center justify-between max-md:mb-1">
         <Image
@@ -480,23 +455,38 @@ const tools = [
         href="https://www.upwork.com/freelancers/~015c1b113a62e11b13?viewMode=1"
         rel="noreferrer"
       >
-        <span class="-mt-0.5">view all</span>
+        <span class="-mt-0.5">View all</span>
         <ArrowRightCircleIcon class="size-4" />
       </Button>
     </div>
     <div
       class="border bg-primary-1 border-neutral text-foreground/75 p-3 rounded-2xl"
     >
-      <p>"<b class="font-semibold">Vasyl possesses every attribute you want in a developer.</b> Super up-front about his skill sets, always took time to understand requirements and communicated super clearly. And he always figured out the task at hand in less time that I expected."</p>
-      <p class="mt-2">Yash Paliwal</p>
+      <p>
+        <b class="font-semibold">
+          Vasyl possesses every attribute you want in a developer.
+        </b> Super up-front about his skill sets, always took time to understand
+        requirements and communicated super clearly. And he always figured out the
+        task at hand in less time that I expected.
+      </p>
+      <p class="mt-2">
+        Yash Paliwal - <a
+          target="_blank"
+          href="https://www.upwork.com/freelancers/~015c1b113a62e11b13?promobnr=1"
+          class="underline hover:text-foreground"
+          rel="noreferrer"
+        >
+          Upwork Client
+        </a>
+      </p>
     </div>
     <div
       class="border bg-primary-1 mt-2.5 border-neutral text-foreground/75 p-3 rounded-2xl"
     >
       <p>
-        "<b class="font-semibold">Vasyl made a great well-animated website!</b> He
+        <b class="font-semibold">Vasyl made a great well-animated website!</b> He
         is amazing in communication and problem-solving skills. Would like to hire
-        again for sure! Highly recommend Vasyl for the web development."
+        again for sure! Highly recommend Vasyl for the web development.
       </p>
       <p class="mt-2">
         Yurii Klymenko, CEO –{" "}
@@ -514,8 +504,8 @@ const tools = [
       class="border bg-primary-1 border-neutral text-foreground/75 p-3 rounded-2xl mt-2.5"
     >
       <p>
-        "<b class="font-semibold">Vasyl is an amazing REACT developer.</b> Top developer
-        for sure."
+        <b class="font-semibold">Vasyl is an amazing REACT developer.</b> Top developer
+        for sure.
       </p>
       <p class="mt-2">
         Charles Polanco, CEO –{" "}
@@ -533,8 +523,8 @@ const tools = [
       class="border bg-primary-1 border-neutral text-foreground/75 p-3 rounded-2xl mt-2.5"
     >
       <p>
-        "<b class="font-semibold">Skilled developer</b> with great communication
-        skills! Highly recommend!"
+        <b class="font-semibold">Skilled developer</b> with great communication skills!
+        Highly recommend!
       </p>
       <p class="mt-2">
         Ananstasia Usenko –{" "}

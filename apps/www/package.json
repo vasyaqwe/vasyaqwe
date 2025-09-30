@@ -11,8 +11,9 @@
     "format-lint:fix": "biome check --write"
   },
   "dependencies": {
-    "@vasyaqwe/ui": "workspace:*",
+    "@astrojs/check": "^0.9.4",
     "@astrojs/sitemap": "^3.1.6",
+    "@vasyaqwe/ui": "workspace:*",
     "astro": "^5.1.5"
   },
   "devDependencies": {

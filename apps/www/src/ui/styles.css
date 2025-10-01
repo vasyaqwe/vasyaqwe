@@ -3,6 +3,14 @@
    --font-secondary: georgia, ui-serif, cambria, times new roman, times, serif;
 }
 
+@font-face {
+   font-family: "outfit";
+   src: url("/font/outfit.woff2") format("woff2-variations");
+   font-display: swap;
+   font-style: normal;
+   font-weight: 400 600;
+}
+
 h1,
 h2,
 h3,

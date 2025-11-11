@@ -6,7 +6,7 @@
       "typecheck": "tsc --noEmit"
    },
    "dependencies": {
-      "@vasyaqwe/infra": "workspace:*",
+      "@vasyaqwe/core": "workspace:*",
       "hono": "^4.7.5",
       "valibot": "^1.0.0"
    },

@@ -24,6 +24,13 @@ import AstroIcon from "@/assets/tools/astro.svg"
 import Upwork from "@/assets/upwork.svg"
 import LinkIcon from "@/assets/icons/link.svg"
 import ArrowRightCircleIcon from "@/assets/icons/arrow-right-circle.svg"
+import { getCollection } from "astro:content"
+
+const blog = (await getCollection("blog"))
+  .filter((p) => !p.data.draft)
+  .sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+  )
 
 const tools = [
   {
@@ -150,6 +157,18 @@ const tools = [
       <ArrowRightCircleIcon class="size-5" />
     </Button>
   </section>
+  <!-- <section class="mt-12 md:mt-16">
+    <h2 class="text-2xl mb-5">Thoughts</h2>
+    <ul>
+      {
+        blog.map((item) => (
+          <li>
+            <a href={`/blog/${item.id}`}>{item.data.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </section> -->
   <section class="mt-12 md:mt-16">
     <h2 class="text-2xl mb-5">Tools & tech I use</h2>
     <div
@@ -186,8 +205,7 @@ const tools = [
   </section>
   <section class="mt-12 md:mt-16">
     <h2 class="text-2xl mb-7">Experience</h2>
-
-    <h3 class="flex items-center gap-1.5 !font-primary">
+    <h3 class="flex items-center gap-1.5 font-primary!">
       2023{" "}
       <span class="h-px w-full bg-neutral">
         {" "}
@@ -213,7 +231,7 @@ const tools = [
       </strong>{" "}
       Building the web for land buyers.
     </p>
-    <h3 class="mt-6 flex items-center gap-1.5 !font-primary">
+    <h3 class="mt-6 flex items-center gap-1.5 font-primary!">
       2022{" "}
       <span class="h-px w-full bg-neutral">
         {" "}
@@ -262,7 +280,7 @@ const tools = [
       </div>
       <div class="w-full max-md:mt-1">
         <h3
-          class="flex items-center gap-3 font-medium !font-primary text-lg -mt-1"
+          class="flex items-center gap-3 font-medium font-primary! text-lg -mt-1"
         >
           Unfiddle
           <a
@@ -276,7 +294,7 @@ const tools = [
           </a>
         </h3>
         <p class="mt-1">
-          Collaborative operations platform for procurement teams.
+          Collaborative operations platform for reselling teams.
         </p>
       </div>
     </div>
@@ -304,7 +322,7 @@ const tools = [
       </div>
       <div class="w-full max-md:mt-1">
         <h3
-          class="flex items-center gap-3 font-medium !font-primary text-lg -mt-1"
+          class="flex items-center gap-3 font-medium font-primary! text-lg -mt-1"
         >
           Sanao
           <a
@@ -344,7 +362,7 @@ const tools = [
       </div>
       <div class="w-full max-md:mt-1">
         <h3
-          class="flex items-center gap-3 font-medium !font-primary text-lg -mt-1"
+          class="flex items-center gap-3 font-medium font-primary! text-lg -mt-1"
         >
           417 Recovery
           <a
@@ -386,7 +404,7 @@ const tools = [
       </div>
       <div class="w-full max-md:mt-1">
         <h3
-          class="flex items-center gap-3 font-medium !font-primary text-lg -mt-1"
+          class="flex items-center gap-3 font-medium font-primary! text-lg -mt-1"
         >
           Tracker
           <a
@@ -424,7 +442,7 @@ const tools = [
       </div>
       <div class="w-full max-md:mt-1">
         <h3
-          class="flex items-center gap-3 font-medium !font-primary text-lg -mt-1"
+          class="flex items-center gap-3 font-medium font-primary! text-lg -mt-1"
         >
           Volunteers for Ukraine
           <a

@@ -1,14 +1,10 @@
 {
-   "name": "@vasyaqwe/infra",
+   "name": "@vasyaqwe/core",
    "type": "module",
    "exports": {
       "./env": {
          "types": "./dist/env.d.ts",
          "default": "./src/env.ts"
-      },
-      "./rate-limit": {
-         "types": "./dist/rate-limit.d.ts",
-         "default": "./src/rate-limit.ts"
       }
    },
    "scripts": {

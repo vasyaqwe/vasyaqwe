@@ -1,4 +1,4 @@
-import { clientEnv } from "@vasyaqwe/infra/env"
+import { clientEnv } from "@vasyaqwe/core/env"
 import { cors } from "hono/cors"
 import { logger } from "hono/logger"
 import { ApiError } from "./error"

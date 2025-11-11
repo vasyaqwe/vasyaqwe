@@ -1,4 +1,4 @@
-import { clientEnv } from "@vasyaqwe/infra/env"
+import { clientEnv } from "@vasyaqwe/core/env"
 
 export const env = {
    ...import.meta.env,

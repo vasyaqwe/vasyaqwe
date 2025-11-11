@@ -84,7 +84,6 @@ export const invoiceRouter = new Hono().post(
 
       const chunks = []
       for await (const chunk of pdfStream) {
-         // @ts-expect-error ...
          chunks.push(Buffer.from(chunk))
       }
 

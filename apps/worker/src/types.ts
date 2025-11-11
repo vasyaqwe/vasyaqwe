@@ -1,4 +1,4 @@
-import type { ClientEnv, WorkerEnv } from "@vasyaqwe/infra/env"
+import type { ClientEnv, WorkerEnv } from "@vasyaqwe/core/env"
 import type { routes } from "."
 
 type Variables = {

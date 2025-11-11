@@ -25,6 +25,7 @@ import Upwork from "@/assets/upwork.svg"
 import LinkIcon from "@/assets/icons/link.svg"
 import ArrowRightCircleIcon from "@/assets/icons/arrow-right-circle.svg"
 import { getCollection } from "astro:content"
+import { formatDate } from "@vasyaqwe/core/date"
 
 const blog = (await getCollection("blog"))
   .filter((p) => !p.data.draft)
@@ -157,18 +158,30 @@ const tools = [
       <ArrowRightCircleIcon class="size-5" />
     </Button>
   </section>
-  <!-- <section class="mt-12 md:mt-16">
+  <section class="mt-12 md:mt-16">
     <h2 class="text-2xl mb-5">Thoughts</h2>
     <ul>
       {
         blog.map((item) => (
           <li>
-            <a href={`/blog/${item.id}`}>{item.data.title}</a>
+            <a
+              href={`/blog/${item.id}`}
+              class="flex items-center border-b border-primary-2 group py-3.5 gap-4"
+            >
+              <span class="text-primary-7 font-light">
+                {formatDate(item.data.date, {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </span>
+              <span class="group-hover:underline">{item.data.title}</span>
+            </a>
           </li>
         ))
       }
     </ul>
-  </section> -->
+  </section>
   <section class="mt-12 md:mt-16">
     <h2 class="text-2xl mb-5">Tools & tech I use</h2>
     <div

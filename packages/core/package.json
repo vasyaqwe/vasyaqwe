@@ -5,6 +5,10 @@
       "./env": {
          "types": "./dist/env.d.ts",
          "default": "./src/env.ts"
+      },
+      "./date": {
+         "types": "./dist/date.d.ts",
+         "default": "./src/date.ts"
       }
    },
    "scripts": {

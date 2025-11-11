@@ -21,7 +21,7 @@ const data = Astro.props.data
 if (data.draft) return Astro.redirect("/404")
 ---
 
-<Layout title={data.title}>
+<Layout title={data.title} description={data.description}>
 	<div class="mt-5">
 		<a class="text-foreground/75 underline hover:text-foreground" href={"/"}>
 			← Go back

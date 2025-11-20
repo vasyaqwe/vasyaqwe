@@ -158,6 +158,7 @@
         "@astrojs/mdx": "^4.3.10",
         "@astrojs/sitemap": "^3.6.0",
         "@tailwindcss/vite": "^4.1.17",
+        "@vasyaqwe/core": "workspace:*",
         "@vasyaqwe/ui": "workspace:*",
         "astro": "^5.14.1",
       },

@@ -3,7 +3,9 @@
    "scripts": {
       "typecheck": "tsc --noEmit",
       "format-lint": "biome check",
-      "format-lint:fix": "biome check --write"
+      "format-lint:fix": "biome check --write",
+      "start": "bun run ./src/index.ts",
+      "dev": "bun run ./src/index.ts"
    },
    "dependencies": {
       "@hono/zod-validator": "^0.4.1",

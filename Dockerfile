@@ -1,4 +1,4 @@
-FROM oven/bun:1.2.5-slim
+FROM oven/bun:1.3.1-slim
 
 ENV NODE_ENV="production"
 
@@ -9,7 +9,7 @@ COPY turbo.json .
 COPY tooling/typescript/package.json tooling/typescript/
 COPY apps/api/package.json apps/api/
 
-RUN bun install --production && bun install turbo@^2.3.3 -g
+RUN bun install --production && bun install turbo@^2.5.6 -g
 
 COPY tooling/typescript tooling/typescript
 COPY apps/api apps/api

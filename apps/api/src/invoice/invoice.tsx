@@ -1,8 +1,51 @@
-import { Document, Image, Page, Text, View } from "@react-pdf/renderer"
+import { Document, Font, Image, Page, Text, View } from "@react-pdf/renderer"
 import { EditorContent } from "./components/editor-content"
 import { LineItems } from "./components/line-items"
 import { Meta } from "./components/meta"
 import { Summary } from "./components/summary"
+import type { EditorDoc, LineItem } from "./types"
+
+export type Template = {
+   logoUrl?: string
+   fromLabel?: string
+   customerLabel?: string
+   invoiceNumberLabel?: string
+   issueDateLabel?: string
+   dueDateLabel?: string
+   paymentLabel?: string
+   noteLabel?: string
+   descriptionLabel?: string
+   quantityLabel?: string
+   priceLabel?: string
+   totalLabel?: string
+}
+
+type TemplateProps = {
+   invoiceNumber: string
+   issueDate: number
+   dueDate: number
+   template?: Template
+   lineItems: LineItem[]
+   customerDetails: EditorDoc
+   fromDetails: EditorDoc
+   amount: number
+   customerName?: string
+   size: "letter" | "a4"
+}
+
+Font.register({
+   family: "geist_mono",
+   fonts: [
+      {
+         src: `https://tracker.vasyaqwe.com/font/geist_mono_regular.ttf`,
+         fontWeight: 400,
+      },
+      {
+         src: `https://tracker.vasyaqwe.com/font/geist_mono_medium.ttf`,
+         fontWeight: 500,
+      },
+   ],
+})
 
 export function InvoicePdf({
    invoiceNumber,
@@ -14,12 +57,11 @@ export function InvoicePdf({
    fromDetails,
    amount,
    size = "a4",
-   // biome-ignore lint/suspicious/noExplicitAny: <>
-}: any) {
+}: TemplateProps) {
    return (
       <Document>
          <Page
-            size={size.toUpperCase()}
+            size={size.toUpperCase() as "LETTER" | "A4"}
             style={{
                padding: 20,
                backgroundColor: "#fff",

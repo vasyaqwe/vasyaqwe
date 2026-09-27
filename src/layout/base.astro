@@ -1,0 +1,115 @@
+---
+import "@/ui/styles.css";
+import Dither from "@/ui/dither.astro";
+
+type Props = {
+  title?: string;
+  description?: string;
+  ogImage?: string | undefined;
+};
+
+const {
+  title = "Vasyl Polishchuk",
+  description = "Vasyl Polishchuk, frontend engineer based in Ukraine.",
+  ogImage,
+} = Astro.props;
+const url = Astro.url.href;
+---
+
+<html
+  lang="en"
+  class="relative min-h-svh bg-background font-primary text-foreground antialiased"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {
+      ogImage && (
+        <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+      )
+    }
+    <meta
+      name="twitter:card"
+      content={ogImage ? "summary_large_image" : "summary"}
+    />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+      rel="preload"
+      href="/font/geist.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+  </head>
+  <body
+    class="mx-auto max-w-xl px-4 py-12 text-[0.9375rem] leading-relaxed md:py-20 [&_a:not(.plain)]:underline [&_a:not(.plain)]:decoration-1 [&_a:not(.plain)]:decoration-foreground/20 [&_a:not(.plain)]:underline-offset-[3px] [&_a:not(.plain)]:transition-colors [&_a:not(.plain):hover]:decoration-foreground/60"
+  >
+    <Dither />
+    <slot />
+    <footer
+      class="mt-12 flex justify-between gap-4 text-sm text-surface-9 tabular-nums md:mt-24"
+    >
+      <p>
+        <span id="clock"></span>{" "}
+        in Netishyn, Ukraine
+      </p>
+      <a
+        target="_blank"
+        rel="noreferrer"
+        href="https://assets.vasyaqwe.com/Vasyl_Polishchuk_Resume.pdf"
+        class="plain inline-flex items-center gap-1 transition-colors hover:text-foreground"
+        >Resume<svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          aria-hidden="true"
+          class="size-3"
+          ><path
+            d="M21.0017 12.0004C21.0017 16.9712 16.9716 21.0007 12.0001 21.0007C7.02869 21.0007 2.99854 16.9712 2.99854 12.0004C2.99854 7.0296 7.02869 3 12.0001 3"
+          ></path><path
+            d="M20.5537 3.46927L14.9902 9.0105M20.5537 3.46927C20.0585 2.97411 16.7223 3.02026 16.0171 3.03028M20.5537 3.46927C21.049 3.96442 21.0028 7.30005 20.9928 8.00523"
+            stroke-linejoin="round"></path></svg
+        ></a
+      >
+    </footer>
+    <!-- inline so it runs before first paint, no empty-clock flash -->
+    <script is:inline>
+      {
+        const clock = document.getElementById("clock");
+        const format = new Intl.DateTimeFormat("en-US", {
+          timeZone: "Europe/Kyiv",
+          hour: "numeric",
+          minute: "2-digit",
+        });
+        const tick = () => {
+          const html = format
+            .format(new Date())
+            .replace(
+              ":",
+              '<span class="animate-[blink_2s_steps(1)_infinite]">:</span>',
+            );
+          if (clock.innerHTML !== html) clock.innerHTML = html;
+        };
+        tick();
+        setInterval(tick, 1000);
+      }
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+</style>

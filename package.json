@@ -1,0 +1,25 @@
+{
+  "name": "vasyaqwe",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "typecheck": "astro sync && tsc --noEmit",
+    "format-lint": "biome check",
+    "format-lint:fix": "biome check --write"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.3.5",
+    "tailwindcss": "^4.3.3",
+    "tailwindcss-motion": "^1.1.1",
+    "tailwix": "^4.0.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.14",
+    "typescript": "^7.0.2"
+  }
+}

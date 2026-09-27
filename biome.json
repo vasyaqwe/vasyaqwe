@@ -1,0 +1,107 @@
+{
+   "$schema": "https://biomejs.dev/schemas/2.5.14/schema.json",
+   "formatter": {
+      "enabled": true,
+      "formatWithErrors": false,
+      "indentStyle": "space",
+      "indentWidth": 3,
+      "lineEnding": "lf",
+      "lineWidth": 80,
+      "attributePosition": "multiline"
+   },
+   "files": {
+      "includes": ["**", "!**/dist", "!**/.astro", "!**/package.json"]
+   },
+   "css": {
+      "linter": {
+         "enabled": false
+      },
+      "formatter": {
+         "enabled": true
+      },
+      "parser": {
+         "tailwindDirectives": true
+      }
+   },
+   "javascript": {
+      "formatter": {
+         "jsxQuoteStyle": "double",
+         "trailingCommas": "all",
+         "semicolons": "asNeeded",
+         "arrowParentheses": "always",
+         "bracketSpacing": true,
+         "bracketSameLine": false,
+         "quoteStyle": "double",
+         "attributePosition": "multiline"
+      }
+   },
+   "assist": {
+      "actions": {
+         "source": {
+            "organizeImports": "on"
+         }
+      }
+   },
+   "linter": {
+      "enabled": true,
+      "rules": {
+         "preset": "recommended",
+         "security": {
+            "noDangerouslySetInnerHtml": "off"
+         },
+         "style": {
+            "useNumberNamespace": "off",
+            "noUnusedTemplateLiteral": "off",
+            "useNodejsImportProtocol": "off",
+            "noParameterAssign": "error",
+            "useAsConstAssertion": "error",
+            "useDefaultParameterLast": "error",
+            "useEnumInitializers": "error",
+            "useSelfClosingElements": "error",
+            "useSingleVarDeclarator": "error",
+            "noInferrableTypes": "error",
+            "noUselessElse": "error",
+            "noNonNullAssertion": "off"
+         },
+         "correctness": {
+            "useExhaustiveDependencies": "off",
+            "noUnusedVariables": "error",
+            "noUnusedImports": "error",
+            "useUniqueElementIds": "off"
+         },
+         "a11y": {
+            "noStaticElementInteractions": "off",
+            "useValidAriaRole": "off",
+            "noAutofocus": "off",
+            "useMediaCaption": "off",
+            "noSvgWithoutTitle": "off",
+            "useKeyWithClickEvents": "off",
+            "useButtonType": "off",
+            "useSemanticElements": "off",
+            "useAriaPropsSupportedByRole": "off",
+            "noLabelWithoutControl": "off"
+         },
+         "suspicious": {
+            "noArrayIndexKey": "off"
+         },
+         "nursery": {
+            "useSortedClasses": {
+               "level": "info",
+               "fix": "safe",
+               "options": {
+                  "attributes": ["class"],
+                  "functions": ["tv", "cn"]
+               }
+            }
+         }
+      }
+   },
+   "vcs": {
+      "enabled": true,
+      "clientKind": "git",
+      "useIgnoreFile": true
+   },
+   "html": {
+      "experimentalFullSupportEnabled": true
+   }
+}

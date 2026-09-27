@@ -1,0 +1,39 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "@/layout/base.astro";
+
+export const getStaticPaths = async () =>
+  (await getCollection("blog", (p) => !p.data.draft)).map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout
+  title={post.data.title}
+  description={post.data.description}
+  ogImage={post.data.ogImage}
+>
+  <a href="/" class="plain text-muted flex gap-1.5 hover:text-foreground"
+    ><span> ←</span> Home</a
+  >
+  <header class="mt-10">
+    <h1>{post.data.title}</h1>
+    <p class="text-muted tabular-nums">
+      {
+        post.data.date.toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+          timeZone: "UTC",
+        })
+      }
+    </p>
+  </header>
+  <article class="prose mt-8">
+    <Content />
+  </article>
+</Layout>
